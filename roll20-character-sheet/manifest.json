@@ -1,0 +1,16 @@
+{
+  "name": "Roll20 Character Sheet",
+  "version": "0.1",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://app.roll20.net/*"],
+      "js": ["character-sheet.js"],
+      "css": ["character-sheet.css"]
+    }
+  ],
+  "icons": {
+    "216": "icon.256.png"
+  },
+  "description": "Character sheet and roller for app.roll20.net"
+}

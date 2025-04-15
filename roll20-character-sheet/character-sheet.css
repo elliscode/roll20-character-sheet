@@ -1,0 +1,91 @@
+.character-sheet-extension {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  z-index: 2;
+  display:flex;
+  flex-direction:row;
+  align-items: end;
+  pointer-events: none;
+}
+.character-sheet-extension button {
+  background: #fff;
+  color: #000;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  pointer-events: auto;
+}
+.character-sheet-extension .flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.flex-row>span {
+  margin-left: 10px;
+}
+.character-sheet-extension .panel {
+  display: none;
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 0px;
+  padding: 3px;
+  margin: 0px;
+  pointer-events: auto;
+}
+.character-sheet-extension .ability {
+  padding: 10px 5px;
+  border: 1px solid rgb(133, 0, 0);
+  color: rgb(133, 0, 0);
+  background-color: white;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+}
+.character-sheet-extension .save {
+  background-color: rgb(255, 205, 205);
+}
+.character-sheet-extension label {
+  margin-right: 10px;
+}
+.character-sheet-extension input[type="text"] {
+  width: 110px;
+}
+.character-sheet-extension input[type="number"] {
+  width: 32px;
+}
+.flex-fill {
+  flex-grow: 1;
+}
+.pointer {
+  cursor: pointer;
+}
+.skill-stat {
+  width: 27px;
+}
+.proficiency-bubble {
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.not {
+
+}
+.half {
+  background-color: grey;
+}
+.proficiency {
+  background-color: black;
+}
+.expertise {
+  background-color: black;
+  border: 1px solid white;
+  outline: 1px solid black;
+}
+.flex-right {
+  justify-content: flex-end;
+}
+.exhaustion {
+  width:40px;
+}
