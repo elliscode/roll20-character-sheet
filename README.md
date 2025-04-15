@@ -14,7 +14,7 @@ I'm not satisfied with either Roll20 character sheets or DND Beyond character sh
 
 ![](img/install_001.png)
 
-3. Press the **Load unpacked** button in the top-left and select the `monster-health` directory in your clone of this repository
+3. Press the **Load unpacked** button in the top-left and select the `roll20-character-sheet` directory in your clone of this repository
 
 ![](img/install_002.png)
 
