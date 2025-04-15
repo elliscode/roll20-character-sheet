@@ -263,6 +263,8 @@ function buildUi() {
   characterSheetDiv.appendChild(controlsDiv);
 
   document.body.appendChild(characterSheetDiv);
+
+  getLocalStorage();
 }
 
 function buildConditionsPanel(panel) {
@@ -346,6 +348,7 @@ function displayConditions(event) {
     message = `/em has no active conditions`;
   }
   characterSheetExtensionSendMessage(message);
+  setLocalStorage();
 }
 
 function displayConditionDescription(event) {
@@ -358,6 +361,7 @@ function displayConditionDescription(event) {
     `{{source=${link}}} ` + 
     `{{description=${description}}}`;
   characterSheetExtensionSendMessage(message);
+  setLocalStorage();
 }
 
 function buildSkillsPanel(panel) {
@@ -477,6 +481,7 @@ function rollSkill(event) {
     `{{r2=[[1d20${statRoll}[${statName}]${proficiencyHit}${extraHit}${exhaustionString}]]}}`;
 
   characterSheetExtensionSendMessage(message);
+  setLocalStorage();
 }
 function buildGunPanel(panel) {
   {
@@ -560,6 +565,11 @@ function buildGunPanel(panel) {
       button.setAttribute('message', burstFireDescription)
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
+    }
+    {
+      const span = document.createElement('span');
+      span.innerText = '(1 action)';
+      thisDiv.appendChild(span);
     }
     panel.appendChild(thisDiv);
   }
@@ -1032,6 +1042,7 @@ function rollAbility(event) {
     `{{${rollType}=1}} ` +
     `{{r2=[[1d20${rollString}${proficiencyHit}${extraHit}${exhaustionString}]]}}`;
   characterSheetExtensionSendMessage(message);
+  setLocalStorage();
 }
 
 function characterSheetExtensionPositionGui() {
@@ -1096,6 +1107,7 @@ function rollWeapon(event) {
   let previousAmmo = shots;
   if (shots - bulletsToSpend < 0) {
     characterSheetExtensionSendMessage(`/em doesn't have enough ammo to fire his ${rname[weapon]}`);
+    setLocalStorage();
     return;
   }
   shots = shots - bulletsToSpend;
@@ -1157,6 +1169,7 @@ function rollWeapon(event) {
 
   characterSheetExtensionSendMessage(message);
   shotsInput.value = `${shots}`;
+  setLocalStorage();
 }
 function reloadFirearm() {
   let ammoElement = document.querySelector('input.ammo[type="number"]');
@@ -1164,6 +1177,7 @@ function reloadFirearm() {
   let weapon = document.querySelector('input[name="weapon"]:checked').value;
   if (ammo <= 0) {
     characterSheetExtensionSendMessage(`/em doesn't have enough ammo to reload his ${rname[weapon]}`);
+    setLocalStorage();
     return;
   }
   let shotsInput = document.querySelector(`input.shots.${weapon}[type="number"]`);
@@ -1177,6 +1191,7 @@ function reloadFirearm() {
     );
     ammoElement.value = `${ammo}`;
     shotsInput.value = `${shots}`;
+    setLocalStorage();
   }
 }
 function findParentWithClass(element, className) {
@@ -1188,6 +1203,57 @@ function findParentWithClass(element, className) {
     current = current.parentElement;
   }
   return current;
+}
+function setLocalStorage() {
+  localStorage.setItem('roll20charactersheet-memory', JSON.stringify({
+    exhaustion: document.querySelector('select.exhaustion').value,
+    conditions: Array.from(document.querySelectorAll('input.condition-checkbox[type="checkbox"]')).filter(x => x.checked).map(x => findParentWithClass(x, 'condition').getAttribute('name')),
+    weapon: document.querySelector('input[name="weapon"]:checked').value,
+    burstFire: document.querySelector('input[name="burst-fire"]:checked').value,
+    huntersMark: document.querySelector('input[name="hunters"]:checked').value,
+    savageAttacker: document.querySelector('input[name="savage"]:checked').value,
+    huntersPrey: document.querySelector('input[name="colossus-horde"]:checked').value,
+    weaponMastery: document.querySelector('input[name="mastery"]:checked').value,
+    rollType: document.querySelector('input[name="roll-type"]:checked').value,
+    bonusHitName: document.querySelector('input[type="text"][id="bonus-hit-name"]').value,
+    bonusHit: document.querySelector('input[type="text"][id="bonus-hit"]').value,
+    bonusDamageName: document.querySelector('input[type="text"][id="bonus-damage-name"]').value,
+    bonusDamage: document.querySelector('input[type="text"][id="bonus-damage"]').value,
+    ammo: document.querySelector('input.ammo[type="number"]').value,
+    shotsShotgun: document.querySelector(`input.shots.shotgun[type="number"]`).value,
+    shotsRifle: document.querySelector(`input.shots.rifle[type="number"]`).value
+  }));
+}
+function getLocalStorage() {
+  try {
+    let savedData = localStorage.getItem('roll20charactersheet-memory');
+    
+    let d = JSON.parse(savedData);
+    
+    document.querySelector('select.exhaustion').value = d.exhaustion;
+    d.conditions.forEach(x => {
+      let element = document.querySelector(`div.condition[name="${x}"]`);
+      if (!!element) {
+        element.querySelector('input[type="checkbox"]').checked = true;
+      }
+    });
+    document.querySelector(`input[name="weapon"][value=${d.weapon}]`).checked = true;
+    document.querySelector(`input[name="burst-fire"][value=${d.burstFire}]`).checked = true;
+    document.querySelector(`input[name="hunters"][value=${d.huntersMark}]`).checked = true;
+    document.querySelector(`input[name="savage"][value=${d.savageAttacker}]`).checked = true;
+    document.querySelector(`input[name="colossus-horde"][value=${d.huntersPrey}]`).checked = true;
+    document.querySelector(`input[name="mastery"][value=${d.weaponMastery}]`).checked = true;
+    document.querySelector(`input[name="roll-type"][value=${d.rollType}]`).checked = true;
+    document.querySelector(`input[type="text"][id="bonus-hit-name"]`).value = d.bonusHitName;
+    document.querySelector(`input[type="text"][id="bonus-hit"]`).value = d.bonusHit;
+    document.querySelector(`input[type="text"][id="bonus-damage-name"]`).value = d.bonusDamageName;
+    document.querySelector(`input[type="text"][id="bonus-damage"]`).value = d.bonusDamage;
+    document.querySelector(`input.ammo[type="number"]`).value = d.ammo;
+    document.querySelector(`input.shots.shotgun[type="number"]`).value = d.shotsShotgun;
+    document.querySelector(`input.shots.rifle[type="number"]`).value = d.shotsRifle;
+  } catch (e) {
+    
+  }
 }
 setTimeout(buildUi, 4900);
 setInterval(characterSheetExtensionPositionGui, 5000);
