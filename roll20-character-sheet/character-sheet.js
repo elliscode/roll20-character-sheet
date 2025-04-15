@@ -24,52 +24,52 @@ const huntersMark = `&{template:spell} ` +
 const huntersMove = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Move Hunter's Mark}} ` +
-  `{{source=&#8193;[Hunter's Mark](https://www.dndbeyond.com/spells/2619166-hunters-mark)}} ` +
+  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/spells/2619166-hunters-mark)}} ` +
   `{{description=If the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action to move the mark to a new creature you can see within range.}}`;
 const huntersLore = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Hunter's Lore}} ` +
-  `{{source=&#8193;[Ranger Subclass: Hunter](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Hunter)}} ` +
+  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Hunter)}} ` +
   `{{description=While a creature is marked by your Hunter's Mark, you know whether that creature has any Immunities, Resistances, or Vulnerabilities, and if the creature has any, you know what they are.}}`;
 const savageAttacker = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Savage Attacker}} ` +
-  `{{source=&#8193;[Origin: Soldier](https://www.dndbeyond.com/sources/dnd/free-rules/character-origins#Soldier)}} ` +
+  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/character-origins#Soldier)}} ` +
   `{{description=Once per turn when you hit a target with a weapon, you can roll the weapon's damage dice twice and use either roll against the target.}}`;
 const huntersPrey = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Hunter's Prey}} ` +
-  `{{source=&#8193;[Ranger Subclass: Hunter](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Hunter)}} ` +
+  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Hunter)}} ` +
   `{{description=You gain one of the following feature options of your choice: Colossus Slayer or Horde Breaker. Whenever you finish a Short or Long Rest, you can replace the chosen option with the other one.}}`;
 const colossusSlayer = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Colossus Slayer}} ` +
-  `{{source=&#8193;[Hunter's Prey](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level3HuntersPrey)}} ` +
+  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level3HuntersPrey)}} ` +
   `{{description=Once per turn when you hit a creature with a weapon, the weapon deals an extra [1d8](!\n) damage to the target if it's missing any of its Hit Points.}}`;
 const hordeBreaker = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Horde Breaker}} ` +
-  `{{source=&#8193;[Hunter's Prey](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level3HuntersPrey)}} ` +
+  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level3HuntersPrey)}} ` +
   `{{description=Once on each of your turns when you make an attack with a weapon, you can make another attack with the same weapon against a different creature that is within 5 feet of the original target, that is within the weapon's range, and that you haven't attacked this turn.}}`;
 const pushDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Push}} ` +
-  `{{source=&#8193;[Weapon Mastery: Shotgun](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
+  `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
   `{{description=If you hit a creature with a Shotgun, you can push the creature up to 10 feet straight away from yourself if it is Large or smaller.}}`;
 const slowDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Slow}} ` +
-  `{{source=&#8193;[Weapon Mastery: Automatic Rifle](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
+  `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
   `{{description=If you hit a creature with an Automatic Rifle and deal damage to it, you can reduce its Speed by 10 feet until the start of your next turn. If the creature is hit more than once by weapons that have this property, the Speed reduction doesn't exceed 10 feet.}}`;
 const rifleDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Rifle, Automatic}} ` +
-  `{{source=&#8193;[Dungeon Master’s Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
+  `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
   `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 80ft./240ft.\n**Damage**: [2d8+3](!\n)\n**Damage Type**: Piercing\n**Weight**: 8lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), Range, [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (30 shots), Two-Handed, [Burst Fire](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#BurstFire), [Slow](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Slow)}}`;
 const shotgunDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Shotgun}} ` +
-  `{{source=&#8193;[Dungeon Master’s Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
+  `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
   `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 30ft./90ft.\n**Damage**: [2d8+3](!\n)\n**Damage Type**: Piercing\n**Weight**: 7lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), Range, [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (2 shots), Two-Handed, [Push](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Push)}}`;
 const burstFireDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
@@ -80,19 +80,22 @@ const reloadDescription = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Reload}} ` +
   `{{castingtime=1 bonus action}} ` +
-  `{{v=1}} ` +
-  `{{source=[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload)}}` + 
-  `{{description=You can make a limited number of shots with a Reload weapon. You must then reload the weapon as an action or a Bonus Action.}}`;
+  `{{m=1}} {{material=[Ammunition](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition)}} ` +
+  `{{description=**Source:** [Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) \nYou can make a limited number of shots with a Reload weapon. You must then reload the weapon as an action or a Bonus Action.}}`;
 const archeryDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Archery}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/feats#Archery)}} ` +
-  `{{description=Fighting Style Feat (Prerequisite: [Fighting Style Feature](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#FighterClassFeatures))\n\nYou gain a [+2](!\n) bonus to attack rolls you make with Ranged weapons.}}`;
-const extensionDescription = `&{template:traits} ` +
+  `{{description=Fighting Style Feat (Prerequisite: [Fighting Style Feature](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level2RangerFightingStyle))\n\nYou gain a [+2](!\n) bonus to attack rolls you make with Ranged weapons.}}`;
+const extensionDescription = `/ooc &{template:traits} ` +
   `{{name=Roll20 Character Sheet}} ` +
   `{{charname=elliscode}}` + 
   `{{source=&#8193;[GitHub](https://github.com/elliscode/roll20-character-sheet)}} ` +
-  `{{description=On-screen character sheet overlay for use in Roll20, still a work in progress, and lots of stuff is still hardcoded for ${CHARACTER_NAME}.}}`
+  `{{description=On-screen character sheet overlay for use in Roll20, still a work in progress, and lots of stuff is still hardcoded for ${CHARACTER_NAME}.}}`;
+const quantumRollDescription = `/ooc &{template:traits} ` +
+  `{{name=QuantumRoll}} ` +
+  `{{source=[roll20.net](https://app.roll20.net/home/quantum)}} ` +
+  `{{description=Dice rolls on Roll20 are processed by QuantumRoll to provide true randomness in each roll. The engine itself is powered by a powerful, thoroughly-tested RNG, seeded by an [entropy source deriving from quantum fluctuations](http://en.wikipedia.org/wiki/Hardware_random_number_generator#Physical_phenomena_with_quantum-random_properties).}}`;
 
 const proficiencies = {
   not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
@@ -840,6 +843,13 @@ function buildGunPanel(panel) {
       button.addEventListener('click', reloadFirearm);
       thisDiv.appendChild(button);
     }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Desc';
+      button.setAttribute('message', reloadDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
     panel.appendChild(thisDiv);
   }
 }
@@ -947,6 +957,25 @@ function buildFormattingPanel(panel) {
     thisDiv.classList.add('flex-row');
     {
       const button = document.createElement('button');
+      button.innerText = 'Quantum';
+      button.setAttribute('message', quantumRollDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'GitHub';
+      button.setAttribute('message', extensionDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
       button.innerText = 'Down';
       button.setAttribute('message', `/em &darr;`)
       button.addEventListener('click', characterSheetExtensionSendMessage);
@@ -956,13 +985,6 @@ function buildFormattingPanel(panel) {
       const button = document.createElement('button');
       button.innerText = 'Up';
       button.setAttribute('message', `/em &uarr;`)
-      button.addEventListener('click', characterSheetExtensionSendMessage);
-      thisDiv.appendChild(button);
-    }
-    {
-      const button = document.createElement('button');
-      button.innerText = 'GitHub';
-      button.setAttribute('message', extensionDescription)
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
@@ -1140,6 +1162,10 @@ function reloadFirearm() {
   let ammoElement = document.querySelector('input.ammo[type="number"]');
   let ammo = parseInt(ammoElement.value);
   let weapon = document.querySelector('input[name="weapon"]:checked').value;
+  if (ammo <= 0) {
+    characterSheetExtensionSendMessage(`/em doesn't have enough ammo to reload his ${rname[weapon]}`);
+    return;
+  }
   let shotsInput = document.querySelector(`input.shots.${weapon}[type="number"]`);
   let shots = parseInt(shotsInput.value);
   let bulletsToAdd = Math.min(Math.min(weaponAmmo[weapon].shots - shots, weaponAmmo[weapon].shots), ammo);
@@ -1147,8 +1173,7 @@ function reloadFirearm() {
     ammo = ammo - bulletsToAdd;
     shots = shots + bulletsToAdd;
     characterSheetExtensionSendMessage(
-      `/em used his bonus action to reload his ${rname[weapon]} (${shots}/${weaponAmmo[weapon].shots})` + '\n' +
-      `/em has ${ammo} loose ammo remaining`
+      `/em reloaded his ${rname[weapon]} (${shots}/${weaponAmmo[weapon].shots}), and has ${ammo} loose ammo remaining`
     );
     ammoElement.value = `${ammo}`;
     shotsInput.value = `${shots}`;
@@ -1164,7 +1189,7 @@ function findParentWithClass(element, className) {
   }
   return current;
 }
-setTimeout(buildUi, 4000);
+setTimeout(buildUi, 4900);
 setInterval(characterSheetExtensionPositionGui, 5000);
 setTimeout(characterSheetExtensionSendMessage, 5000, '/talktomyself');
 setTimeout(setTalking, 5100, CHARACTER_NAME);
