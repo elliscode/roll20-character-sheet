@@ -20,7 +20,7 @@ const huntersMark = `&{template:spell} ` +
   `{{level=1st Level Divination}} ` +
   `{{v=1}} ` +
   `{{concentration=1}} ` +
-  `{{description=You deal an extra [1d6](!\n) Force damage to the target whenever you hit it with an attack roll.}}`;
+  `{{description=**Source:** [D&D Free Rules (2024)](https://www.dndbeyond.com/spells/2619166-hunters-mark) \nYou deal an extra [1d6](!\n) Force damage to the target whenever you hit it with an attack roll.}}`;
 const huntersMove = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Move Hunter's Mark}} ` +
@@ -64,12 +64,12 @@ const slowDescription = `&{template:traits} ` +
 const rifleDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Rifle, Automatic}} ` +
-  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
+  `{{source=&#8193;[Dungeon Master’s Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
   `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 80ft./240ft.\n**Damage**: [2d8+3](!\n)\n**Damage Type**: Piercing\n**Weight**: 8lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), Range, [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (30 shots), Two-Handed, [Burst Fire](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#BurstFire), [Slow](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Slow)}}`;
 const shotgunDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Shotgun}} ` +
-  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
+  `{{source=&#8193;[Dungeon Master’s Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
   `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 30ft./90ft.\n**Damage**: [2d8+3](!\n)\n**Damage Type**: Piercing\n**Weight**: 7lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), Range, [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (2 shots), Two-Handed, [Push](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Push)}}`;
 const burstFireDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
@@ -88,6 +88,11 @@ const archeryDescription = `&{template:traits} ` +
   `{{name=Archery}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/feats#Archery)}} ` +
   `{{description=Fighting Style Feat (Prerequisite: [Fighting Style Feature](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#FighterClassFeatures))\n\nYou gain a [+2](!\n) bonus to attack rolls you make with Ranged weapons.}}`;
+const extensionDescription = `&{template:traits} ` +
+  `{{name=Roll20 Character Sheet}} ` +
+  `{{charname=elliscode}}` + 
+  `{{source=&#8193;[GitHub](https://github.com/elliscode/roll20-character-sheet)}} ` +
+  `{{description=On-screen character sheet overlay for use in Roll20, still a work in progress, and lots of stuff is still hardcoded for ${CHARACTER_NAME}.}}`
 
 const proficiencies = {
   not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
@@ -942,21 +947,28 @@ function buildFormattingPanel(panel) {
     thisDiv.classList.add('flex-row');
     {
       const button = document.createElement('button');
-      button.innerText = 'Down Arrow';
+      button.innerText = 'Down';
       button.setAttribute('message', `/em &darr;`)
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
     {
       const button = document.createElement('button');
-      button.innerText = 'Up Arrow';
+      button.innerText = 'Up';
       button.setAttribute('message', `/em &uarr;`)
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
     {
       const button = document.createElement('button');
-      button.innerText = 'ttms';
+      button.innerText = 'GitHub';
+      button.setAttribute('message', extensionDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 't2ms';
       button.setAttribute('message', `/talktomyself`)
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
@@ -1079,11 +1091,11 @@ function rollWeapon(event) {
       rolls.push(bonusDamage);
     }
     if (colossusHorde == 'colossus') {
-      names.push("Colossus Slayer");
+      names.push("Colossus Slayer (Piercing)");
       rolls.push('1d8');
     }
     if (onOff[hunters]) {
-      names.push("Hunter's mark");
+      names.push("Hunter's Mark (Force)");
       rolls.push('1d6');
     }
     extraDamage = `{{dmg2flag=1}} {{dmg2=[[${rolls.join("+")}]]}} {{dmg2type=${names.join(" + ")}}} {{crit2=Crit: [[${rolls.join("+")}]]}} `;
