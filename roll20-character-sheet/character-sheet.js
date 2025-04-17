@@ -110,7 +110,7 @@ const rollTypes = {
   disadvantage: { display: 'Disadv', default: false }
 }
 
-const rname = { rifle: "Rifle, Automatic", shotgun: "Shotgun" };
+const rname = { rifle: "Automatic Rifle", shotgun: "Shotgun" };
 const range = { rifle: "80ft./240ft.", shotgun: "30ft./90ft." }
 const dmg1 = {
   rifle: { on: "{2d8,2d8}kh1+3", off: "2d8+3"},
@@ -507,6 +507,12 @@ function buildGunPanel(panel) {
       input.value = '0';
       input.classList.add('ammo');
       thisDiv.appendChild(input);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = `Ammo`;
+      button.addEventListener('click', printCurrentAmmo);
+      thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
   }
@@ -1193,6 +1199,20 @@ function reloadFirearm() {
     shotsInput.value = `${shots}`;
     setLocalStorage();
   }
+}
+function printCurrentAmmo(event) {
+  let ammo = parseInt(document.querySelector('input.ammo[type="number"]').value);
+  let output = `/em checks his ammo, and has `;
+  let sum = 0;
+  for (let weapon of Object.keys(rname)) {
+    let shots = parseInt(document.querySelector(`input.shots.${weapon}[type="number"]`).value);
+    sum += shots;
+    output += `${shots} in his ${rname[weapon]}, `
+  }
+  sum += ammo;
+  output += `and ${ammo} loose, for a total of ${sum} ammo.`;
+  characterSheetExtensionSendMessage(output);
+  setLocalStorage();
 }
 function findParentWithClass(element, className) {
   let current = element;
