@@ -63,14 +63,14 @@ const slowDescription = `&{template:traits} ` +
   `{{description=If you hit a creature with an Automatic Rifle and deal damage to it, you can reduce its Speed by 10 feet until the start of your next turn. If the creature is hit more than once by weapons that have this property, the Speed reduction doesn't exceed 10 feet.}}`;
 const rifleDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
-  `{{name=Rifle, Automatic}} ` +
+  `{{name=Automatic Rifle}} ` +
   `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
-  `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 80ft./240ft.\n**Damage**: [2d8+3](!\n)\n**Damage Type**: Piercing\n**Weight**: 8lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), Range, [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (30 shots), Two-Handed, [Burst Fire](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#BurstFire), [Slow](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Slow)}}`;
+  `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 80ft./240ft.\n**Damage**: [2d8+3](!\n)\n**Damage Type**: Piercing\n**Weight**: 8lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), [Range](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Range), [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (30 shots), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Burst Fire](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#BurstFire), [Slow](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Slow)}}`;
 const shotgunDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Shotgun}} ` +
   `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
-  `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 30ft./90ft.\n**Damage**: [2d8+3](!\n)\n**Damage Type**: Piercing\n**Weight**: 7lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), Range, [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (2 shots), Two-Handed, [Push](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Push)}}`;
+  `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 30ft./90ft.\n**Damage**: [2d8+3](!\n)\n**Damage Type**: Piercing\n**Weight**: 7lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), [Range](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Range), [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (2 shots), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Push](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Push)}}`;
 const burstFireDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Burst Fire}} ` +
@@ -88,21 +88,44 @@ const archeryDescription = `&{template:traits} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/feats#Archery)}} ` +
   `{{description=Fighting Style Feat (Prerequisite: [Fighting Style Feature](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level2RangerFightingStyle))\n\nYou gain a [+2](!\n) bonus to attack rolls you make with Ranged weapons.}}`;
 const extensionDescription = `/ooc &{template:traits} ` +
-  `{{name=Roll20 Character Sheet}} ` +
+  `{{name=[Roll20 Character Sheet](https://github.com/elliscode/roll20-character-sheet" style="color:#7e2d40;)}} ` +
   `{{charname=elliscode}}` + 
   `{{source=&#8193;[GitHub](https://github.com/elliscode/roll20-character-sheet)}} ` +
   `{{description=On-screen character sheet overlay for use in Roll20, still a work in progress, and lots of stuff is still hardcoded for ${CHARACTER_NAME}.}}`;
 const quantumRollDescription = `/ooc &{template:traits} ` +
-  `{{name=QuantumRoll}} ` +
+  `{{name=[QuantumRoll](https://app.roll20.net/home/quantum" style="color:#7e2d40;)}} ` +
   `{{source=[roll20.net](https://app.roll20.net/home/quantum)}} ` +
   `{{description=Dice rolls on Roll20 are processed by QuantumRoll to provide true randomness in each roll. The engine itself is powered by a powerful, thoroughly-tested RNG, seeded by an [entropy source deriving from quantum fluctuations](http://en.wikipedia.org/wiki/Hardware_random_number_generator#Physical_phenomena_with_quantum-random_properties).}}`;
-
+const sendingStoneDescription = `&{template:traits} ` + // https://www.dndbeyond.com/sources/dnd/dmg-2024/magic-items-a-z#SendingStones
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Sending Stone}} ` +
+  `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/magic-items-a-z#SendingStones)}} ` +
+  `{{description=Brian said I got one to send the all clear back to Iglan Thur.\n\nWhile you touch one stone, you can cast [Sending](https://www.dndbeyond.com/spells/2619015-sending) from it. The target is the bearer of the other stone. If no creature bears the other stone, you know that fact as soon as you use the stone, and you don't cast the spell.\n\nOnce Sending is cast using either stone, the stones can't be used again until the next dawn. If one of the stones in a pair is destroyed, the other one becomes nonmagical.}}`;
+const resourcefulDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Resourceful}} ` +
+  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/character-origins#HumanTraits)}} ` +
+  `{{description=You gain Heroic Inspiration whenever you finish a Long Rest.}}`;
+const daggerDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Dagger}} ` +
+  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#WeaponsTable)}} ` +
+  `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Range**: 20ft./60ft.\n**Damage**: [1d4+3](!\n)\n**Damage Type**: Piercing\n**Weight**: 1 lb.\n**Cost**: 2 gp\n**Properties**: [Finesse](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Finesse), [Light](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Light), [Thrown](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Thrown), [Nick](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Nick)}}`;
 const proficiencies = {
   not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
   half: {key: 'half', display: 'Half Proficiency', bonus: '+1'},
   proficiency: {key: 'proficiency', display: 'Proficiency', bonus: '+2'},
   expertise: {key: 'expertise', display: 'Expertise', bonus: '+4'}
 };
+const weaponStats = {
+  dagger: {
+    proficiency: proficiencies.proficiency,
+    stat: stats.DEX,
+    damage: '1d4',
+    name: 'Dagger',
+    range: '20ft./60ft.'
+  }
+}
 
 const rollTypes = {
   advantage: { display: 'Advantage', default: false },
@@ -178,8 +201,22 @@ function buildUi() {
   {
     const panel = document.createElement('div');
     panel.classList.add('panel');
+    panel.id = 'weapon-panel';
+    buildWeaponsPanel(panel);
+    gunsDiv.appendChild(panel);
+  }
+  {
+    const panel = document.createElement('div');
+    panel.classList.add('panel');
     panel.id = 'gun-panel';
     buildGunPanel(panel);
+    gunsDiv.appendChild(panel);
+  }
+  {
+    const panel = document.createElement('div');
+    panel.classList.add('panel');
+    panel.id = 'attack-panel';
+    buildAttackPanel(panel);
     gunsDiv.appendChild(panel);
   }
   {
@@ -188,14 +225,51 @@ function buildUi() {
     buttonsDiv.classList.add('flex-right');
     {
       const button = document.createElement('button');
+      button.innerText = 'Weapons';
+      button.setAttribute('for', 'weapon-panel');
+      button.addEventListener('click', expandPanel);
+      buttonsDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
       button.innerText = 'Guns';
       button.setAttribute('for', 'gun-panel');
+      button.addEventListener('click', expandPanel);
+      buttonsDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Attack';
+      button.setAttribute('for', 'attack-panel');
       button.addEventListener('click', expandPanel);
       buttonsDiv.appendChild(button);
     }
     gunsDiv.appendChild(buttonsDiv);
   }
   characterSheetDiv.appendChild(gunsDiv);
+
+  // let weaponsDiv = document.createElement('div');
+  // {
+  //   const panel = document.createElement('div');
+  //   panel.classList.add('panel');
+  //   panel.id = 'weapon-panel';
+  //   buildWeaponsPanel(panel);
+  //   weaponsDiv.appendChild(panel);
+  // }
+  // {
+  //   const buttonsDiv = document.createElement('div');
+  //   buttonsDiv.classList.add('flex-row');
+  //   buttonsDiv.classList.add('flex-right');
+  //   {
+  //     const button = document.createElement('button');
+  //     button.innerText = 'Weapons';
+  //     button.setAttribute('for', 'weapon-panel');
+  //     button.addEventListener('click', expandPanel);
+  //     buttonsDiv.appendChild(button);
+  //   }
+  //   weaponsDiv.appendChild(buttonsDiv);
+  // }
+  // characterSheetDiv.appendChild(weaponsDiv);
 
   let controlsDiv = document.createElement('div');
   {
@@ -265,6 +339,28 @@ function buildUi() {
   document.body.appendChild(characterSheetDiv);
 
   getLocalStorage();
+}
+
+function buildWeaponsPanel(panel) {
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Dagger';
+      button.setAttribute('message', daggerDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Roll';
+      button.setAttribute('weapon-key', 'dagger');
+      button.addEventListener('click', rollWeapon);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  } 
 }
 
 function buildConditionsPanel(panel) {
@@ -483,132 +579,7 @@ function rollSkill(event) {
   characterSheetExtensionSendMessage(message);
   setLocalStorage();
 }
-function buildGunPanel(panel) {
-  {
-    const thisDiv = document.createElement('div');
-    thisDiv.classList.add('flex-row');
-    {
-      const button = document.createElement('button');
-      button.innerText = `Shotgun`;
-      button.setAttribute('message', shotgunDescription)
-      button.addEventListener('click', characterSheetExtensionSendMessage);
-      thisDiv.appendChild(button);
-    }
-    {
-      const button = document.createElement('button');
-      button.innerText = 'Rifle';
-      button.setAttribute('message', rifleDescription)
-      button.addEventListener('click', characterSheetExtensionSendMessage);
-      thisDiv.appendChild(button);
-    }
-    {
-      const input = document.createElement('input');
-      input.type = 'number';
-      input.value = '0';
-      input.classList.add('ammo');
-      thisDiv.appendChild(input);
-    }
-    {
-      const button = document.createElement('button');
-      button.innerText = `Ammo`;
-      button.addEventListener('click', printCurrentAmmo);
-      thisDiv.appendChild(button);
-    }
-    panel.appendChild(thisDiv);
-  }
-  {
-    const thisDiv = document.createElement('div');
-    thisDiv.classList.add('flex-row');
-    {
-      const input = document.createElement('input');
-      input.type = 'number';
-      input.value = '0';
-      input.classList.add('shots');
-      input.classList.add('shotgun');
-      thisDiv.appendChild(input);
-    }
-    {
-      const label = document.createElement('label');
-      const input = document.createElement('input');
-      input.type = 'radio';
-      input.name = 'weapon';
-      input.value = 'shotgun';
-      input.checked = true;
-      label.appendChild(input);
-      const span = document.createElement('span');
-      span.innerText = 'Shotgun';
-      label.appendChild(span);
-      thisDiv.appendChild(label);
-    }
-    {
-      const label = document.createElement('label');
-      const input = document.createElement('input');
-      input.type = 'radio';
-      input.name = 'weapon';
-      input.value = 'rifle';
-      label.appendChild(input);
-      const span = document.createElement('span');
-      span.innerText = 'Rifle';
-      label.appendChild(span);
-      thisDiv.appendChild(label);
-    }
-    {
-      const input = document.createElement('input');
-      input.type = 'number';
-      input.value = '0';
-      input.classList.add('shots');
-      input.classList.add('rifle');
-      thisDiv.appendChild(input);
-    }
-    panel.appendChild(thisDiv);
-  }
-  {
-    const thisDiv = document.createElement('div');
-    thisDiv.classList.add('flex-row');
-    {
-      const button = document.createElement('button');
-      button.innerText = `Burst Fire`;
-      button.setAttribute('message', burstFireDescription)
-      button.addEventListener('click', characterSheetExtensionSendMessage);
-      thisDiv.appendChild(button);
-    }
-    {
-      const span = document.createElement('span');
-      span.innerText = '(1 action)';
-      thisDiv.appendChild(span);
-    }
-    panel.appendChild(thisDiv);
-  }
-  {
-    const thisDiv = document.createElement('div');
-    thisDiv.classList.add('flex-row');
-    {
-      const label = document.createElement('label');
-      const input = document.createElement('input');
-      input.type = 'radio';
-      input.name = 'burst-fire';
-      input.value = 'on';
-      label.appendChild(input);
-      const span = document.createElement('span');
-      span.innerText = 'On';
-      label.appendChild(span);
-      thisDiv.appendChild(label);
-    }
-    {
-      const label = document.createElement('label');
-      const input = document.createElement('input');
-      input.type = 'radio';
-      input.name = 'burst-fire';
-      input.value = 'off';
-      input.checked = true;
-      label.appendChild(input);
-      const span = document.createElement('span');
-      span.innerText = 'Off';
-      label.appendChild(span);
-      thisDiv.appendChild(label);
-    }
-    panel.appendChild(thisDiv);
-  }
+function buildAttackPanel(panel) {
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
@@ -790,6 +761,134 @@ function buildGunPanel(panel) {
     }
     panel.appendChild(thisDiv);
   }
+}
+function buildGunPanel(panel) {
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = `Shotgun`;
+      button.setAttribute('message', shotgunDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Rifle';
+      button.setAttribute('message', rifleDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.value = '0';
+      input.classList.add('ammo');
+      thisDiv.appendChild(input);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = `Ammo`;
+      button.addEventListener('click', printCurrentAmmo);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.value = '0';
+      input.classList.add('shots');
+      input.classList.add('shotgun');
+      thisDiv.appendChild(input);
+    }
+    {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'weapon';
+      input.value = 'shotgun';
+      input.checked = true;
+      label.appendChild(input);
+      const span = document.createElement('span');
+      span.innerText = 'Shotgun';
+      label.appendChild(span);
+      thisDiv.appendChild(label);
+    }
+    {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'weapon';
+      input.value = 'rifle';
+      label.appendChild(input);
+      const span = document.createElement('span');
+      span.innerText = 'Rifle';
+      label.appendChild(span);
+      thisDiv.appendChild(label);
+    }
+    {
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.value = '0';
+      input.classList.add('shots');
+      input.classList.add('rifle');
+      thisDiv.appendChild(input);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = `Burst Fire`;
+      button.setAttribute('message', burstFireDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const span = document.createElement('span');
+      span.innerText = '(1 action)';
+      thisDiv.appendChild(span);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'burst-fire';
+      input.value = 'on';
+      label.appendChild(input);
+      const span = document.createElement('span');
+      span.innerText = 'On';
+      label.appendChild(span);
+      thisDiv.appendChild(label);
+    }
+    {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'burst-fire';
+      input.value = 'off';
+      input.checked = true;
+      label.appendChild(input);
+      const span = document.createElement('span');
+      span.innerText = 'Off';
+      label.appendChild(span);
+      thisDiv.appendChild(label);
+    }
+    panel.appendChild(thisDiv);
+  }
+  
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
@@ -849,8 +948,8 @@ function buildGunPanel(panel) {
     thisDiv.classList.add('flex-row');
     {
       const button = document.createElement('button');
-      button.innerText = 'Roll Weapon';
-      button.addEventListener('click', rollWeapon);
+      button.innerText = 'Roll';
+      button.addEventListener('click', rollFirearm);
       thisDiv.appendChild(button);
     }
     {
@@ -959,7 +1058,26 @@ function buildMiscPanel(panel) {
     {
       const button = document.createElement('button');
       button.innerText = 'Archery';
-      button.setAttribute('message', archeryDescription)
+      button.setAttribute('message', archeryDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Sending Stone';
+      button.setAttribute('message', sendingStoneDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Resourceful';
+      button.setAttribute('message', resourcefulDescription);
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
@@ -1081,6 +1199,82 @@ function setTalking(nameOfSpeaker) {
 }
 
 function rollWeapon(event) {
+  let exhaustionString = getExhaustionString();
+  let exhaustionStringPlain = getExhaustionStringPlain();
+  let rollType = document.querySelector('input[name="roll-type"]:checked').value;
+
+  let thisWeaponKey = event.target.getAttribute('weapon-key');
+  let thisWeaponStats = weaponStats[thisWeaponKey];
+  let colossusHorde = document.querySelector('input[name="colossus-horde"]:checked').value;
+  let savage = document.querySelector('input[name="savage"]:checked').value;
+  let hunters = document.querySelector('input[name="hunters"]:checked').value;
+  let bonusHitName = document.querySelector('input[type="text"][id="bonus-hit-name"]').value;
+  let bonusDamageName = document.querySelector('input[type="text"][id="bonus-damage-name"]').value;
+  let bonusHit = document.querySelector('input[type="text"][id="bonus-hit"]').value;
+  let bonusDamage = document.querySelector('input[type="text"][id="bonus-damage"]').value;
+
+  let extraDesc = [];
+
+  let extraDamage = '';
+  if ((!!bonusDamageName && !!bonusDamage) || onOff[hunters] || colossusHorde == 'colossus') {
+    let rolls = [];
+    let names = [];
+    if (!!bonusDamageName && !!bonusDamage) {
+      extraDesc.push(bonusDamageName);
+      names.push(bonusDamageName);
+      rolls.push(bonusDamage);
+    }
+    if (colossusHorde == 'colossus') {
+      names.push("Colossus Slayer (Piercing)");
+      rolls.push('1d8');
+    }
+    if (onOff[hunters]) {
+      names.push("Hunter's Mark (Force)");
+      rolls.push('1d6');
+    }
+    extraDamage = `{{dmg2flag=1}} {{dmg2=[[${rolls.join("+")}]]}} {{dmg2type=${names.join(" + ")}}} {{crit2=Crit: [[${rolls.join("+")}]]}} `;
+  }
+
+  let extraHit = '';
+  let extraHitPlain = '';
+  if (!!bonusHitName && !!bonusHit) {
+    extraDesc.push(bonusHitName);
+    extraHit = `+${bonusHit}cs0cf0[${bonusHitName}]`;
+    extraHitPlain = `+${bonusHit}`;
+  }
+
+  let descText = [
+    onOff[hunters] ? "Spell: [Hunter's Mark](https://www.dndbeyond.com/spells/2619166-hunters-mark)" : "",
+    onOff[savage] ? "Feat: [Savage Attacker](https://www.dndbeyond.com/sources/dnd/free-rules/feats#SavageAttacker)" : "",
+    colossusHorde == 'colossus' ? "Class Feat: [Colossus Slayer](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level3HuntersPrey)" : "",
+    colossusHorde == 'horde' ? "Class Feat: [Horde Breaker](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level3HuntersPrey)" : "",
+    ...extraDesc
+  ].filter(x=>!!x).join(" \n");
+
+  let thisHitPlain = `${thisWeaponStats.stat.check}${thisWeaponStats.proficiency.bonus}`
+  let thisHit = `${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]${thisWeaponStats.proficiency.bonus}[${thisWeaponStats.proficiency.display}]`
+
+  let thisDamage = `${thisWeaponStats.damage}${thisWeaponStats.stat.check}`;
+  if (onOff[savage]) {
+    thisDamage = `{${thisWeaponStats.damage},${thisWeaponStats.damage}}kh1${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]`;
+  }
+
+  let message =
+    `&{template:atkdmg}} {{charname=${CHARACTER_NAME}}} {{rname=${thisWeaponStats.name}}} ` +
+    `{{mod=${thisHitPlain}${extraHitPlain}${exhaustionStringPlain}}} ` + 
+    `{{r1=[[1d20${thisHit}${extraHit}${exhaustionString}]]}} {{attack=1}} {{range=${thisWeaponStats.range}}} ` +
+    `{{damage=1}} {{dmg1flag=1}} {{dmg1=[[${thisDamage}]]}} {{dmg1type=Piercing}} {{crit1=Crit: [[${thisDamage}]]}} ` +
+    extraDamage +
+    `{{${rollType}=1}} ` + 
+    `{{r2=[[1d20${thisHit}${extraHit}${exhaustionString}]]}} ` +
+    (!!descText ? `{{desc=` + descText + `}}` : '');
+
+  characterSheetExtensionSendMessage(message);
+  shotsInput.value = `${shots}`;
+  setLocalStorage();
+}
+
+function rollFirearm(event) {
   let exhaustionString = getExhaustionString();
   let exhaustionStringPlain = getExhaustionStringPlain();
   let rollType = document.querySelector('input[name="roll-type"]:checked').value;
