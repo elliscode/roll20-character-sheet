@@ -65,12 +65,12 @@ const rifleDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Automatic Rifle}} ` +
   `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
-  `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 80ft./240ft.\n**Damage**: [2d8+3](!\n)\n**Damage Type**: Piercing\n**Weight**: 8lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), [Range](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Range), [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (30 shots), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Burst Fire](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#BurstFire), [Slow](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Slow)}}`;
+  `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 80ft./240ft.\n**Damage**: [2d8](!\n)\n**Damage Type**: Piercing\n**Weight**: 8lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), [Range](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Range), [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (30 shots), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Burst Fire](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#BurstFire), [Slow](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Slow)}}`;
 const shotgunDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Shotgun}} ` +
   `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
-  `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 30ft./90ft.\n**Damage**: [2d8+3](!\n)\n**Damage Type**: Piercing\n**Weight**: 7lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), [Range](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Range), [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (2 shots), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Push](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Push)}}`;
+  `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 30ft./90ft.\n**Damage**: [2d8](!\n)\n**Damage Type**: Piercing\n**Weight**: 7lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), [Range](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Range), [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (2 shots), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Push](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Push)}}`;
 const burstFireDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Burst Fire}} ` +
@@ -110,20 +110,63 @@ const daggerDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Dagger}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#WeaponsTable)}} ` +
-  `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Range**: 20ft./60ft.\n**Damage**: [1d4+3](!\n)\n**Damage Type**: Piercing\n**Weight**: 1 lb.\n**Cost**: 2 gp\n**Properties**: [Finesse](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Finesse), [Light](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Light), [Thrown](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Thrown), [Nick](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Nick)}}`;
+  `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Range**: 20ft./60ft.\n**Damage**: [1d4](!\n)\n**Damage Type**: Piercing\n**Weight**: 1 lb.\n**Cost**: 2 gp\n**Properties**: [Finesse](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Finesse), [Light](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Light), [Thrown](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Thrown), [Nick](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Nick)}}`;
+const daggerOfVenomDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Dagger}} ` +
+  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#WeaponsTable)}} ` +
+  `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Range**: 20ft./60ft.\n**Damage**: [1d4](!\n)\n**Damage Type**: Piercing\n**Weight**: 1 lb.\n**Cost**: 2 gp\n**Properties**: [Finesse](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Finesse), [Light](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Light), [Thrown](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Thrown), [Nick](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Nick)\nYou can take a Bonus Action to magically coat the blade with poison. The poison remains for 1 minute or until an attack using this weapon hits a creature. That creature must succeed on a [DC 15](!\n) Constitution saving throw or take [2d10](!\n) Poison damage and have the Poisoned condition for 1 minute. The weapon can't be used this way again until the next dawn.}}`;
 const proficiencies = {
   not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
   half: {key: 'half', display: 'Half Proficiency', bonus: '+1'},
   proficiency: {key: 'proficiency', display: 'Proficiency', bonus: '+2'},
   expertise: {key: 'expertise', display: 'Expertise', bonus: '+4'}
 };
+const weaponProperties = {
+  ammunition: {},
+  range: {},
+  finesse: {},
+  light: {},
+  thrown: {},
+  nick: {},
+  push: {},
+  slow: {}
+}
 const weaponStats = {
   dagger: {
     proficiency: proficiencies.proficiency,
     stat: stats.DEX,
     damage: '1d4',
+    bonus: '',
+    effect: {},
     name: 'Dagger',
-    range: '20ft./60ft.'
+    range: '20ft./60ft.',
+    properties: [
+      weaponProperties.finesse, 
+      weaponProperties.light,
+      weaponProperties.thrown,
+      weaponProperties.nick
+    ]
+  },
+  daggerOfVenom: {
+    proficiency: proficiencies.proficiency,
+    stat: stats.DEX,
+    damage: '1d4',
+    bonus: '+1',
+    effect: {
+      venom: `&{template:atkdmg}} ` + 
+        `{{save=1}} {{saveattr=Constitution}} ` + 
+        `{{savedesc=Dagger of Venom}} {{savedc=15}} ` + 
+        `{{damage=1}} {{dmg1flag=1}} {{dmg1=[[2d10]]}} {{dmg1type=Poison}} `
+    },
+    name: 'Dagger of Venom',
+    range: '20ft./60ft.',
+    properties: [
+      weaponProperties.finesse, 
+      weaponProperties.light,
+      weaponProperties.thrown,
+      weaponProperties.nick
+    ]
   }
 }
 
@@ -354,13 +397,22 @@ function buildWeaponsPanel(panel) {
     }
     {
       const button = document.createElement('button');
-      button.innerText = 'Roll';
+      button.innerText = 'Melee';
       button.setAttribute('weapon-key', 'dagger');
+      button.setAttribute('attack-type', 'melee');
+      button.addEventListener('click', rollWeapon);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Throw';
+      button.setAttribute('weapon-key', 'dagger');
+      button.setAttribute('attack-type', 'thrown');
       button.addEventListener('click', rollWeapon);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
-  } 
+  }
 }
 
 function buildConditionsPanel(panel) {
@@ -1171,7 +1223,10 @@ function rollAbility(event) {
 
 function characterSheetExtensionPositionGui() {
   let right = window.innerWidth - parseInt(document.getElementById('babylonCanvas').getBoundingClientRect().width);
-  characterSheetDiv.style.right = `${right}px`
+  let newValue = `${right}px`;
+  if (characterSheetDiv.style.right != newValue) {
+    characterSheetDiv.style.right = newValue;
+  }
 }
 
 function characterSheetExtensionSendMessage(message) {
@@ -1199,12 +1254,15 @@ function setTalking(nameOfSpeaker) {
 }
 
 function rollWeapon(event) {
+  let thisWeaponKey = event.target.getAttribute('weapon-key');
+  let thisWeaponStats = weaponStats[thisWeaponKey];
+
+  let attackType = event.target.getAttribute('attack-type');
+  let throwing = attackType == 'thrown';
+
   let exhaustionString = getExhaustionString();
   let exhaustionStringPlain = getExhaustionStringPlain();
   let rollType = document.querySelector('input[name="roll-type"]:checked').value;
-
-  let thisWeaponKey = event.target.getAttribute('weapon-key');
-  let thisWeaponStats = weaponStats[thisWeaponKey];
   let colossusHorde = document.querySelector('input[name="colossus-horde"]:checked').value;
   let savage = document.querySelector('input[name="savage"]:checked').value;
   let hunters = document.querySelector('input[name="hunters"]:checked').value;
@@ -1251,18 +1309,19 @@ function rollWeapon(event) {
     ...extraDesc
   ].filter(x=>!!x).join(" \n");
 
-  let thisHitPlain = `${thisWeaponStats.stat.check}${thisWeaponStats.proficiency.bonus}`
-  let thisHit = `${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]${thisWeaponStats.proficiency.bonus}[${thisWeaponStats.proficiency.display}]`
+  let thisHitPlain = `${!!thisWeaponStats.bonus ? thisWeaponStats.bonus : ''}${thisWeaponStats.stat.check}${thisWeaponStats.proficiency.bonus}`
+  let thisHit = `${!!thisWeaponStats.bonus ? thisWeaponStats.bonus + '[' + thisWeaponStats.name + ']' : ''}${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]${thisWeaponStats.proficiency.bonus}[${thisWeaponStats.proficiency.display}]`
 
-  let thisDamage = `${thisWeaponStats.damage}${thisWeaponStats.stat.check}`;
+  let thisDamage = `${thisWeaponStats.damage}${thisWeaponStats.stat.check}${!!thisWeaponStats.bonus ? thisWeaponStats.bonus : ''}`;
   if (onOff[savage]) {
-    thisDamage = `{${thisWeaponStats.damage},${thisWeaponStats.damage}}kh1${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]`;
+    thisDamage = `{${thisWeaponStats.damage},${thisWeaponStats.damage}}kh1${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]${!!thisWeaponStats.bonus ? thisWeaponStats.bonus + '[' + thisWeaponStats.name + ']' : ''}`;
   }
 
   let message =
-    `&{template:atkdmg}} {{charname=${CHARACTER_NAME}}} {{rname=${thisWeaponStats.name}}} ` +
+    `&{template:atkdmg}} {{charname=${CHARACTER_NAME}}} {{rname=${thisWeaponStats.name}${throwing ? '' : ''}}} ` +
     `{{mod=${thisHitPlain}${extraHitPlain}${exhaustionStringPlain}}} ` + 
-    `{{r1=[[1d20${thisHit}${extraHit}${exhaustionString}]]}} {{attack=1}} {{range=${thisWeaponStats.range}}} ` +
+    `{{r1=[[1d20${thisHit}${extraHit}${exhaustionString}]]}} {{attack=1}} ` + 
+    (throwing ? `{{range=${thisWeaponStats.range}}} ` : '') +
     `{{damage=1}} {{dmg1flag=1}} {{dmg1=[[${thisDamage}]]}} {{dmg1type=Piercing}} {{crit1=Crit: [[${thisDamage}]]}} ` +
     extraDamage +
     `{{${rollType}=1}} ` + 
@@ -1270,7 +1329,13 @@ function rollWeapon(event) {
     (!!descText ? `{{desc=` + descText + `}}` : '');
 
   characterSheetExtensionSendMessage(message);
-  shotsInput.value = `${shots}`;
+  let effectKeys = Object.keys(thisWeaponStats.effect);
+  for (let effectKey of effectKeys) {
+    let enabled = !!document.querySelector(`input[type="checkbox"][weapon-property="effect"][effect-key="${effectKey}"][weapon-key="${thisWeaponKey}"]:checked`);
+    if (enabled) {
+      characterSheetExtensionSendMessage(thisWeaponStats.effect[effectKey]);
+    }
+  }
   setLocalStorage();
 }
 
@@ -1469,7 +1534,16 @@ function getLocalStorage() {
     
   }
 }
-setTimeout(buildUi, 4900);
-setInterval(characterSheetExtensionPositionGui, 5000);
-setTimeout(characterSheetExtensionSendMessage, 5000, '/talktomyself');
-setTimeout(setTalking, 5100, CHARACTER_NAME);
+function checkIfShouldBuildUi(event) {
+  if (!document.querySelector(`div.userscript-commandintro`)) {
+    return;
+  }
+  clearInterval(checkInterval);
+  buildUi(event);
+  characterSheetExtensionPositionGui(event);
+  characterSheetExtensionSendMessage('/talktomyself');
+  setTalking(CHARACTER_NAME);
+  repositionInterval = setInterval(characterSheetExtensionPositionGui, 1000);
+}
+const checkInterval = setInterval(checkIfShouldBuildUi, 100);
+let repositionInterval = undefined;
