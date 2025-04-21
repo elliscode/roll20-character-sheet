@@ -114,7 +114,7 @@ const daggerDescription = `&{template:traits} ` +
 const daggerOfVenomDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Dagger}} ` +
-  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#WeaponsTable)}} ` +
+  `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/magic-items-a-z#DaggerofVenom)}} ` +
   `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Range**: 20ft./60ft.\n**Damage**: [1d4](!\n)\n**Damage Type**: Piercing\n**Weight**: 1 lb.\n**Cost**: 2 gp\n**Properties**: [Finesse](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Finesse), [Light](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Light), [Thrown](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Thrown), [Nick](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Nick)\nYou can take a Bonus Action to magically coat the blade with poison. The poison remains for 1 minute or until an attack using this weapon hits a creature. That creature must succeed on a [DC 15](!\n) Constitution saving throw or take [2d10](!\n) Poison damage and have the Poisoned condition for 1 minute. The weapon can't be used this way again until the next dawn.}}`;
 const proficiencies = {
   not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
@@ -154,10 +154,13 @@ const weaponStats = {
     damage: '1d4',
     bonus: '+1',
     effect: {
-      venom: `&{template:atkdmg}} ` + 
-        `{{save=1}} {{saveattr=Constitution}} ` + 
-        `{{savedesc=Dagger of Venom}} {{savedc=15}} ` + 
-        `{{damage=1}} {{dmg1flag=1}} {{dmg1=[[2d10]]}} {{dmg1type=Poison}} `
+      venom: {
+        roll: `&{template:atkdmg}} ` + 
+          `{{save=1}} {{saveattr=Constitution}} ` + 
+          `{{savedesc=Dagger of Venom}} {{savedc=15}} ` + 
+          `{{damage=1}} {{dmg1flag=1}} {{dmg1=[[2d10]]}} {{dmg1type=Poison}} `,
+        desc: `Weapon Effect: [Dagger of Venom](https://www.dndbeyond.com/magic-items/9228415-dagger-of-venom)`
+      }
     },
     name: 'Dagger of Venom',
     range: '20ft./60ft.',
@@ -291,29 +294,6 @@ function buildUi() {
   }
   characterSheetDiv.appendChild(gunsDiv);
 
-  // let weaponsDiv = document.createElement('div');
-  // {
-  //   const panel = document.createElement('div');
-  //   panel.classList.add('panel');
-  //   panel.id = 'weapon-panel';
-  //   buildWeaponsPanel(panel);
-  //   weaponsDiv.appendChild(panel);
-  // }
-  // {
-  //   const buttonsDiv = document.createElement('div');
-  //   buttonsDiv.classList.add('flex-row');
-  //   buttonsDiv.classList.add('flex-right');
-  //   {
-  //     const button = document.createElement('button');
-  //     button.innerText = 'Weapons';
-  //     button.setAttribute('for', 'weapon-panel');
-  //     button.addEventListener('click', expandPanel);
-  //     buttonsDiv.appendChild(button);
-  //   }
-  //   weaponsDiv.appendChild(buttonsDiv);
-  // }
-  // characterSheetDiv.appendChild(weaponsDiv);
-
   let controlsDiv = document.createElement('div');
   {
     const panel = document.createElement('div');
@@ -412,7 +392,44 @@ function buildWeaponsPanel(panel) {
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
-  }
+  } 
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('not-shown');
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Dagger of Venom';
+      button.setAttribute('message', daggerOfVenomDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'M';
+      button.setAttribute('weapon-key', 'daggerOfVenom');
+      button.setAttribute('attack-type', 'melee');
+      button.addEventListener('click', rollWeapon);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'T';
+      button.setAttribute('weapon-key', 'daggerOfVenom');
+      button.setAttribute('attack-type', 'thrown');
+      button.addEventListener('click', rollWeapon);
+      thisDiv.appendChild(button);
+    }
+    {
+      let input = document.createElement('input');
+      input.type = 'checkbox';
+      input.setAttribute('weapon-key', 'daggerOfVenom');
+      input.setAttribute('weapon-property', 'effect');
+      input.setAttribute('effect-key', 'venom');
+      thisDiv.appendChild(input);
+    }
+    panel.appendChild(thisDiv);
+  } 
 }
 
 function buildConditionsPanel(panel) {
@@ -1272,6 +1289,17 @@ function rollWeapon(event) {
   let bonusDamage = document.querySelector('input[type="text"][id="bonus-damage"]').value;
 
   let extraDesc = [];
+  let theseEffectRolls = [];
+
+  let effectKeys = Object.keys(thisWeaponStats.effect);
+  for (let effectKey of effectKeys) {
+    let enabled = !!document.querySelector(`input[type="checkbox"][weapon-property="effect"][effect-key="${effectKey}"][weapon-key="${thisWeaponKey}"]:checked`);
+    if (enabled) {
+      let thisEffect = thisWeaponStats.effect[effectKey];
+      theseEffectRolls.push(thisEffect.roll);
+      extraDesc.push(thisEffect.desc);
+    }
+  }
 
   let extraDamage = '';
   if ((!!bonusDamageName && !!bonusDamage) || onOff[hunters] || colossusHorde == 'colossus') {
@@ -1310,11 +1338,11 @@ function rollWeapon(event) {
   ].filter(x=>!!x).join(" \n");
 
   let thisHitPlain = `${!!thisWeaponStats.bonus ? thisWeaponStats.bonus : ''}${thisWeaponStats.stat.check}${thisWeaponStats.proficiency.bonus}`
-  let thisHit = `${!!thisWeaponStats.bonus ? thisWeaponStats.bonus + '[' + thisWeaponStats.name + ']' : ''}${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]${thisWeaponStats.proficiency.bonus}[${thisWeaponStats.proficiency.display}]`
+  let thisHit = `${!!thisWeaponStats.bonus ? thisWeaponStats.bonus + '[Weapon]' : ''}${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]${thisWeaponStats.proficiency.bonus}[${thisWeaponStats.proficiency.display}]`
 
   let thisDamage = `${thisWeaponStats.damage}${thisWeaponStats.stat.check}${!!thisWeaponStats.bonus ? thisWeaponStats.bonus : ''}`;
   if (onOff[savage]) {
-    thisDamage = `{${thisWeaponStats.damage},${thisWeaponStats.damage}}kh1${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]${!!thisWeaponStats.bonus ? thisWeaponStats.bonus + '[' + thisWeaponStats.name + ']' : ''}`;
+    thisDamage = `{${thisWeaponStats.damage},${thisWeaponStats.damage}}kh1${!!thisWeaponStats.bonus ? thisWeaponStats.bonus + '[Weapon]' : ''}${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]`;
   }
 
   let message =
@@ -1328,13 +1356,16 @@ function rollWeapon(event) {
     `{{r2=[[1d20${thisHit}${extraHit}${exhaustionString}]]}} ` +
     (!!descText ? `{{desc=` + descText + `}}` : '');
 
-  characterSheetExtensionSendMessage(message);
-  let effectKeys = Object.keys(thisWeaponStats.effect);
-  for (let effectKey of effectKeys) {
-    let enabled = !!document.querySelector(`input[type="checkbox"][weapon-property="effect"][effect-key="${effectKey}"][weapon-key="${thisWeaponKey}"]:checked`);
-    if (enabled) {
-      characterSheetExtensionSendMessage(thisWeaponStats.effect[effectKey]);
-    }
+  let i = 0;
+  if (theseEffectRolls.length > 0) {
+    setTimeout(characterSheetExtensionSendMessage, (i++) * 500, `/em &darr;`);
+  }
+  setTimeout(characterSheetExtensionSendMessage, (i++) * 500, message);
+  for (let thisEffectRoll of theseEffectRolls) {
+    setTimeout(characterSheetExtensionSendMessage, (i++) * 500, thisEffectRoll);
+  }
+  if (theseEffectRolls.length > 0) {
+    setTimeout(characterSheetExtensionSendMessage, (i++) * 500, `/em &uarr;`);
   }
   setLocalStorage();
 }

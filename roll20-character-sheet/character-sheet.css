@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 0px;
   right: 0px;
-  z-index: 2;
+  z-index: 10000; /* the #playerzone div has a z-index of 9999 so I had to one-up them */
   display:flex;
   flex-direction:row;
   align-items: end;
@@ -88,4 +88,7 @@
 }
 .exhaustion {
   width:40px;
+}
+.not-shown {
+  display: none!important;
 }
