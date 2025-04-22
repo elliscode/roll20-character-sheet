@@ -113,7 +113,7 @@ const daggerDescription = `&{template:traits} ` +
   `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Range**: 20ft./60ft.\n**Damage**: [1d4](!\n)\n**Damage Type**: Piercing\n**Weight**: 1 lb.\n**Cost**: 2 gp\n**Properties**: [Finesse](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Finesse), [Light](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Light), [Thrown](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Thrown), [Nick](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Nick)}}`;
 const daggerOfVenomDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
-  `{{name=Dagger}} ` +
+  `{{name=Dagger of Venom}} ` +
   `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/magic-items-a-z#DaggerofVenom)}} ` +
   `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Range**: 20ft./60ft.\n**Damage**: [1d4](!\n)\n**Damage Type**: Piercing\n**Weight**: 1 lb.\n**Cost**: 2 gp\n**Properties**: [Finesse](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Finesse), [Light](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Light), [Thrown](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Thrown), [Nick](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Nick)\nYou can take a Bonus Action to magically coat the blade with poison. The poison remains for 1 minute or until an attack using this weapon hits a creature. That creature must succeed on a [DC 15](!\n) Constitution saving throw or take [2d10](!\n) Poison damage and have the Poisoned condition for 1 minute. The weapon can't be used this way again until the next dawn.}}`;
 const proficiencies = {
@@ -124,21 +124,22 @@ const proficiencies = {
 };
 const weaponProperties = {
   ammunition: {},
+  burstFire: {},
   range: {},
   finesse: {},
   light: {},
   thrown: {},
   nick: {},
   push: {},
-  slow: {}
+  reload: {},
+  slow: {},
+  twoHanded: {}
 }
 const weaponStats = {
   dagger: {
     proficiency: proficiencies.proficiency,
     stat: stats.DEX,
     damage: '1d4',
-    bonus: '',
-    effect: {},
     name: 'Dagger',
     range: '20ft./60ft.',
     properties: [
@@ -170,9 +171,41 @@ const weaponStats = {
       weaponProperties.thrown,
       weaponProperties.nick
     ]
+  },
+  shotgun: {
+    proficiency: proficiencies.proficiency,
+    stat: stats.DEX,
+    damage: '2d8',
+    name: 'Shotgun',
+    range: '30ft./90ft.',
+    shots: 2,
+    properties: [
+      weaponProperties.ammunition, 
+      weaponProperties.range,
+      weaponProperties.reload,
+      weaponProperties.twoHanded,
+      weaponProperties.push
+    ],
+    mastery: "Mastery: [Push](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Push)"
+  },
+  rifle: {
+    proficiency: proficiencies.proficiency,
+    stat: stats.DEX,
+    damage: '2d8',
+    name: 'Automatic Rifle',
+    range: '80ft./240ft.',
+    shots: 30,
+    properties: [
+      weaponProperties.ammunition, 
+      weaponProperties.range,
+      weaponProperties.reload,
+      weaponProperties.twoHanded,
+      weaponProperties.burstFire,
+      weaponProperties.slow
+    ],
+    mastery: "Mastery: [Slow](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Slow)"
   }
 }
-
 const rollTypes = {
   advantage: { display: 'Advantage', default: false },
   normal: { display: 'Normal', default: true },
@@ -1369,7 +1402,6 @@ function rollWeapon(event) {
   }
   setLocalStorage();
 }
-
 function rollFirearm(event) {
   let exhaustionString = getExhaustionString();
   let exhaustionStringPlain = getExhaustionStringPlain();
