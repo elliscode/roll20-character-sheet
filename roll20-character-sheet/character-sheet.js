@@ -123,17 +123,64 @@ const proficiencies = {
   expertise: {key: 'expertise', display: 'Expertise', bonus: '+4'}
 };
 const weaponProperties = {
-  ammunition: {},
-  burstFire: {},
-  range: {},
-  finesse: {},
-  light: {},
-  thrown: {},
-  nick: {},
-  push: {},
-  reload: {},
-  slow: {},
-  twoHanded: {}
+  ammunition: 'ammunition',
+  burstFire: 'burstFire',
+  range: 'range',
+  finesse: 'finesse',
+  light: 'light',
+  thrown: 'thrown',
+  nick: 'nick',
+  push: 'push',
+  reload: 'reload',
+  slow: 'slow',
+  twoHanded: 'two-handed'
+}
+const masteries = {
+  push: "Mastery: [Push](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Push) \n",
+  slow: "Mastery: [Slow](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Slow) \n"
+}
+const defaultCallbacks = {
+  melee: [
+    standardHitRoll,
+    bonusHitModifier,
+    standardDamageRoll,
+    bonusDamageModifier,
+    huntersMarkModifier,
+    colossusSlayerModifier,
+    hordeBreakerModifier,
+    savageAttackModifier,
+    daggerOfVenomModifier,
+    squareBracketFormat,
+    masteryModifier
+  ],
+  ranged: [
+    standardHitRoll,
+    bonusHitModifier,
+    archeryModifier,
+    standardDamageRoll,
+    bonusDamageModifier,
+    huntersMarkModifier,
+    colossusSlayerModifier,
+    hordeBreakerModifier,
+    savageAttackModifier,
+    squareBracketFormat,
+    masteryModifier
+  ],
+  firearm: [
+    expendShot,
+    standardHitRoll,
+    bonusHitModifier,
+    archeryModifier,
+    standardDamageRoll,
+    bonusDamageModifier,
+    huntersMarkModifier,
+    colossusSlayerModifier,
+    hordeBreakerModifier,
+    savageAttackModifier,
+    burstFireModifier,
+    squareBracketFormat,
+    masteryModifier
+  ]
 }
 const weaponStats = {
   dagger: {
@@ -142,6 +189,8 @@ const weaponStats = {
     damage: '1d4',
     name: 'Dagger',
     range: '20ft./60ft.',
+    damageType: 'Piercing',
+    callbacks: defaultCallbacks.melee,
     properties: [
       weaponProperties.finesse, 
       weaponProperties.light,
@@ -154,17 +203,10 @@ const weaponStats = {
     stat: stats.DEX,
     damage: '1d4',
     bonus: '+1',
-    effect: {
-      venom: {
-        roll: `&{template:atkdmg}} ` + 
-          `{{save=1}} {{saveattr=Constitution}} ` + 
-          `{{savedesc=Dagger of Venom}} {{savedc=15}} ` + 
-          `{{damage=1}} {{dmg1flag=1}} {{dmg1=[[2d10]]}} {{dmg1type=Poison}} `,
-        desc: `Weapon Effect: [Dagger of Venom](https://www.dndbeyond.com/magic-items/9228415-dagger-of-venom)`
-      }
-    },
     name: 'Dagger of Venom',
     range: '20ft./60ft.',
+    damageType: 'Piercing',
+    callbacks: defaultCallbacks.melee,
     properties: [
       weaponProperties.finesse, 
       weaponProperties.light,
@@ -179,14 +221,16 @@ const weaponStats = {
     name: 'Shotgun',
     range: '30ft./90ft.',
     shots: 2,
+    damageType: 'Piercing',
+    callbacks: defaultCallbacks.firearm,
+    mastery: true,
     properties: [
       weaponProperties.ammunition, 
       weaponProperties.range,
       weaponProperties.reload,
       weaponProperties.twoHanded,
       weaponProperties.push
-    ],
-    mastery: "Mastery: [Push](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Push)"
+    ]
   },
   rifle: {
     proficiency: proficiencies.proficiency,
@@ -195,6 +239,9 @@ const weaponStats = {
     name: 'Automatic Rifle',
     range: '80ft./240ft.',
     shots: 30,
+    damageType: 'Piercing',
+    callbacks: defaultCallbacks.firearm,
+    mastery: true,
     properties: [
       weaponProperties.ammunition, 
       weaponProperties.range,
@@ -202,8 +249,38 @@ const weaponStats = {
       weaponProperties.twoHanded,
       weaponProperties.burstFire,
       weaponProperties.slow
+    ]
+  }, 
+  unarmedStrike: {
+    proficiency: proficiencies.proficiency,
+    stat: stats.STR,
+    damage: '3',
+    name: 'Unarmed Strike',
+    range: '5ft.',
+    damageType: 'Bludgeoning',
+    callbacks: [
+      standardHitRoll,
+      bonusHitModifier,
+      unarmedStrikeDamageRoll,
+      bonusDamageModifier,
+      huntersMarkModifier,
+      squareBracketFormat
     ],
-    mastery: "Mastery: [Slow](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Slow)"
+    ignoreStatForDamage: true,
+    properties: []
+  }, 
+  club: {
+    proficiency: proficiencies.proficiency,
+    stat: stats.STR,
+    damage: '1d4',
+    name: 'Club',
+    range: '5ft.',
+    damageType: 'Bludgeoning',
+    callbacks: defaultCallbacks.melee,
+    properties: [
+      weaponProperties.light,
+      weaponProperties.slow
+    ]
   }
 }
 const rollTypes = {
@@ -211,21 +288,7 @@ const rollTypes = {
   normal: { display: 'Normal', default: true },
   disadvantage: { display: 'Disadv', default: false }
 }
-
-const rname = { rifle: "Automatic Rifle", shotgun: "Shotgun" };
-const range = { rifle: "80ft./240ft.", shotgun: "30ft./90ft." }
-const dmg1 = {
-  rifle: { on: "{2d8,2d8}kh1+3", off: "2d8+3"},
-  shotgun: { on: "{2d8,2d8}kh1+3", off: "2d8+3"}
-};
-const weaponAmmo = {
-  rifle: { shots: 30 },
-  shotgun: { shots: 2 },
-};
-const masteries = { rifle: "Mastery: [Slow (Auto. Rifle)](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Slow)", shotgun: "Mastery: [Push (Shotgun)](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Push)" }
 const onOff = { on: true, off: false };
-const regularHit = `${stats.DEX.check}[${stats.DEX.display}]${proficiencies.proficiency.bonus}[${proficiencies.proficiency.display}]+2[Archery]`
-const regularHitPlain = "+3+2+2"
 
 function buildUi() {
   characterSheetDiv.classList.add('character-sheet-extension');
@@ -410,7 +473,7 @@ function buildWeaponsPanel(panel) {
     }
     {
       const button = document.createElement('button');
-      button.innerText = 'Melee';
+      button.innerText = 'M';
       button.setAttribute('weapon-key', 'dagger');
       button.setAttribute('attack-type', 'melee');
       button.addEventListener('click', rollWeapon);
@@ -418,9 +481,22 @@ function buildWeaponsPanel(panel) {
     }
     {
       const button = document.createElement('button');
-      button.innerText = 'Throw';
+      button.innerText = 'T';
       button.setAttribute('weapon-key', 'dagger');
       button.setAttribute('attack-type', 'thrown');
+      button.addEventListener('click', rollWeapon);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  } 
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Unarmed Strike';
+      button.setAttribute('weapon-key', 'unarmedStrike');
+      button.setAttribute('attack-type', 'melee');
       button.addEventListener('click', rollWeapon);
       thisDiv.appendChild(button);
     }
@@ -457,7 +533,6 @@ function buildWeaponsPanel(panel) {
       let input = document.createElement('input');
       input.type = 'checkbox';
       input.setAttribute('weapon-key', 'daggerOfVenom');
-      input.setAttribute('weapon-property', 'effect');
       input.setAttribute('effect-key', 'venom');
       thisDiv.appendChild(input);
     }
@@ -687,7 +762,7 @@ function buildAttackPanel(panel) {
     thisDiv.classList.add('flex-row');
     {
       const button = document.createElement('button');
-      button.innerText = `Hunter's Mark`;
+      button.innerText = `H. Mark`;
       button.setAttribute('message', huntersMark)
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
@@ -807,14 +882,14 @@ function buildAttackPanel(panel) {
     thisDiv.classList.add('flex-row');
     {
       const button = document.createElement('button');
-      button.innerText = 'Colossus Slayer';
+      button.innerText = 'Colossus';
       button.setAttribute('message', colossusSlayer)
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
     {
       const button = document.createElement('button');
-      button.innerText = 'Horde Breaker';
+      button.innerText = 'Horde';
       button.setAttribute('message', hordeBreaker)
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
@@ -877,22 +952,25 @@ function buildGunPanel(panel) {
     }
     {
       const button = document.createElement('button');
-      button.innerText = 'Rifle';
-      button.setAttribute('message', rifleDescription)
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.innerText = 'R';
+      button.setAttribute('weapon-key', 'shotgun');
+      button.addEventListener('click', reloadFirearm);
       thisDiv.appendChild(button);
     }
     {
       const input = document.createElement('input');
       input.type = 'number';
       input.value = '0';
-      input.classList.add('ammo');
+      input.classList.add('shots');
+      input.setAttribute('weapon-key', 'shotgun');
       thisDiv.appendChild(input);
     }
     {
       const button = document.createElement('button');
-      button.innerText = `Ammo`;
-      button.addEventListener('click', printCurrentAmmo);
+      button.innerText = `S`;
+      button.setAttribute('weapon-key', 'shotgun');
+      button.setAttribute('attack-type', 'ranged');
+      button.addEventListener('click', rollWeapon);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -901,45 +979,34 @@ function buildGunPanel(panel) {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
     {
-      const input = document.createElement('input');
-      input.type = 'number';
-      input.value = '0';
-      input.classList.add('shots');
-      input.classList.add('shotgun');
-      thisDiv.appendChild(input);
+      const button = document.createElement('button');
+      button.innerText = 'Rifle';
+      button.setAttribute('message', rifleDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
     }
     {
-      const label = document.createElement('label');
-      const input = document.createElement('input');
-      input.type = 'radio';
-      input.name = 'weapon';
-      input.value = 'shotgun';
-      input.checked = true;
-      label.appendChild(input);
-      const span = document.createElement('span');
-      span.innerText = 'Shotgun';
-      label.appendChild(span);
-      thisDiv.appendChild(label);
-    }
-    {
-      const label = document.createElement('label');
-      const input = document.createElement('input');
-      input.type = 'radio';
-      input.name = 'weapon';
-      input.value = 'rifle';
-      label.appendChild(input);
-      const span = document.createElement('span');
-      span.innerText = 'Rifle';
-      label.appendChild(span);
-      thisDiv.appendChild(label);
+      const button = document.createElement('button');
+      button.innerText = 'R';
+      button.setAttribute('weapon-key', 'rifle');
+      button.addEventListener('click', reloadFirearm);
+      thisDiv.appendChild(button);
     }
     {
       const input = document.createElement('input');
       input.type = 'number';
       input.value = '0';
       input.classList.add('shots');
-      input.classList.add('rifle');
+      input.setAttribute('weapon-key', 'rifle');
       thisDiv.appendChild(input);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'S';
+      button.setAttribute('weapon-key', 'rifle');
+      button.setAttribute('attack-type', 'ranged');
+      button.addEventListener('click', rollWeapon);
+      thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
   }
@@ -1050,21 +1117,22 @@ function buildGunPanel(panel) {
     thisDiv.classList.add('flex-row');
     {
       const button = document.createElement('button');
-      button.innerText = 'Roll';
-      button.addEventListener('click', rollFirearm);
-      thisDiv.appendChild(button);
-    }
-    {
-      const button = document.createElement('button');
       button.innerText = 'Reload';
-      button.addEventListener('click', reloadFirearm);
-      thisDiv.appendChild(button);
-    }
-    {
-      const button = document.createElement('button');
-      button.innerText = 'Desc';
       button.setAttribute('message', reloadDescription)
       button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const input = document.createElement('input');
+      input.type = 'number';
+      input.value = '0';
+      input.classList.add('ammo');
+      thisDiv.appendChild(input);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = `Ammo`;
+      button.addEventListener('click', printCurrentAmmo);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1302,220 +1370,330 @@ function setTalking(nameOfSpeaker) {
   let desired = Array.from(speakingAs.querySelectorAll('option')).filter(x => x.value.startsWith('character|') && x.textContent == nameOfSpeaker)[0].value;
   speakingAs.value = desired;
 }
+function expendShot(event, d) {
+  let thisWeaponKey = event.target.getAttribute('weapon-key');
+  let thisWeaponStats = weaponStats[thisWeaponKey];
 
-function rollWeapon(event) {
+  let burstFireEnabled = onOff[document.querySelector('input[name="burst-fire"]:checked').value];
+  let burstFireAllowed = thisWeaponStats.properties.includes(weaponProperties.burstFire);
+
+  let shotsThatWouldBeSpent = 1;
+  if (burstFireAllowed && burstFireEnabled) {
+    shotsThatWouldBeSpent = 10;
+  }
+
+  let shotsInput = document.querySelector(`input.shots[type="number"][weapon-key="${thisWeaponKey}"]`);
+  let previousAmmo = parseInt(shotsInput.value);
+  let shotsThatWouldBeRemaining = previousAmmo - shotsThatWouldBeSpent;
+  if (shotsThatWouldBeRemaining < 0) {
+    reloadFirearm(event, d);
+  }
+ 
+  // recalculate and persist
+  let shots = parseInt(shotsInput.value);
+  shotsThatWouldBeRemaining = shots - shotsThatWouldBeSpent;
+  if (shotsThatWouldBeRemaining < 0) {
+    throw new Error('not enough shots error');
+  }
+
+  shotsInput.value = `${shotsThatWouldBeRemaining}`;
+  
+  d.desc += `${shotsThatWouldBeRemaining} of ${thisWeaponStats.shots} shots left (prev. ${previousAmmo}) \n`;
+}
+function standardHitRoll(event, d) {
   let thisWeaponKey = event.target.getAttribute('weapon-key');
   let thisWeaponStats = weaponStats[thisWeaponKey];
 
   let attackType = event.target.getAttribute('attack-type');
   let throwing = attackType == 'thrown';
 
+  let mod = '';
+  let modP = '';
+  if (!!thisWeaponStats.bonus) {
+    mod += `${thisWeaponStats.bonus}[Weapon]`;
+    modP += thisWeaponStats.bonus;
+  }
+  mod += `${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]`;
+  modP += thisWeaponStats.stat.check;
+  mod += `${thisWeaponStats.proficiency.bonus}[${thisWeaponStats.proficiency.display}]`;
+  modP += thisWeaponStats.proficiency.bonus;
+
   let exhaustionString = getExhaustionString();
   let exhaustionStringPlain = getExhaustionStringPlain();
+
+  if (!!exhaustionString) {
+    mod += exhaustionString;
+    modP += exhaustionStringPlain;
+  }
+
+  d.attack = '1';
+  d.r1 = `1d20${mod}`
+  d.r2 = `1d20${mod}`
   let rollType = document.querySelector('input[name="roll-type"]:checked').value;
-  let colossusHorde = document.querySelector('input[name="colossus-horde"]:checked').value;
-  let savage = document.querySelector('input[name="savage"]:checked').value;
-  let hunters = document.querySelector('input[name="hunters"]:checked').value;
-  let bonusHitName = document.querySelector('input[type="text"][id="bonus-hit-name"]').value;
-  let bonusDamageName = document.querySelector('input[type="text"][id="bonus-damage-name"]').value;
-  let bonusHit = document.querySelector('input[type="text"][id="bonus-hit"]').value;
-  let bonusDamage = document.querySelector('input[type="text"][id="bonus-damage"]').value;
-
-  let extraDesc = [];
-  let theseEffectRolls = [];
-
-  let effectKeys = Object.keys(thisWeaponStats.effect);
-  for (let effectKey of effectKeys) {
-    let enabled = !!document.querySelector(`input[type="checkbox"][weapon-property="effect"][effect-key="${effectKey}"][weapon-key="${thisWeaponKey}"]:checked`);
-    if (enabled) {
-      let thisEffect = thisWeaponStats.effect[effectKey];
-      theseEffectRolls.push(thisEffect.roll);
-      extraDesc.push(thisEffect.desc);
-    }
+  d[rollType] = "1"
+  d.rname = thisWeaponStats.name;
+  d.charname = CHARACTER_NAME;
+  d.mod = modP;
+  if (throwing) {
+    d.range = thisWeaponStats.range;
   }
-
-  let extraDamage = '';
-  if ((!!bonusDamageName && !!bonusDamage) || onOff[hunters] || colossusHorde == 'colossus') {
-    let rolls = [];
-    let names = [];
-    if (!!bonusDamageName && !!bonusDamage) {
-      extraDesc.push(bonusDamageName);
-      names.push(bonusDamageName);
-      rolls.push(bonusDamage);
-    }
-    if (colossusHorde == 'colossus') {
-      names.push("Colossus Slayer (Piercing)");
-      rolls.push('1d8');
-    }
-    if (onOff[hunters]) {
-      names.push("Hunter's Mark (Force)");
-      rolls.push('1d6');
-    }
-    extraDamage = `{{dmg2flag=1}} {{dmg2=[[${rolls.join("+")}]]}} {{dmg2type=${names.join(" + ")}}} {{crit2=Crit: [[${rolls.join("+")}]]}} `;
-  }
-
-  let extraHit = '';
-  let extraHitPlain = '';
-  if (!!bonusHitName && !!bonusHit) {
-    extraDesc.push(bonusHitName);
-    extraHit = `+${bonusHit}cs0cf0[${bonusHitName}]`;
-    extraHitPlain = `+${bonusHit}`;
-  }
-
-  let descText = [
-    onOff[hunters] ? "Spell: [Hunter's Mark](https://www.dndbeyond.com/spells/2619166-hunters-mark)" : "",
-    onOff[savage] ? "Feat: [Savage Attacker](https://www.dndbeyond.com/sources/dnd/free-rules/feats#SavageAttacker)" : "",
-    colossusHorde == 'colossus' ? "Class Feat: [Colossus Slayer](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level3HuntersPrey)" : "",
-    colossusHorde == 'horde' ? "Class Feat: [Horde Breaker](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level3HuntersPrey)" : "",
-    ...extraDesc
-  ].filter(x=>!!x).join(" \n");
-
-  let thisHitPlain = `${!!thisWeaponStats.bonus ? thisWeaponStats.bonus : ''}${thisWeaponStats.stat.check}${thisWeaponStats.proficiency.bonus}`
-  let thisHit = `${!!thisWeaponStats.bonus ? thisWeaponStats.bonus + '[Weapon]' : ''}${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]${thisWeaponStats.proficiency.bonus}[${thisWeaponStats.proficiency.display}]`
-
-  let thisDamage = `${thisWeaponStats.damage}${thisWeaponStats.stat.check}${!!thisWeaponStats.bonus ? thisWeaponStats.bonus : ''}`;
-  if (onOff[savage]) {
-    thisDamage = `{${thisWeaponStats.damage},${thisWeaponStats.damage}}kh1${!!thisWeaponStats.bonus ? thisWeaponStats.bonus + '[Weapon]' : ''}${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]`;
-  }
-
-  let message =
-    `&{template:atkdmg}} {{charname=${CHARACTER_NAME}}} {{rname=${thisWeaponStats.name}${throwing ? '' : ''}}} ` +
-    `{{mod=${thisHitPlain}${extraHitPlain}${exhaustionStringPlain}}} ` + 
-    `{{r1=[[1d20${thisHit}${extraHit}${exhaustionString}]]}} {{attack=1}} ` + 
-    (throwing ? `{{range=${thisWeaponStats.range}}} ` : '') +
-    `{{damage=1}} {{dmg1flag=1}} {{dmg1=[[${thisDamage}]]}} {{dmg1type=Piercing}} {{crit1=Crit: [[${thisDamage}]]}} ` +
-    extraDamage +
-    `{{${rollType}=1}} ` + 
-    `{{r2=[[1d20${thisHit}${extraHit}${exhaustionString}]]}} ` +
-    (!!descText ? `{{desc=` + descText + `}}` : '');
-
-  let i = 0;
-  if (theseEffectRolls.length > 0) {
-    setTimeout(characterSheetExtensionSendMessage, (i++) * 500, `/em &darr;`);
-  }
-  setTimeout(characterSheetExtensionSendMessage, (i++) * 500, message);
-  for (let thisEffectRoll of theseEffectRolls) {
-    setTimeout(characterSheetExtensionSendMessage, (i++) * 500, thisEffectRoll);
-  }
-  if (theseEffectRolls.length > 0) {
-    setTimeout(characterSheetExtensionSendMessage, (i++) * 500, `/em &uarr;`);
-  }
-  setLocalStorage();
 }
-function rollFirearm(event) {
-  let exhaustionString = getExhaustionString();
-  let exhaustionStringPlain = getExhaustionStringPlain();
-  let rollType = document.querySelector('input[name="roll-type"]:checked').value;
-
-  let weapon = document.querySelector('input[name="weapon"]:checked').value;
-  let colossusHorde = document.querySelector('input[name="colossus-horde"]:checked').value;
-  let savage = document.querySelector('input[name="savage"]:checked').value;
-  let hunters = document.querySelector('input[name="hunters"]:checked').value;
-  let mastery = document.querySelector('input[name="mastery"]:checked').value;
-  let burstFire = document.querySelector('input[name="burst-fire"]:checked').value;
-  let shotsInput = document.querySelector(`input.shots.${weapon}[type="number"]`);
-  let shots = parseInt(shotsInput.value);
-
-  let burstFireEnabled = onOff[burstFire] && weapon == 'rifle';
-
+function bonusHitModifier(event, d) {
   let bonusHitName = document.querySelector('input[type="text"][id="bonus-hit-name"]').value;
-  let bonusDamageName = document.querySelector('input[type="text"][id="bonus-damage-name"]').value;
   let bonusHit = document.querySelector('input[type="text"][id="bonus-hit"]').value;
+
+  if (!!bonusHitName && !!bonusHit) {
+    d.r1 += `+${bonusHit}cs0cf0[${bonusHitName}]`
+    d.r2 += `+${bonusHit}cs0cf0[${bonusHitName}]`
+    d.mod += `+${bonusHit}`;
+    d.desc += `${bonusHitName} \n`
+  }
+}
+function bonusDamageModifier(event, d) {
+  let bonusDamageName = document.querySelector('input[type="text"][id="bonus-damage-name"]').value;
   let bonusDamage = document.querySelector('input[type="text"][id="bonus-damage"]').value;
 
-  let bulletsToSpend = 1;
-  if (burstFireEnabled) {
-    bulletsToSpend = 10;
-  }
-  let whatMyAmmoWouldBe = shots - bulletsToSpend;
-  if (whatMyAmmoWouldBe < 0) {
-    reloadFirearm();
-    shots = parseInt(shotsInput.value);
-  }
-  let previousAmmo = shots;
-  if (shots - bulletsToSpend < 0) {
-    characterSheetExtensionSendMessage(`/em doesn't have enough ammo to fire his ${rname[weapon]}`);
-    setLocalStorage();
-    return;
-  }
-  shots = shots - bulletsToSpend;
-
-
-  let extraDesc = [];
-
-  let extraDamage = '';
-  if ((!!bonusDamageName && !!bonusDamage) || onOff[hunters] || colossusHorde == 'colossus') {
-    let rolls = [];
-    let names = [];
-    if (!!bonusDamageName && !!bonusDamage) {
-      extraDesc.push(bonusDamageName);
-      names.push(bonusDamageName);
-      rolls.push(bonusDamage);
+  if (!!bonusDamageName && !!bonusDamage) {
+    if (!d.dmg2flag) {
+      d.dmg2flag = '1';
+    } else {
+      d.dmg2 += '+';
+      d.crit2 += '+';
+      d.dmg2type += ' + ';
     }
-    if (colossusHorde == 'colossus') {
-      names.push("Colossus Slayer (Piercing)");
-      rolls.push('1d8');
+    d.dmg2 += `${bonusDamage}[${bonusDamageName}]`;
+    d.crit2 += `${bonusDamage}[${bonusDamageName}]`;
+    d.dmg2type += `${bonusDamageName}`
+    d.desc += `${bonusDamageName} \n`;
+  }
+}
+function archeryModifier(event, d) {
+  d.r1 += `+2[Archery]`;
+  d.r2 += `+2[Archery]`;
+  d.mod += `+2`;
+}
+function standardDamageRoll(event, d) {
+  let thisWeaponKey = event.target.getAttribute('weapon-key');
+  let thisWeaponStats = weaponStats[thisWeaponKey];
+
+  let thisDamage = thisWeaponStats.damage;
+  if (!!thisWeaponStats.bonus) {
+    thisDamage += `${thisWeaponStats.bonus}[Weapon]`
+  }
+  thisDamage += `${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]`
+  
+  d.damage = '1';
+  d.dmg1 = thisDamage;
+  d.crit1 = thisWeaponStats.damage;
+  d.dmg1flag = '1';
+  d.dmg1type = thisWeaponStats.damageType;
+}
+function huntersMarkModifier(event, d) {
+  let enabled = onOff[document.querySelector('input[name="hunters"]:checked').value];
+  if (enabled) {
+    if (!d.dmg2flag) {
+      d.dmg2flag = '1';
+    } else {
+      d.dmg2 += '+';
+      d.crit2 += '+';
+      d.dmg2type += ' + ';
     }
-    if (onOff[hunters]) {
-      names.push("Hunter's Mark (Force)");
-      rolls.push('1d6');
+    d.dmg2 += `1d6[Hunter&apos;s Mark]`;
+    d.crit2 += `1d6[Hunter&apos;s Mark]`;
+    d.dmg2type += `Force`
+    d.desc += "Spell: [Hunter's Mark](https://www.dndbeyond.com/spells/2619166-hunters-mark) \n";
+  }
+}
+function colossusSlayerModifier(event, d) {
+  let thisWeaponKey = event.target.getAttribute('weapon-key');
+  let thisWeaponStats = weaponStats[thisWeaponKey];
+
+  let enabled = document.querySelector('input[name="colossus-horde"]:checked').value == 'colossus';
+  if (enabled) {
+    if (!d.dmg2flag) {
+      d.dmg2flag = '1';
+    } else {
+      d.dmg2 += '+';
+      d.crit2 += '+';
+      d.dmg2type += ' + ';
     }
-    extraDamage = `{{dmg2flag=1}} {{dmg2=[[${rolls.join("+")}]]}} {{dmg2type=${names.join(" + ")}}} {{crit2=Crit: [[${rolls.join("+")}]]}} `;
+    d.dmg2 += `1d8[Colossus Slayer]`;
+    d.crit2 += `1d8[Colossus Slayer]`;
+    d.dmg2type += thisWeaponStats.damageType;
+    d.desc += "Class Feat: [Colossus Slayer](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level3HuntersPrey) \n";
+  }
+}
+function hordeBreakerModifier(event, d) {
+  let enabled = document.querySelector('input[name="colossus-horde"]:checked').value == 'horde';
+  if (enabled) {
+    d.desc += "Class Feat: [Horde Breaker](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level3HuntersPrey) \n";
+  }
+}
+function savageAttackModifier(event, d) {
+  let enabled = onOff[document.querySelector('input[name="savage"]:checked').value];
+  if (enabled && !!d.dmg1) {
+    d.dmg1 = d.dmg1.replace(/(\d+d\d+)/g, "{$1,$1}kh1");
+    d.crit1 = d.crit1.replace(/(\d+d\d+)/g, "{$1,$1}kh1");
+    // according to the rules https://www.dndbeyond.com/sources/dnd/br-2024/feats#SavageAttacker
+    // it is only the weapon's damage dice, not all the damage dice that get rerolled
+    // 
+    // d.dmg2 = d.dmg2.replace(/(\d+d\d+)/g, "{$1,$1}kh1");
+    // d.crit2 = d.crit2.replace(/(\d+d\d+)/g, "{$1,$1}kh1");
+    d.desc += "Feat: [Savage Attacker](https://www.dndbeyond.com/sources/dnd/free-rules/feats#SavageAttacker) \n";
+  }
+}
+function burstFireModifier(event, d) {
+  let thisWeaponKey = event.target.getAttribute('weapon-key');
+  let thisWeaponStats = weaponStats[thisWeaponKey];
+
+  let burstFireEnabled = onOff[document.querySelector('input[name="burst-fire"]:checked').value];
+  let burstFireAllowed = thisWeaponStats.properties.includes(weaponProperties.burstFire);
+
+  if (burstFireAllowed && burstFireEnabled) {
+    d.mod = 'DC15';
+    d.save = '1';
+    d.saveattr = 'Dexterity';
+    d.savedesc = 'Burst Fire';
+    d.savedc = '15';
+    d.desc += 'Weapon Property: [Burst Fire](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#BurstFire) \n';
+    // also clear all the roll types
+    Object.keys(rollTypes).forEach(x=>d[x] = '');
+  }
+}
+function unarmedStrikeDamageRoll(event, d) {
+  d.damage = '1';
+  d.dmg1 = `1${stats.STR.check}[${stats.STR.display}]`;
+  d.crit1 = `1`;
+  d.dmg1flag = '1';
+  d.dmg1type = 'Bludgeoning';
+}
+function squareBracketFormat(event, d) {
+  const squareBracketFields = ['dmg1', 'dmg2', 'hldmg', 'hldmgcrit', 'r1', 'r2'];
+  for (let key of squareBracketFields) {
+    if (!d[key]) {
+      continue;
+    }
+    d[key] = `[[${d[key]}]]`;
+  }
+  const critFields = ['crit1', 'crit2'];
+  for (let key of critFields) {
+    if (!d[key]) {
+      continue;
+    }
+    d[key] = `Crit: [[${d[key]}]]`;
+  }
+}
+function masteryModifier(event, d) {
+  let thisWeaponKey = event.target.getAttribute('weapon-key');
+  let thisWeaponStats = weaponStats[thisWeaponKey];
+  let enabled = onOff[document.querySelector('input[name="mastery"]:checked').value];
+  
+  if (enabled && thisWeaponStats.mastery) {
+    let masteryKeys = new Set(Object.keys(masteries)); 
+    let propertiesKeys = new Set(thisWeaponStats.properties);
+    let matchingKey = masteryKeys.intersection(propertiesKeys);
+    for (let key of matchingKey) {
+      d.desc += masteries[key];
+    }
+  }
+}
+function daggerOfVenomModifier(event, d) {
+  let thisWeaponKey = event.target.getAttribute('weapon-key');
+
+  let checkbox = document.querySelector(`input[weapon-key="${thisWeaponKey}"][effect-key="venom"]:checked`);
+
+  if (checkbox && checkbox.checked) {
+    d.mod = 'DC15';
+    d.save = '1';
+    d.saveattr = 'Constitution';
+    d.savedesc = 'Venom';
+    d.savedc = '15';
+    if (!d.dmg2flag) {
+      d.dmg2flag = '1';
+    } else {
+      d.dmg2 += '+';
+      d.crit2 += '+';
+      d.dmg2type += ' + ';
+    }
+    d.dmg2 += `2d10[Venom]`;
+    d.crit2 += `2d10[Venom]`;
+    d.dmg2type += `Poison`;
+    d.desc += 'Weapon Effect: [Venom](https://www.dndbeyond.com/magic-items/9228415-dagger-of-venom) \n';
+  }
+}
+function rollWeapon(event) {
+  let thisWeaponKey = event.target.getAttribute('weapon-key');
+  let thisWeaponStats = weaponStats[thisWeaponKey];
+
+  const d = {
+    advantage: '',
+    always: '',
+    attack: '',
+    charname: '',
+    crit1: '',
+    crit2: '',
+    damage: '',
+    desc: '',
+    disadvantage: '',
+    dmg1: '',
+    dmg1flag: '',
+    dmg1type: '',
+    dmg2: '',
+    dmg2flag: '',
+    dmg2type: '',
+    globalattack: '',
+    globaldamage: '',
+    globaldamagecrit: '',
+    globaldamagetype: '',
+    hldmg: '',
+    hldmgcrit: '',
+    innate: '',
+    mod: '',
+    normal: '',
+    r1: '',
+    r2: '',
+    range: '',
+    rname: '',
+    save: '',
+    saveattr: '',
+    savedc: '',
+    savedesc: '',
+  };
+
+  for (let callbackFunction of thisWeaponStats.callbacks) {
+    callbackFunction(event, d);
   }
 
-  let extraHit = '';
-  let extraHitPlain = '';
-  if (!!bonusHitName && !!bonusHit) {
-    extraDesc.push(bonusHitName);
-    extraHit = `+${bonusHit}cs0cf0[${bonusHitName}]`;
-    extraHitPlain = `+${bonusHit}`;
+  let message = `&{template:atkdmg}} `;
+  for (let key of Object.keys(d)) {
+    if (!d[key]) {
+      continue;
+    }
+    message += `{{${key}=${d[key]}}} `;
   }
-
-  extraDesc.push(`${shots} of ${weaponAmmo[weapon].shots} shots left (prev. ${previousAmmo})`);
-  if (shots == 0) {
-    extraDesc.push(`[Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) before next use`);
-  }
-
-  let descText = [
-    onOff[hunters] ? "Spell: [Hunter's Mark](https://www.dndbeyond.com/spells/2619166-hunters-mark)" : "",
-    onOff[savage] ? "Feat: [Savage Attacker](https://www.dndbeyond.com/sources/dnd/free-rules/feats#SavageAttacker)" : "",
-    colossusHorde == 'colossus' ? "Class Feat: [Colossus Slayer](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level3HuntersPrey)" : "",
-    colossusHorde == 'horde' ? "Class Feat: [Horde Breaker](https://www.dndbeyond.com/sources/dnd/free-rules/character-classes#Level3HuntersPrey)" : "",
-    onOff[mastery] ? masteries[weapon] : '',
-    burstFireEnabled ? 'Weapon Property: [Burst Fire](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#BurstFire)' : '',
-    ...extraDesc
-  ].filter(x=>!!x).join(" \n");
-
-  let message =
-    `&{template:atkdmg}}` + (burstFireEnabled ? `{{save=1}} {{saveattr=Dexterity}} {{savedesc=Burst Fire}} {{savedc=15}}` : '') + ` \n` + 
-    `&{template:atkdmg}} {{charname=${CHARACTER_NAME}}} {{rname=${rname[weapon]}}} ` +
-    (burstFireEnabled ? '{{mod=DC15}}' : `{{mod=${regularHitPlain}${extraHitPlain}${exhaustionStringPlain}}} `) + `{{r1=[[1d20${regularHit}${extraHit}${exhaustionString}]]}} {{attack=1}} {{range=${range[weapon]}}} ` +
-    `{{damage=1}} {{dmg1flag=1}} {{dmg1=[[${dmg1[weapon][savage]}]]}} {{dmg1type=Piercing}} {{crit1=Crit: [[${dmg1[weapon][savage]}]]}} ` +
-    extraDamage +
-    (burstFireEnabled ? '' : `{{${rollType}=1}} `) + `{{r2=[[1d20${regularHit}${extraHit}${exhaustionString}]]}} ` +
-    (!!descText ? `{{desc=` + descText + `}}` : '');
 
   characterSheetExtensionSendMessage(message);
-  shotsInput.value = `${shots}`;
   setLocalStorage();
 }
-function reloadFirearm() {
+function reloadFirearm(event, d) {
+  let thisWeaponKey = event.target.getAttribute('weapon-key');
+  let thisWeaponStats = weaponStats[thisWeaponKey];
+
   let ammoElement = document.querySelector('input.ammo[type="number"]');
   let ammo = parseInt(ammoElement.value);
-  let weapon = document.querySelector('input[name="weapon"]:checked').value;
   if (ammo <= 0) {
-    characterSheetExtensionSendMessage(`/em doesn't have enough ammo to reload his ${rname[weapon]}`);
+    characterSheetExtensionSendMessage(`/em doesn't have enough ammo to reload his ${thisWeaponStats.name}`);
     setLocalStorage();
-    return;
+    throw new Error('out of ammo error');
   }
-  let shotsInput = document.querySelector(`input.shots.${weapon}[type="number"]`);
+  let shotsInput = document.querySelector(`input.shots[type="number"][weapon-key="${thisWeaponKey}"]`);
   let shots = parseInt(shotsInput.value);
-  let bulletsToAdd = Math.min(Math.min(weaponAmmo[weapon].shots - shots, weaponAmmo[weapon].shots), ammo);
+  let bulletsToAdd = Math.min(Math.min(thisWeaponStats.shots - shots, thisWeaponStats.shots), ammo);
   if (bulletsToAdd > 0) {
     ammo = ammo - bulletsToAdd;
     shots = shots + bulletsToAdd;
     characterSheetExtensionSendMessage(
-      `/em reloaded his ${rname[weapon]} (${shots}/${weaponAmmo[weapon].shots}), and has ${ammo} loose ammo remaining`
+      `/em reloaded his ${thisWeaponStats.name} (${shots}/${thisWeaponStats.shots}), and has ${ammo} loose ammo remaining`
     );
     ammoElement.value = `${ammo}`;
     shotsInput.value = `${shots}`;
@@ -1523,13 +1701,14 @@ function reloadFirearm() {
   }
 }
 function printCurrentAmmo(event) {
+  let shotsInputs = Array.from(document.querySelectorAll('input.shots[type="number"]')).map(x=>x.getAttribute('weapon-key'));
   let ammo = parseInt(document.querySelector('input.ammo[type="number"]').value);
   let output = `/em checks his ammo, and has `;
   let sum = 0;
-  for (let weapon of Object.keys(rname)) {
-    let shots = parseInt(document.querySelector(`input.shots.${weapon}[type="number"]`).value);
+  for (let weaponKey of shotsInputs) {
+    let shots = parseInt(document.querySelector(`input.shots[type="number"][weapon-key="${weaponKey}"]`).value);
     sum += shots;
-    output += `${shots} in his ${rname[weapon]}, `
+    output += `${shots} in his ${weaponStats[weaponKey].name}, `
   }
   sum += ammo;
   output += `and ${ammo} loose, for a total of ${sum} ammo.`;
@@ -1550,7 +1729,6 @@ function setLocalStorage() {
   localStorage.setItem('roll20charactersheet-memory', JSON.stringify({
     exhaustion: document.querySelector('select.exhaustion').value,
     conditions: Array.from(document.querySelectorAll('input.condition-checkbox[type="checkbox"]')).filter(x => x.checked).map(x => findParentWithClass(x, 'condition').getAttribute('name')),
-    weapon: document.querySelector('input[name="weapon"]:checked').value,
     burstFire: document.querySelector('input[name="burst-fire"]:checked').value,
     huntersMark: document.querySelector('input[name="hunters"]:checked').value,
     savageAttacker: document.querySelector('input[name="savage"]:checked').value,
@@ -1562,8 +1740,8 @@ function setLocalStorage() {
     bonusDamageName: document.querySelector('input[type="text"][id="bonus-damage-name"]').value,
     bonusDamage: document.querySelector('input[type="text"][id="bonus-damage"]').value,
     ammo: document.querySelector('input.ammo[type="number"]').value,
-    shotsShotgun: document.querySelector(`input.shots.shotgun[type="number"]`).value,
-    shotsRifle: document.querySelector(`input.shots.rifle[type="number"]`).value
+    shotsShotgun: document.querySelector(`input.shots[type="number"][weapon-key="shotgun"]`).value,
+    shotsRifle: document.querySelector(`input.shots[type="number"][weapon-key="rifle"]`).value
   }));
 }
 function getLocalStorage() {
@@ -1579,7 +1757,6 @@ function getLocalStorage() {
         element.querySelector('input[type="checkbox"]').checked = true;
       }
     });
-    document.querySelector(`input[name="weapon"][value=${d.weapon}]`).checked = true;
     document.querySelector(`input[name="burst-fire"][value=${d.burstFire}]`).checked = true;
     document.querySelector(`input[name="hunters"][value=${d.huntersMark}]`).checked = true;
     document.querySelector(`input[name="savage"][value=${d.savageAttacker}]`).checked = true;
@@ -1591,8 +1768,8 @@ function getLocalStorage() {
     document.querySelector(`input[type="text"][id="bonus-damage-name"]`).value = d.bonusDamageName;
     document.querySelector(`input[type="text"][id="bonus-damage"]`).value = d.bonusDamage;
     document.querySelector(`input.ammo[type="number"]`).value = d.ammo;
-    document.querySelector(`input.shots.shotgun[type="number"]`).value = d.shotsShotgun;
-    document.querySelector(`input.shots.rifle[type="number"]`).value = d.shotsRifle;
+    document.querySelector(`input.shots[type="number"][weapon-key="shotgun"]`).value = d.shotsShotgun;
+    document.querySelector(`input.shots[type="number"][weapon-key="rifle"]`).value = d.shotsRifle;
   } catch (e) {
     
   }
