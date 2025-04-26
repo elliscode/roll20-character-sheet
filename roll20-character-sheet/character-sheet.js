@@ -1164,6 +1164,16 @@ function buildRollTypePanel(panel) {
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.innerText = `Don't forget to use your Inspiration!!`;
+      thisDiv.appendChild(span);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
     for (let type of Object.keys(rollTypes)) {
       const label = document.createElement('label');
       const input = document.createElement('input');
@@ -1658,6 +1668,7 @@ function rollWeapon(event) {
     saveattr: '',
     savedc: '',
     savedesc: '',
+    extraMessages: [],
   };
 
   for (let callbackFunction of thisWeaponStats.callbacks) {
@@ -1673,6 +1684,9 @@ function rollWeapon(event) {
   }
 
   characterSheetExtensionSendMessage(message);
+  for (let i = 0; i < d.extraMessages.length; i++) {
+    setTimeout(characterSheetExtensionSendMessage, (i + 1) * 1000, d.extraMessages[i]);
+  }
   setLocalStorage();
 }
 function reloadFirearm(event, d) {
