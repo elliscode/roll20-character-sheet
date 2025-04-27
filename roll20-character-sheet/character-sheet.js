@@ -11,6 +11,11 @@ const stats = {
   CHA: { key: 'CHA', display: 'Charisma', check: "+0", proficiency: 'not'}
 };
 
+const newCharacterStatRoll = `/ooc &{template:default} ` +
+  `{{name=New Character Stat Rolls}} ` +
+  `{{Roll 1=[[4d6dl1]]}} {{Roll 2=[[4d6dl1]]}} {{Roll 3=[[4d6dl1]]}} ` +
+  `{{Roll 4=[[4d6dl1]]}} {{Roll 5=[[4d6dl1]]}} {{Roll 6=[[4d6dl1]]}} ` +
+  `{{Source=[D&D Beyond Basic Rules](https://www.dndbeyond.com/sources/dnd/br-2024/creating-a-character#GenerateYourScores)}}`;
 const huntersMark = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Hunter's Mark}} ` +
@@ -116,6 +121,11 @@ const daggerOfVenomDescription = `&{template:traits} ` +
   `{{name=Dagger of Venom}} ` +
   `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/magic-items-a-z#DaggerofVenom)}} ` +
   `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Range**: 20ft./60ft.\n**Damage**: [1d4](!\n)\n**Damage Type**: Piercing\n**Weight**: 1 lb.\n**Cost**: 2 gp\n**Properties**: [Finesse](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Finesse), [Light](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Light), [Thrown](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Thrown), [Nick](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Nick)\nYou can take a Bonus Action to magically coat the blade with poison. The poison remains for 1 minute or until an attack using this weapon hits a creature. That creature must succeed on a [DC 15](!\n) Constitution saving throw or take [2d10](!\n) Poison damage and have the Poisoned condition for 1 minute. The weapon can't be used this way again until the next dawn.}}`;
+const unarmedStrikeDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Unarmed Strike}} ` +
+  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/br-2024/rules-glossary#UnarmedStrike)}} ` +
+  `{{description=Instead of using a weapon to make a melee attack, you can use a punch, kick, headbutt, or similar forceful blow.}}`;
 const proficiencies = {
   not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
   half: {key: 'half', display: 'Half Proficiency', bonus: '+1'},
@@ -495,6 +505,13 @@ function buildWeaponsPanel(panel) {
     {
       const button = document.createElement('button');
       button.innerText = 'Unarmed Strike';
+      button.setAttribute('message', unarmedStrikeDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'M';
       button.setAttribute('weapon-key', 'unarmedStrike');
       button.setAttribute('attack-type', 'melee');
       button.addEventListener('click', rollWeapon);
@@ -1283,6 +1300,13 @@ function buildFormattingPanel(panel) {
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Stats Roll';
+      button.setAttribute('message', newCharacterStatRoll)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
     panel.appendChild(thisDiv);
   }
   {
@@ -1573,7 +1597,7 @@ function burstFireModifier(event, d) {
 function unarmedStrikeDamageRoll(event, d) {
   d.damage = '1';
   d.dmg1 = `1${stats.STR.check}[${stats.STR.display}]`;
-  d.crit1 = `1`;
+  d.crit1 = ``;
   d.dmg1flag = '1';
   d.dmg1type = 'Bludgeoning';
 }
@@ -1675,9 +1699,9 @@ function rollWeapon(event) {
     callbackFunction(event, d);
   }
 
-  let message = `&{template:atkdmg}} `;
+  let message = `&{template:atkdmg} `;
   for (let key of Object.keys(d)) {
-    if (!d[key]) {
+    if (!d[key] || key == 'extraMessages') {
       continue;
     }
     message += `{{${key}=${d[key]}}} `;
