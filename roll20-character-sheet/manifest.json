@@ -1,6 +1,6 @@
 {
-  "name": "Floyd Character Sheet",
-  "version": "0.1",
+  "name": "Generalized Character Sheet",
+  "version": "0.2",
   "manifest_version": 3,
   "content_scripts": [
     {
@@ -12,5 +12,5 @@
   "icons": {
     "216": "icon.256.png"
   },
-  "description": "Character sheet and roller for app.roll20.net, but specifically for Floyd"
+  "description": "Character sheet and roller for app.roll20.net"
 }
