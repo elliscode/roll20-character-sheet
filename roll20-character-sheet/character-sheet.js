@@ -68,9 +68,9 @@ const slowDescription = `&{template:traits} ` +
   `{{description=If you hit a creature with an Automatic Rifle and deal damage to it, you can reduce its Speed by 10 feet until the start of your next turn. If the creature is hit more than once by weapons that have this property, the Speed reduction doesn't exceed 10 feet.}}`;
 const rifleDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
-  `{{name=Automatic Rifle}} ` +
+  `{{name=[Automatic Rifle, +2](" style="color:#6696de;)}} ` +
   `{{source=&#8193;[Dungeon Master's Guide (2024)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#FirearmsTable)}} ` +
-  `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 80ft./240ft.\n**Damage**: [2d8](!\n)\n**Damage Type**: Piercing\n**Weight**: 8lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), [Range](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Range), [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (30 shots), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Burst Fire](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#BurstFire), [Slow](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Slow)}}`;
+  `{{description=**Proficient**: Yes (Brian said so)\n**Attack Type**: Ranged\n**Range**: 80ft./240ft.\n**Damage**: [2d8](!\n)\n**Damage Type**: Piercing\n**Weight**: 8lb.\n**Cost**: --\n**Properties**: [Ammunition (Firearms)](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Ammunition), [Range](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Range), [Reload](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#Reload) (30 shots), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Burst Fire](https://www.dndbeyond.com/sources/dnd/dmg-2024/dms-toolbox#BurstFire), [Slow](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Slow)\n You get [+2](!\n) to attack and damage with this weapon}}`;
 const shotgunDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Shotgun}} ` +
@@ -129,8 +129,8 @@ const unarmedStrikeDescription = `&{template:traits} ` +
 const proficiencies = {
   not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
   half: {key: 'half', display: 'Half Proficiency', bonus: '+1'},
-  proficiency: {key: 'proficiency', display: 'Proficiency', bonus: '+2'},
-  expertise: {key: 'expertise', display: 'Expertise', bonus: '+4'}
+  proficiency: {key: 'proficiency', display: 'Proficiency', bonus: '+3'},
+  expertise: {key: 'expertise', display: 'Expertise', bonus: '+6'}
 };
 const weaponProperties = {
   ammunition: 'ammunition',
@@ -246,7 +246,8 @@ const weaponStats = {
     proficiency: proficiencies.proficiency,
     stat: stats.DEX,
     damage: '2d8',
-    name: 'Automatic Rifle',
+    bonus: '+2',
+    name: 'Automatic Rifle, +2',
     range: '80ft./240ft.',
     shots: 30,
     damageType: 'Piercing',
