@@ -468,6 +468,15 @@ function buildUi() {
 
   document.body.appendChild(characterSheetDiv);
 
+  {
+    let marqueeDiv = document.createElement('div');
+    marqueeDiv.classList.add('character-sheet-extension-marquee');
+    let marquee = document.createElement("marquee");
+    marquee.innerText = "Don't forget to find interesting plants!";
+    marqueeDiv.appendChild(marquee);
+    document.body.appendChild(marqueeDiv);
+  }
+
   getLocalStorage();
 }
 
@@ -1279,10 +1288,20 @@ function buildMiscPanel(panel) {
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Interesting Plants';
+      button.addEventListener('click', interestingPlantsRoll);
+      thisDiv.appendChild(button);
+    }
     panel.appendChild(thisDiv);
   }
 }
-
+function interestingPlantsRoll(event) {
+  characterSheetExtensionSendMessage("/em checks for interesting plants...");
+  let perceptionSpan = Array.from(document.querySelectorAll('span.pointer.flex-fill')).find(x=>x.innerText=='Perception');
+  rollSkill({target: perceptionSpan});
+}
 function buildFormattingPanel(panel) {
   {
     const thisDiv = document.createElement('div');

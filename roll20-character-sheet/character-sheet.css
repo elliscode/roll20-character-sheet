@@ -8,6 +8,20 @@
   align-items: end;
   pointer-events: none;
 }
+.character-sheet-extension-marquee {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 10000; /* the #playerzone div has a z-index of 9999 so I had to one-up them */
+  pointer-events: none;
+}
+.character-sheet-extension-marquee marquee {
+  font-size: 40px;
+  color: red;
+  font-weight: 900;
+  filter: drop-shadow(0px 0px 3px black);
+}
 .character-sheet-extension button {
   background: #fff;
   color: #000;
