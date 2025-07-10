@@ -1299,8 +1299,18 @@ function buildMiscPanel(panel) {
 }
 function interestingPlantsRoll(event) {
   characterSheetExtensionSendMessage("/em checks for interesting plants...");
-  let perceptionSpan = Array.from(document.querySelectorAll('span.pointer.flex-fill')).find(x=>x.innerText=='Perception');
-  rollSkill({target: perceptionSpan});
+  let span = undefined;
+  if (true) {
+    span = Array.from(document.querySelectorAll('span.pointer.flex-fill')).find(x=>x.innerText=='Perception');
+    setTimeout(characterSheetExtensionSendMessage, 1000, "/em has a passive Perception of 17");
+  } else if (true) {
+    span = Array.from(document.querySelectorAll('span.pointer.flex-fill')).find(x=>x.innerText=='Investigation');
+    setTimeout(characterSheetExtensionSendMessage, 1000, "/em has a passive Investigation of 14");
+  } else if (true) {
+    span = Array.from(document.querySelectorAll('span.pointer.flex-fill')).find(x=>x.innerText=='Insight');
+    setTimeout(characterSheetExtensionSendMessage, 1000, "/em has a passive Insight of 14");
+  }
+  rollSkill({target: span});
 }
 function buildFormattingPanel(panel) {
   {
