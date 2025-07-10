@@ -671,12 +671,12 @@ function buildSkillsPanel(panel) {
   addSkill({panel: panel, proficiency: proficiencies.proficiency, modifier: stats.STR, name: "Athletics"});
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.CHA, name: "Deception"});
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.INT, name: "History"});
-  addSkill({panel: panel, proficiency: proficiencies.proficiency, modifier: stats.WIS, name: "Insight"});
+  addSkill({panel: panel, proficiency: proficiencies.proficiency, modifier: stats.WIS, name: "Insight", passive: 14});
   addSkill({panel: panel, proficiency: proficiencies.proficiency, modifier: stats.CHA, name: "Intimidation"});
-  addSkill({panel: panel, proficiency: proficiencies.proficiency, modifier: stats.INT, name: "Investigation"});
+  addSkill({panel: panel, proficiency: proficiencies.proficiency, modifier: stats.INT, name: "Investigation", passive: 14});
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.WIS, name: "Medicine"});
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.INT, name: "Nature"});
-  addSkill({panel: panel, proficiency: proficiencies.expertise, modifier: stats.WIS, name: "Perception"});
+  addSkill({panel: panel, proficiency: proficiencies.expertise, modifier: stats.WIS, name: "Perception", passive: 17});
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.CHA, name: "Performance"});
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.CHA, name: "Persuasion"});
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.INT, name: "Religion"});
@@ -684,7 +684,7 @@ function buildSkillsPanel(panel) {
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.DEX, name: "Stealth"});
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.WIS, name: "Survival"});
 }
-function addSkill({panel, proficiency, modifier, name}) {
+function addSkill({panel, proficiency, modifier, name, passive}) {
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
@@ -695,6 +695,9 @@ function addSkill({panel, proficiency, modifier, name}) {
     thisDiv.setAttribute('proficiencyName', proficiency.display);
     thisDiv.setAttribute('statRoll', modifier.check);
     thisDiv.setAttribute('statName', modifier.display);
+    if (passive) {
+      thisDiv.setAttribute('passive', passive);
+    }
     {
       let div = document.createElement('div');
       div.classList.add('proficiency-bubble');
@@ -757,6 +760,7 @@ function rollSkill(event) {
   let proficiencyName = skillDiv.getAttribute('proficiencyName');
   let statRoll = skillDiv.getAttribute('statRoll');
   let statName = skillDiv.getAttribute('statName');
+  let passive = skillDiv.getAttribute('passive');
 
   let proficiencyHit = '';
   let proficiencyHitPlain = '';
@@ -772,13 +776,17 @@ function rollSkill(event) {
     extraHitPlain = `+${bonusHit}`;
   }
 
-  let message = `&{template:simple} ` +
-    `{{charname=${CHARACTER_NAME}}} ` +
+  let message = `&{template:simple} `;
+  if (passive) {
+    message = `&{template:atk} ` + `{{desc=Passive ${name}: [${passive}](!\n) }} `;
+  }
+  message += `{{charname=${CHARACTER_NAME}}} ` +
     `{{rname=${name}}} ` +
     `{{mod=${statRoll}${proficiencyHitPlain}${extraHitPlain}${exhaustionStringPlain}}} ` +
     `{{r1=[[1d20${statRoll}[${statName}]${proficiencyHit}${extraHit}${exhaustionString}]]}} ` +
     `{{${rollType}=1}} ` +
-    `{{r2=[[1d20${statRoll}[${statName}]${proficiencyHit}${extraHit}${exhaustionString}]]}}`;
+    `{{r2=[[1d20${statRoll}[${statName}]${proficiencyHit}${extraHit}${exhaustionString}]]}} `;
+
 
   characterSheetExtensionSendMessage(message);
   setLocalStorage();
@@ -1299,17 +1307,7 @@ function buildMiscPanel(panel) {
 }
 function interestingPlantsRoll(event) {
   characterSheetExtensionSendMessage("/em checks for interesting plants...");
-  let span = undefined;
-  if (true) {
-    span = Array.from(document.querySelectorAll('span.pointer.flex-fill')).find(x=>x.innerText=='Perception');
-    setTimeout(characterSheetExtensionSendMessage, 1000, "/em has a passive Perception of 17");
-  } else if (true) {
-    span = Array.from(document.querySelectorAll('span.pointer.flex-fill')).find(x=>x.innerText=='Investigation');
-    setTimeout(characterSheetExtensionSendMessage, 1000, "/em has a passive Investigation of 14");
-  } else if (true) {
-    span = Array.from(document.querySelectorAll('span.pointer.flex-fill')).find(x=>x.innerText=='Insight');
-    setTimeout(characterSheetExtensionSendMessage, 1000, "/em has a passive Insight of 14");
-  }
+  let span = Array.from(document.querySelectorAll('span.pointer.flex-fill')).find(x=>x.innerText=='Perception');
   rollSkill({target: span});
 }
 function buildFormattingPanel(panel) {
