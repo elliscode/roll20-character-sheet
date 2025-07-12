@@ -11,10 +11,11 @@ const stats = {
   CHA: { key: 'CHA', display: 'Charisma', check: "+0", proficiency: 'not'}
 };
 
+const statRoll = `4d6dl1`;
 const newCharacterStatRoll = `/ooc &{template:default} ` +
   `{{name=New Character Stat Rolls}} ` +
-  `{{Roll 1=[[4d6dl1]]}} {{Roll 2=[[4d6dl1]]}} {{Roll 3=[[4d6dl1]]}} ` +
-  `{{Roll 4=[[4d6dl1]]}} {{Roll 5=[[4d6dl1]]}} {{Roll 6=[[4d6dl1]]}} ` +
+  `{{Roll 1=[[${statRoll}]]}} {{Roll 2=[[${statRoll}]]}} {{Roll 3=[[${statRoll}]]}} ` +
+  `{{Roll 4=[[${statRoll}]]}} {{Roll 5=[[${statRoll}]]}} {{Roll 6=[[${statRoll}]]}} ` +
   `{{Source=[D&D Beyond Basic Rules](https://www.dndbeyond.com/sources/dnd/br-2024/creating-a-character#GenerateYourScores)}}`;
 const huntersMark = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
@@ -777,9 +778,12 @@ function rollSkill(event) {
   }
 
   let message = `&{template:simple} `;
-  if (passive) {
-    message = `&{template:atk} ` + `{{desc=Passive ${name}: [${passive}](!\n) }} `;
-  }
+  // passive description if needed
+  // if (passive) {
+  //   message = `&{template:atk} ` + `{{desc=Passive ${name}: [${passive}](!\n) }} `;
+  // }
+  // floor roll if needed
+  // /r {1d20+1[Wisdom]+6[Expertise],0d0+17[Passive]}kh1
   message += `{{charname=${CHARACTER_NAME}}} ` +
     `{{rname=${name}}} ` +
     `{{mod=${statRoll}${proficiencyHitPlain}${extraHitPlain}${exhaustionStringPlain}}} ` +
