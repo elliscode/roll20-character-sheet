@@ -749,6 +749,12 @@ function getExhaustionStringPlain() {
   }
 }
 function rollSkill(event) {
+  let message = getRollSkillMessage(event);
+  
+  characterSheetExtensionSendMessage(message);
+  setLocalStorage();
+}
+function getRollSkillMessage(event) {
   let exhaustionString = getExhaustionString();
   let exhaustionStringPlain = getExhaustionStringPlain();
   let rollType = document.querySelector('input[name="roll-type"]:checked').value;
@@ -790,10 +796,8 @@ function rollSkill(event) {
     `{{r1=[[1d20${statRoll}[${statName}]${proficiencyHit}${extraHit}${exhaustionString}]]}} ` +
     `{{${rollType}=1}} ` +
     `{{r2=[[1d20${statRoll}[${statName}]${proficiencyHit}${extraHit}${exhaustionString}]]}} `;
-
-
-  characterSheetExtensionSendMessage(message);
-  setLocalStorage();
+  
+  return message;
 }
 function buildAttackPanel(panel) {
   {
@@ -1310,9 +1314,9 @@ function buildMiscPanel(panel) {
   }
 }
 function interestingPlantsRoll(event) {
-  characterSheetExtensionSendMessage("/em checks for interesting plants...");
   let span = Array.from(document.querySelectorAll('span.pointer.flex-fill')).find(x=>x.innerText=='Perception');
-  rollSkill({target: span});
+  let rollSkillMessage = getRollSkillMessage({target: span});
+  characterSheetExtensionSendMessage(`/em checks for interesting plants...\n/em ${rollSkillMessage}`);
 }
 function buildFormattingPanel(panel) {
   {
