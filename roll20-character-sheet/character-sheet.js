@@ -127,11 +127,24 @@ const unarmedStrikeDescription = `&{template:traits} ` +
   `{{name=Unarmed Strike}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/br-2024/rules-glossary#UnarmedStrike)}} ` +
   `{{description=Instead of using a weapon to make a melee attack, you can use a punch, kick, headbutt, or similar forceful blow.}}`;
+const sproutFoliageDescription = `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Sprout Foliage}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=Self}} ` +
+  `{{duration=1 hour}} ` +
+  `{{level=1st Level Conjuration}} ` +
+  `{{v=1}} ` +
+  `{{components=V, S, M (flower seeds)}} ` + 
+  `{{description=**Source:** Obojima: Tales from the Tall Grass, pg. 189 \n\nYou sprout and rapidly grow a lush leafy foliage that covers the entirety of your body. \n\nIf a creature hasn't observed you move or act, it must succeed on an Intelligence (Investigation) check against your spell save [DC 12](!\n) to discern that you aren't a bush. \n\nFor the duration, you can use your action to create and hurl a pinecone, berry, or flower bud 30 feet for [1d6+4](!\n) damage.}}`;
 const proficiencies = {
   not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
   half: {key: 'half', display: 'Half Proficiency', bonus: '+1'},
   proficiency: {key: 'proficiency', display: 'Proficiency', bonus: '+3'},
   expertise: {key: 'expertise', display: 'Expertise', bonus: '+6'}
+};
+const modifiers = {
+  spellcasting: {key: 'spellcasting', display: 'Spell Casting Modifier', check: '+1', proficiency: 'proficiency'},
 };
 const weaponProperties = {
   ammunition: 'ammunition',
@@ -191,9 +204,17 @@ const defaultCallbacks = {
     burstFireModifier,
     squareBracketFormat,
     masteryModifier
+  ],
+  rangedAttackSpell: [
+    spellHitRoll,
+    bonusHitModifier,
+    standardDamageRoll,
+    bonusDamageModifier,
+    huntersMarkModifier,
+    squareBracketFormat
   ]
 }
-const weaponStats = {
+const attackStats = {
   dagger: {
     proficiency: proficiencies.proficiency,
     stat: stats.DEX,
@@ -293,6 +314,15 @@ const weaponStats = {
       weaponProperties.light,
       weaponProperties.slow
     ]
+  },
+  sproutFoliage: {
+    proficiency: proficiencies.proficiency,
+    stat: modifiers.spellcasting,
+    damage: '1d6',
+    name: 'Sprout Foliage: Throw Plant',
+    range: '30ft.',
+    damageType: 'Bludgeoning',
+    callbacks: defaultCallbacks.rangedAttackSpell
   }
 }
 const rollTypes = {
@@ -332,6 +362,13 @@ function buildUi() {
   {
     const panel = document.createElement('div');
     panel.classList.add('panel');
+    panel.id = 'spells-panel';
+    buildSpellsPanel(panel);
+    skillsDiv.appendChild(panel);
+  }
+  {
+    const panel = document.createElement('div');
+    panel.classList.add('panel');
     panel.id = 'skills-panel';
     buildSkillsPanel(panel);
     skillsDiv.appendChild(panel);
@@ -340,6 +377,13 @@ function buildUi() {
     const buttonsDiv = document.createElement('div');
     buttonsDiv.classList.add('flex-row');
     buttonsDiv.classList.add('flex-right');
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Spells';
+      button.setAttribute('for', 'spells-panel');
+      button.addEventListener('click', expandPanel);
+      buttonsDiv.appendChild(button);
+    }
     {
       const button = document.createElement('button');
       button.innerText = 'Skills';
@@ -479,6 +523,29 @@ function buildUi() {
   }
 
   getLocalStorage();
+}
+
+function buildSpellsPanel(panel) {
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = `Sprout Foliage`;
+      button.setAttribute('message', sproutFoliageDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'S';
+      button.setAttribute('weapon-key', 'sproutFoliage');
+      button.setAttribute('attack-type', 'ranged-spell');
+      button.addEventListener('click', rollWeapon);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
 }
 
 function buildWeaponsPanel(panel) {
@@ -1442,7 +1509,7 @@ function setTalking(nameOfSpeaker) {
 }
 function expendShot(event, d) {
   let thisWeaponKey = event.target.getAttribute('weapon-key');
-  let thisWeaponStats = weaponStats[thisWeaponKey];
+  let thisWeaponStats = attackStats[thisWeaponKey];
 
   let burstFireEnabled = onOff[document.querySelector('input[name="burst-fire"]:checked').value];
   let burstFireAllowed = thisWeaponStats.properties.includes(weaponProperties.burstFire);
@@ -1472,7 +1539,45 @@ function expendShot(event, d) {
 }
 function standardHitRoll(event, d) {
   let thisWeaponKey = event.target.getAttribute('weapon-key');
-  let thisWeaponStats = weaponStats[thisWeaponKey];
+  let thisWeaponStats = attackStats[thisWeaponKey];
+
+  let attackType = event.target.getAttribute('attack-type');
+  let throwing = attackType == 'thrown';
+
+  let mod = '';
+  let modP = '';
+  if (!!thisWeaponStats.bonus) {
+    mod += `${thisWeaponStats.bonus}[Weapon]`;
+    modP += thisWeaponStats.bonus;
+  }
+  mod += `${thisWeaponStats.stat.check}[${thisWeaponStats.stat.display}]`;
+  modP += thisWeaponStats.stat.check;
+  mod += `${thisWeaponStats.proficiency.bonus}[${thisWeaponStats.proficiency.display}]`;
+  modP += thisWeaponStats.proficiency.bonus;
+
+  let exhaustionString = getExhaustionString();
+  let exhaustionStringPlain = getExhaustionStringPlain();
+
+  if (!!exhaustionString) {
+    mod += exhaustionString;
+    modP += exhaustionStringPlain;
+  }
+
+  d.attack = '1';
+  d.r1 = `1d20${mod}`
+  d.r2 = `1d20${mod}`
+  let rollType = document.querySelector('input[name="roll-type"]:checked').value;
+  d[rollType] = "1"
+  d.rname = thisWeaponStats.name;
+  d.charname = CHARACTER_NAME;
+  d.mod = modP;
+  if (throwing) {
+    d.range = thisWeaponStats.range;
+  }
+}
+function spellHitRoll(event, d) {
+  let thisWeaponKey = event.target.getAttribute('weapon-key');
+  let thisWeaponStats = attackStats[thisWeaponKey];
 
   let attackType = event.target.getAttribute('attack-type');
   let throwing = attackType == 'thrown';
@@ -1544,7 +1649,7 @@ function archeryModifier(event, d) {
 }
 function standardDamageRoll(event, d) {
   let thisWeaponKey = event.target.getAttribute('weapon-key');
-  let thisWeaponStats = weaponStats[thisWeaponKey];
+  let thisWeaponStats = attackStats[thisWeaponKey];
 
   let thisDamage = thisWeaponStats.damage;
   if (!!thisWeaponStats.bonus) {
@@ -1576,7 +1681,7 @@ function huntersMarkModifier(event, d) {
 }
 function colossusSlayerModifier(event, d) {
   let thisWeaponKey = event.target.getAttribute('weapon-key');
-  let thisWeaponStats = weaponStats[thisWeaponKey];
+  let thisWeaponStats = attackStats[thisWeaponKey];
 
   let enabled = document.querySelector('input[name="colossus-horde"]:checked').value == 'colossus';
   if (enabled) {
@@ -1614,7 +1719,7 @@ function savageAttackModifier(event, d) {
 }
 function burstFireModifier(event, d) {
   let thisWeaponKey = event.target.getAttribute('weapon-key');
-  let thisWeaponStats = weaponStats[thisWeaponKey];
+  let thisWeaponStats = attackStats[thisWeaponKey];
 
   let burstFireEnabled = onOff[document.querySelector('input[name="burst-fire"]:checked').value];
   let burstFireAllowed = thisWeaponStats.properties.includes(weaponProperties.burstFire);
@@ -1655,7 +1760,7 @@ function squareBracketFormat(event, d) {
 }
 function masteryModifier(event, d) {
   let thisWeaponKey = event.target.getAttribute('weapon-key');
-  let thisWeaponStats = weaponStats[thisWeaponKey];
+  let thisWeaponStats = attackStats[thisWeaponKey];
   let enabled = onOff[document.querySelector('input[name="mastery"]:checked').value];
   
   if (enabled && thisWeaponStats.mastery) {
@@ -1693,7 +1798,7 @@ function daggerOfVenomModifier(event, d) {
 }
 function rollWeapon(event) {
   let thisWeaponKey = event.target.getAttribute('weapon-key');
-  let thisWeaponStats = weaponStats[thisWeaponKey];
+  let thisWeaponStats = attackStats[thisWeaponKey];
 
   const d = {
     advantage: '',
@@ -1751,7 +1856,7 @@ function rollWeapon(event) {
 }
 function reloadFirearm(event, d) {
   let thisWeaponKey = event.target.getAttribute('weapon-key');
-  let thisWeaponStats = weaponStats[thisWeaponKey];
+  let thisWeaponStats = attackStats[thisWeaponKey];
 
   let ammoElement = document.querySelector('input.ammo[type="number"]');
   let ammo = parseInt(ammoElement.value);
@@ -1782,7 +1887,7 @@ function printCurrentAmmo(event) {
   for (let weaponKey of shotsInputs) {
     let shots = parseInt(document.querySelector(`input.shots[type="number"][weapon-key="${weaponKey}"]`).value);
     sum += shots;
-    output += `${shots} in his ${weaponStats[weaponKey].name}, `
+    output += `${shots} in his ${attackStats[weaponKey].name}, `
   }
   sum += ammo;
   output += `and ${ammo} loose, for a total of ${sum} ammo.`;
