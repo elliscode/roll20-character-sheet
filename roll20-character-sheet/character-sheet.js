@@ -27,6 +27,15 @@ const huntersMark = `&{template:spell} ` +
   `{{v=1}} ` +
   `{{concentration=1}} ` +
   `{{description=**Source:** [D&D Free Rules (2024)](https://www.dndbeyond.com/spells/2619166-hunters-mark) \nYou deal an extra [1d6](!\n) Force damage to the target whenever you hit it with an attack roll.}}`;
+const mushroomBallista = `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Mushroom Ballista}} ` +
+  `{{castingtime=1 bonus action}} ` +
+  `{{range=Touch / Flavor}} ` +
+  `{{duration=1 hour}} ` +
+  `{{level=2nd Level Transmutation}} ` +
+  `{{v=1}} ` +
+  `{{description=**Source:** [Obojima: Tales from the Tall Grass](https://www.dndbeyond.com/spells/2857534-mushroom-ballista) \n\nWhen a creature is hit, it takes an extra [1d6](!\n) poison damage. \n\nThe creature must make a  and must make a Dexterity saving throw, and on a failed save, the creature is pushed back a number of feet equal to the damage taken (rounded up to the nearest 5 feet) to a maximum of 15 feet.}}`;
 const huntersMove = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Move Hunter's Mark}} ` +
@@ -198,6 +207,7 @@ const defaultCallbacks = {
     standardDamageRoll,
     bonusDamageModifier,
     huntersMarkModifier,
+    mushroomBallistaModifier,
     colossusSlayerModifier,
     hordeBreakerModifier,
     savageAttackModifier,
@@ -526,6 +536,48 @@ function buildUi() {
 }
 
 function buildSpellsPanel(panel) {
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = `Mushroom Ballista`;
+      button.setAttribute('message', mushroomBallista)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'mushroom';
+      input.value = 'on';
+      label.appendChild(input);
+      const span = document.createElement('span');
+      span.innerText = 'On';
+      label.appendChild(span);
+      thisDiv.appendChild(label);
+    }
+    {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'mushroom';
+      input.value = 'off';
+      input.checked = true;
+      label.appendChild(input);
+      const span = document.createElement('span');
+      span.innerText = 'Off';
+      label.appendChild(span);
+      thisDiv.appendChild(label);
+    }
+    panel.appendChild(thisDiv);
+  }
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
@@ -1679,6 +1731,22 @@ function huntersMarkModifier(event, d) {
     d.desc += "Spell: [Hunter's Mark](https://www.dndbeyond.com/spells/2619166-hunters-mark) \n";
   }
 }
+function mushroomBallistaModifier(event, d) {
+  let enabled = onOff[document.querySelector('input[name="mushroom"]:checked').value];
+  if (enabled) {
+    if (!d.dmg2flag) {
+      d.dmg2flag = '1';
+    } else {
+      d.dmg2 += '+';
+      d.crit2 += '+';
+      d.dmg2type += ' + ';
+    }
+    d.dmg2 += `1d6[Mushroom Ballista]`;
+    d.crit2 += `1d6[Mushroom Ballista]`;
+    d.dmg2type += `Poison`
+    d.desc += "Spell: [Mushroom Ballista](https://www.dndbeyond.com/spells/2857534-mushroom-ballista) \n";
+  }
+}
 function colossusSlayerModifier(event, d) {
   let thisWeaponKey = event.target.getAttribute('weapon-key');
   let thisWeaponStats = attackStats[thisWeaponKey];
@@ -1910,6 +1978,7 @@ function setLocalStorage() {
     conditions: Array.from(document.querySelectorAll('input.condition-checkbox[type="checkbox"]')).filter(x => x.checked).map(x => findParentWithClass(x, 'condition').getAttribute('name')),
     burstFire: document.querySelector('input[name="burst-fire"]:checked').value,
     huntersMark: document.querySelector('input[name="hunters"]:checked').value,
+    mushroomBallista: document.querySelector('input[name="mushroom"]:checked').value,
     savageAttacker: document.querySelector('input[name="savage"]:checked').value,
     huntersPrey: document.querySelector('input[name="colossus-horde"]:checked').value,
     weaponMastery: document.querySelector('input[name="mastery"]:checked').value,
@@ -1949,6 +2018,7 @@ function getLocalStorage() {
     document.querySelector(`input.ammo[type="number"]`).value = d.ammo;
     document.querySelector(`input.shots[type="number"][weapon-key="shotgun"]`).value = d.shotsShotgun;
     document.querySelector(`input.shots[type="number"][weapon-key="rifle"]`).value = d.shotsRifle;
+    document.querySelector(`input[name="mushroom"][value=${d.mushroomBallista}]`).checked = true;
   } catch (e) {
     
   }
