@@ -36,6 +36,143 @@ const mushroomBallista = `&{template:spell} ` +
   `{{level=2nd Level Transmutation}} ` +
   `{{v=1}} ` +
   `{{description=**Source:** [Obojima: Tales from the Tall Grass](https://www.dndbeyond.com/spells/2857534-mushroom-ballista) \n\nWhen a creature is hit, it takes an extra [1d6](!\n) poison damage. \n\nThe creature must make a  and must make a Dexterity saving throw, and on a failed save, the creature is pushed back a number of feet equal to the damage taken (rounded up to the nearest 5 feet) to a maximum of 15 feet.}}`;
+const elementalismAirSpell = `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Elementalism, Beckon Air}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=30ft. / 5ft. cube}} ` +
+  `{{duration=Instantaneous}} ` +
+  `{{level=Transmutation Cantrip}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#Elementalism) \n\nYou create a breeze strong enough to ripple cloth, stir dust, rustle leaves, and close open doors and shutters, all in a 5-foot Cube. Doors and shutters being held open by someone or something aren't affected.}}`;
+const elementalismEarthSpell = `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Elementalism, Beckon Earth}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=30ft. / 5ft. cube}} ` +
+  `{{duration=Instantaneous}} ` +
+  `{{level=Transmutation Cantrip}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#Elementalism) \n\nYou create a thin shroud of dust or sand that covers surfaces in a 5-foot-square area, or you cause a single word to appear in your handwriting in a patch of dirt or sand.}}`;
+const elementalismFireSpell = `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Elementalism, Beckon Fire}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=30ft. / 5ft. cube}} ` +
+  `{{duration=Instantaneous}} ` +
+  `{{level=Transmutation Cantrip}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#Elementalism) \n\nYou create a thin cloud of harmless embers and colored, scented smoke in a 5-foot Cube. You choose the color and scent, and the embers can light candles, torches, or lamps in that area. The smoke's scent lingers for 1 minute.}}`;
+const elementalismWaterSpell = `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Elementalism, Beckon Water}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=30ft. / 5ft. cube}} ` +
+  `{{duration=Instantaneous}} ` +
+  `{{level=Transmutation Cantrip}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#Elementalism) \n\nYou create a spray of cool mist that lightly dampens creatures and objects in a 5-foot Cube. Alternatively, you create 1 cup of clean water either in an open container or on a surface, and the water evaporates in 1 minute.}}`;
+const elementalismSculptSpell = `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Elementalism, Sculpt Element}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=30ft. / 5ft. cube}} ` +
+  `{{duration=Instantaneous}} ` +
+  `{{level=Transmutation Cantrip}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#Elementalism) \n\nYou cause dirt, sand, fire, smoke, mist, or water that can fit in a 1-foot Cube to assume a crude shape (such as that of a creature) for 1 hour.}}`;
+const resistanceSpell = `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Resistance}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=Touch}} ` +
+  `{{duration=Concentration, up to 1 minute}} ` +
+  `{{level=Abjuration Cantrip}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{description=**Source:** [*Player's Handbook*, pg. 312](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#Resistance) \n\nYou cause dirt, sand, fire, smoke, mist, or water that can fit in a 1-foot Cube to assume a crude shape (such as that of a creature) for 1 hour.}}`;
+const spareTheDyingSpell = `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Spare the Dying}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=30 ft. (lvl 5)}} ` +
+  `{{duration=Instantaneous}} ` +
+  `{{level=Necromancy Cantrip}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{description=**Source:** [*Player's Handbook*, pg. 318](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#SparetheDying) \n\nChoose a creature within range that has 0 Hit Points and isn't dead. The creature becomes Stable.}}`;
+const beastBondSpell = `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Beast Bond}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=Touch}} ` +
+  `{{duration=Concentration up to 10 minutes}} ` +
+  `{{level=1st Level Divination}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{m=1}} {{material=a bit of fur wrapped in a cloth}} ` +
+  `{{description=**Source:** [*Elemental Evil Player's Companion*, pg. 150](https://www.dndbeyond.com/spells/2370-beast-bond) \n\nYou establish a telepathic link with one beast you touch that is friendly to you or charmed by you. The spell fails if the beast's Intelligence is 4 or higher. Until the spell ends, the link is active while you and the beast are within line of sight of each other. Through the link, the beast can understand your telepathic messages to it, and it can telepathically communicate simple emotions and concepts back to you. While the link is active, the beast gains advantage on attack rolls against any creature within 5 feet of you that you can see.}}`;
+const bubbleLiftSpell = function (levelInt) {
+  let levelModifier = '';
+  if (levelInt > 1) {
+    levelModifier = `, **cast at ${levelPlace(levelInt)} level**`;
+  }
+  return `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Bubble Lift}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=60ft.}} ` +
+  `{{duration=1 hour}} ` +
+  `{{level=1st Level Conjuration${levelModifier}}} ` +
+  `{{v=1}} ` +
+  `{{description=**Source:** [*Obojima: Tales from the Tall Grass*, pg. 182](https://www.dndbeyond.com/spells/2857561-bubble-lift) \n\nYou blow a bubble around any solid, granular, or liquid object that weighs **${500*levelInt} pounds** or less, causing it to float **4 feet off the ground**. No matter what the contents of the bubble are, the bubble weighs 10 pounds and can be pushed using an action. Strong winds or effects that would push a creature also push the bubble. The bubble always floats at least 4 feet off the ground, and descends from a fall at a speed of 10 feet per round.\n\nAs an action, a creature can pierce the outside of the bubble, causing it to pop and releasing its contents.}}`;
+}
+const cureWoundsSpell = function (levelInt) {
+  let levelModifier = '';
+  if (levelInt > 1) {
+    levelModifier = `, **cast at ${levelPlace(levelInt)} level**`;
+  }
+  const commandToRun = `&{template:dmg} {{charname=Floyd}} {{rname=Cure Wounds, ${levelPlace(levelInt)} level}} {{range=Touch}} {{desc=Components: V, S}} {{damage=1}} {{dmg1flag=1}} {{dmg1= [[${2*levelInt}d8+1]]}} {{dmg1type=Healing}} {{crit1=Crit: [[${2*levelInt}d8]]}}`;
+  return `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Cure Wounds}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=Touch}} ` +
+  `{{duration=Instantaneous}} ` +
+  `{{level=1st Level Abjuration${levelModifier}}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{description=**Source:** [*Player's Handbook*, pg. 259](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#CureWounds) \n\n` + 
+  `A creature you touch regains a number of Hit Points equal to ` + 
+  `[${2*levelInt}d8+1](!\n${sanitizeCommand(commandToRun)})` + 
+  `}} \n${commandToRun} `;
+}
+const forestGuardSpell = function (levelInt) {
+  let levelModifier = '';
+  if (levelInt > 1) {
+    levelModifier = `, **cast at ${levelPlace(levelInt)} level**`;
+  }
+  const commandToRun = `&{template:atkdmg} {{charname=Forest Guard Shrub}} {{rname=Leaf Attack}} {{mod=+1}} {{r1=[[1d20${modifiers.spellcasting.check}[${modifiers.spellcasting.display}]]]}} {{attack=1}} {{range=10ft.}} {{desc=Components: V, S}} {{damage=1}} {{dmg1flag=1}} {{dmg1=[[1d4]]}} {{dmg1type=Slashing}} {{crit1=Crit: [[1d4]]}} {{normal=1}}`
+  return `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Forest Guard}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=60 ft.}} ` +
+  `{{duration=10 minutes}} ` +
+  `{{level=1st Level Conjuration${levelModifier}}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{description=**Source:** [*Obojima: Tales from the Tall Grass*, pg. 185](https://www.dndbeyond.com/spells/2857569-forest-guard) \n\n` + 
+  `You create **${levelInt} Small animated shrub${levelInt > 1 ? 's' : ''}**, which grow${levelInt > 1 ? '' : 's'} from the ground in an unoccupied space of your choice that you can see within range. The shrub${levelInt > 1 ? 's' : ''} ha${levelInt > 1 ? 've' : 's'} a number of human-like characteristics, such as a wooden body and face, but ${levelInt > 1 ? 'they' : 'it'} lack${levelInt > 1 ? '' : 's'} hands and arms and **can't move**.\n\n ` + 
+  `Any creature hostile to you that **moves to a space within 10 feet of a shrub** for the first time on a turn **or starts its turn there**, is targeted by the **shrub's leaf attack**. The shrub makes a ranged weapon attack, using your spell attack modifier. On a hit, a creature takes [1d4](!\n${sanitizeCommand(commandToRun)}) slashing damage.\n\n ` + 
+  `On your turn, you can use a **bonus action** to make a shrub use its **leaf attack** against one creature **within 10 feet of it**. ` + 
+  `}} `;
+}
 const huntersMove = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Move Hunter's Mark}} ` +
@@ -145,7 +282,7 @@ const sproutFoliageDescription = `&{template:spell} ` +
   `{{level=1st Level Conjuration}} ` +
   `{{v=1}} ` +
   `{{components=V, S, M (flower seeds)}} ` + 
-  `{{description=**Source:** Obojima: Tales from the Tall Grass, pg. 189 \n\nYou sprout and rapidly grow a lush leafy foliage that covers the entirety of your body. \n\nIf a creature hasn't observed you move or act, it must succeed on an Intelligence (Investigation) check against your spell save [DC 12](!\n) to discern that you aren't a bush. \n\nFor the duration, you can use your action to create and hurl a pinecone, berry, or flower bud 30 feet for [1d6+4](!\n) damage.}}`;
+  `{{description=**Source:** [Obojima: Tales from the Tall Grass, pg. 189](https://www.dndbeyond.com/spells/2857546-sprout-foliage) \n\nYou sprout and rapidly grow a lush leafy foliage that covers the entirety of your body. \n\nIf a creature hasn't observed you move or act, it must succeed on an Intelligence (Investigation) check against your spell save [DC 12](!\n) to discern that you aren't a bush. \n\nFor the duration, you can use your action to create and hurl a pinecone, berry, or flower bud 30 feet for [1d6+4](!\n) damage.}}`;
 const proficiencies = {
   not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
   half: {key: 'half', display: 'Half Proficiency', bonus: '+1'},
@@ -341,6 +478,36 @@ const rollTypes = {
   disadvantage: { display: 'Disadv', default: false }
 }
 const onOff = { on: true, off: false };
+function sanitizeCommand(text) {
+  const stringArray = [];
+  for (i = text.length - 1; i >= 0; i--) {
+    let char = text.charCodeAt(i);
+    if ((48 <= char && char <= 57)
+        || (65 <= char && char <= 90)
+        || (97 <= char && char <= 122)
+        || char == ':'.charCodeAt(0)
+        || char == ' '.charCodeAt(0)
+        || char == ','.charCodeAt(0)
+        || char == '='.charCodeAt(0)
+        || char == '+'.charCodeAt(0)) {
+      stringArray.unshift(text.charAt(i));
+    } else {
+      stringArray.unshift(`&#${char};`);
+    }
+  }
+  return stringArray.join('');
+}
+function levelPlace(levelInt) {
+  let suffix = 'th';
+  if (levelInt == 1) {
+    suffix = 'st';
+  } else if (levelInt == 2) {
+    suffix = 'nd';
+  } else if (levelInt == 3) {
+    suffix = 'rd';
+  }
+  return `${levelInt}${suffix}`;
+}
 
 function buildUi() {
   characterSheetDiv.classList.add('character-sheet-extension');
@@ -372,8 +539,8 @@ function buildUi() {
   {
     const panel = document.createElement('div');
     panel.classList.add('panel');
-    panel.id = 'spells-panel';
-    buildSpellsPanel(panel);
+    panel.id = 'spell-slots-panel';
+    buildSpellSlotsPanel(panel);
     skillsDiv.appendChild(panel);
   }
   {
@@ -389,8 +556,8 @@ function buildUi() {
     buttonsDiv.classList.add('flex-right');
     {
       const button = document.createElement('button');
-      button.innerText = 'Spells';
-      button.setAttribute('for', 'spells-panel');
+      button.innerText = 'Spell Slots';
+      button.setAttribute('for', 'spell-slots-panel');
       button.addEventListener('click', expandPanel);
       buttonsDiv.appendChild(button);
     }
@@ -404,6 +571,29 @@ function buildUi() {
     skillsDiv.appendChild(buttonsDiv);
   }
   characterSheetDiv.appendChild(skillsDiv);
+
+  let spellsDiv = document.createElement('div');
+  {
+    const panel = document.createElement('div');
+    panel.classList.add('panel');
+    panel.id = 'spells-panel';
+    buildSpellsPanel(panel);
+    spellsDiv.appendChild(panel);
+  }
+  {
+    const buttonsDiv = document.createElement('div');
+    buttonsDiv.classList.add('flex-row');
+    buttonsDiv.classList.add('flex-right');
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Spells';
+      button.setAttribute('for', 'spells-panel');
+      button.addEventListener('click', expandPanel);
+      buttonsDiv.appendChild(button);
+    }
+    spellsDiv.appendChild(buttonsDiv);
+  }
+  characterSheetDiv.appendChild(spellsDiv);
 
   let gunsDiv = document.createElement('div');
   {
@@ -433,6 +623,7 @@ function buildUi() {
     buttonsDiv.classList.add('flex-right');
     {
       const button = document.createElement('button');
+      button.classList.add('not-shown');
       button.innerText = 'Weapons';
       button.setAttribute('for', 'weapon-panel');
       button.addEventListener('click', expandPanel);
@@ -440,6 +631,7 @@ function buildUi() {
     }
     {
       const button = document.createElement('button');
+      button.classList.add('not-shown');
       button.innerText = 'Guns';
       button.setAttribute('for', 'gun-panel');
       button.addEventListener('click', expandPanel);
@@ -447,6 +639,7 @@ function buildUi() {
     }
     {
       const button = document.createElement('button');
+      button.classList.add('not-shown');
       button.innerText = 'Attack';
       button.setAttribute('for', 'attack-panel');
       button.addEventListener('click', expandPanel);
@@ -457,6 +650,13 @@ function buildUi() {
   characterSheetDiv.appendChild(gunsDiv);
 
   let controlsDiv = document.createElement('div');
+  {
+    const panel = document.createElement('div');
+    panel.classList.add('panel');
+    panel.id = 'buffs-panel';
+    buildBuffsPanel(panel);
+    controlsDiv.appendChild(panel);
+  }
   {
     const panel = document.createElement('div');
     panel.classList.add('panel');
@@ -491,14 +691,21 @@ function buildUi() {
     buttonsDiv.classList.add('flex-right');
     {
       const button = document.createElement('button');
-      button.innerText = 'Abilities';
+      button.innerText = 'Buffs';
+      button.setAttribute('for', 'buffs-panel');
+      button.addEventListener('click', expandPanel);
+      buttonsDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Ablts';
       button.setAttribute('for', 'abilities-panel');
       button.addEventListener('click', expandPanel);
       buttonsDiv.appendChild(button);
     }
     {
       const button = document.createElement('button');
-      button.innerText = 'Roll Type';
+      button.innerText = 'Roll';
       button.setAttribute('for', 'roll-type-panel');
       button.addEventListener('click', expandPanel);
       buttonsDiv.appendChild(button);
@@ -512,7 +719,7 @@ function buildUi() {
     }
     {
       const button = document.createElement('button');
-      button.innerText = 'Format';
+      button.innerText = 'Fmt';
       button.setAttribute('for', 'formatting-panel');
       button.addEventListener('click', expandPanel);
       buttonsDiv.appendChild(button);
@@ -527,7 +734,7 @@ function buildUi() {
     let marqueeDiv = document.createElement('div');
     marqueeDiv.classList.add('character-sheet-extension-marquee');
     let marquee = document.createElement("marquee");
-    marquee.innerText = "Don't forget to find interesting plants!";
+    marquee.innerText = "Remind people of their buffs!!!";
     marqueeDiv.appendChild(marquee);
     document.body.appendChild(marqueeDiv);
   }
@@ -541,6 +748,33 @@ function buildSpellsPanel(panel) {
     thisDiv.classList.add('flex-row');
     {
       const button = document.createElement('button');
+      button.innerText = `H. Mark`;
+      button.setAttribute('message', huntersMark)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = `Lore`;
+      button.setAttribute('message', huntersLore)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = `Move`;
+      button.setAttribute('message', huntersMove)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('not-shown');
+    {
+      const button = document.createElement('button');
       button.innerText = `Mushroom Ballista`;
       button.setAttribute('message', mushroomBallista)
       button.addEventListener('click', characterSheetExtensionSendMessage);
@@ -551,6 +785,7 @@ function buildSpellsPanel(panel) {
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('not-shown');
     {
       const label = document.createElement('label');
       const input = document.createElement('input');
@@ -582,14 +817,253 @@ function buildSpellsPanel(panel) {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
     {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Elementalism`;
+      thisDiv.appendChild(span);
+    }
+    {
       const button = document.createElement('button');
-      button.innerText = `Sprout Foliage`;
+      button.classList.add('spell');
+      button.innerText = `Air`;
+      button.setAttribute('message', elementalismAirSpell);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `Earth`;
+      button.setAttribute('message', elementalismEarthSpell);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `Fire`;
+      button.setAttribute('message', elementalismFireSpell);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `Water`;
+      button.setAttribute('message', elementalismWaterSpell);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `Sculpt Element`;
+      button.setAttribute('message', elementalismSculptSpell);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Resistance (c)`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `C`;
+      button.setAttribute('message', resistanceSpell);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Spare the Dying`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `C`;
+      button.setAttribute('message', spareTheDyingSpell);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Beast Bond (c)`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `1`;
+      button.setAttribute('message', beastBondSpell);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Bubble Lift`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `1`;
+      button.setAttribute('message', bubbleLiftSpell(1));
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    { 
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `2`;
+      button.setAttribute('message', bubbleLiftSpell(2));
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Cure Wounds`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `1`;
+      button.setAttribute('message', cureWoundsSpell(1));
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `2`;
+      button.setAttribute('message', cureWoundsSpell(2));
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Forest Guard`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `1`;
+      button.setAttribute('message', forestGuardSpell(1));
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `2`;
+      button.setAttribute('message', forestGuardSpell(2));
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Healing Word`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `C`;
+      button.setAttribute('message', mushroomBallista) // todo
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Speak with Animals`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `C`;
+      button.setAttribute('message', mushroomBallista) // todo
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Sprout Foliage`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `1`;
       button.setAttribute('message', sproutFoliageDescription)
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
     {
       const button = document.createElement('button');
+      button.classList.add('spell');
       button.innerText = 'S';
       button.setAttribute('weapon-key', 'sproutFoliage');
       button.setAttribute('attack-type', 'ranged-spell');
@@ -598,6 +1072,83 @@ function buildSpellsPanel(panel) {
     }
     panel.appendChild(thisDiv);
   }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Aid`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `C`;
+      button.setAttribute('message', mushroomBallista) // todo
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Barkskin`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `C`;
+      button.setAttribute('message', mushroomBallista) // todo
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Healing Spirit`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `C`;
+      button.setAttribute('message', mushroomBallista) // todo
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Summon Beast`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `C`;
+      button.setAttribute('message', mushroomBallista) // todo
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+
 }
 
 function buildWeaponsPanel(panel) {
@@ -631,6 +1182,7 @@ function buildWeaponsPanel(panel) {
   } 
   {
     const thisDiv = document.createElement('div');
+    thisDiv.classList.add('not-shown');
     thisDiv.classList.add('flex-row');
     {
       const button = document.createElement('button');
@@ -783,7 +1335,21 @@ function displayConditionDescription(event) {
   characterSheetExtensionSendMessage(message);
   setLocalStorage();
 }
-
+function buildSpellSlotsPanel(panel) {
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const el = document.createElement('textarea');
+      el.innerText = ``;
+      el.placeholder = `Enter spell slot counts here`;
+      el.style.height = '75px'; 
+      el.style.width = '165px';
+      thisDiv.appendChild(el);
+    }
+    panel.appendChild(thisDiv);
+  }
+}
 function buildSkillsPanel(panel) {
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.DEX, name: "Acrobatics"});
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.WIS, name: "Animal Handling"});
@@ -1296,6 +1862,22 @@ function buildGunPanel(panel) {
       button.innerText = `Ammo`;
       button.addEventListener('click', printCurrentAmmo);
       thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+}
+
+function buildBuffsPanel(panel) {
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const el = document.createElement('textarea');
+      el.innerText = ``;
+      el.placeholder = `No buffs currently applied...`;
+      el.style.height = '195px'; 
+      el.style.width = '231px';
+      thisDiv.appendChild(el);
     }
     panel.appendChild(thisDiv);
   }

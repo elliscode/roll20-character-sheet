@@ -83,9 +83,6 @@
   border: 1px solid black;
   border-radius: 10px;
 }
-.not {
-
-}
 .half {
   background-color: grey;
 }
@@ -105,4 +102,10 @@
 }
 .not-shown {
   display: none!important;
+}
+.spell {
+  background-color: rgb(164, 25, 25)!important;
+  color: white!important;
+  border-color: rgb(87, 0, 0)!important;
+  padding: 0px 4px!important;
 }
