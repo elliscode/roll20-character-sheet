@@ -45,7 +45,7 @@ const elementalismAirSpell = `&{template:spell} ` +
   `{{level=Transmutation Cantrip}} ` +
   `{{v=1}} ` +
   `{{s=1}} ` +
-  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#Elementalism) \n\nYou create a breeze strong enough to ripple cloth, stir dust, rustle leaves, and close open doors and shutters, all in a 5-foot Cube. Doors and shutters being held open by someone or something aren't affected.}}`;
+  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/spells/2618834-elementalism) \n\nYou create a breeze strong enough to ripple cloth, stir dust, rustle leaves, and close open doors and shutters, all in a 5-foot Cube. Doors and shutters being held open by someone or something aren't affected.}}`;
 const elementalismEarthSpell = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Elementalism, Beckon Earth}} ` +
@@ -55,7 +55,7 @@ const elementalismEarthSpell = `&{template:spell} ` +
   `{{level=Transmutation Cantrip}} ` +
   `{{v=1}} ` +
   `{{s=1}} ` +
-  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#Elementalism) \n\nYou create a thin shroud of dust or sand that covers surfaces in a 5-foot-square area, or you cause a single word to appear in your handwriting in a patch of dirt or sand.}}`;
+  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/spells/2618834-elementalism) \n\nYou create a thin shroud of dust or sand that covers surfaces in a 5-foot-square area, or you cause a single word to appear in your handwriting in a patch of dirt or sand.}}`;
 const elementalismFireSpell = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Elementalism, Beckon Fire}} ` +
@@ -65,7 +65,7 @@ const elementalismFireSpell = `&{template:spell} ` +
   `{{level=Transmutation Cantrip}} ` +
   `{{v=1}} ` +
   `{{s=1}} ` +
-  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#Elementalism) \n\nYou create a thin cloud of harmless embers and colored, scented smoke in a 5-foot Cube. You choose the color and scent, and the embers can light candles, torches, or lamps in that area. The smoke's scent lingers for 1 minute.}}`;
+  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/spells/2618834-elementalism) \n\nYou create a thin cloud of harmless embers and colored, scented smoke in a 5-foot Cube. You choose the color and scent, and the embers can light candles, torches, or lamps in that area. The smoke's scent lingers for 1 minute.}}`;
 const elementalismWaterSpell = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Elementalism, Beckon Water}} ` +
@@ -75,7 +75,7 @@ const elementalismWaterSpell = `&{template:spell} ` +
   `{{level=Transmutation Cantrip}} ` +
   `{{v=1}} ` +
   `{{s=1}} ` +
-  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#Elementalism) \n\nYou create a spray of cool mist that lightly dampens creatures and objects in a 5-foot Cube. Alternatively, you create 1 cup of clean water either in an open container or on a surface, and the water evaporates in 1 minute.}}`;
+  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/spells/2618834-elementalism) \n\nYou create a spray of cool mist that lightly dampens creatures and objects in a 5-foot Cube. Alternatively, you create 1 cup of clean water either in an open container or on a surface, and the water evaporates in 1 minute.}}`;
 const elementalismSculptSpell = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Elementalism, Sculpt Element}} ` +
@@ -85,7 +85,7 @@ const elementalismSculptSpell = `&{template:spell} ` +
   `{{level=Transmutation Cantrip}} ` +
   `{{v=1}} ` +
   `{{s=1}} ` +
-  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#Elementalism) \n\nYou cause dirt, sand, fire, smoke, mist, or water that can fit in a 1-foot Cube to assume a crude shape (such as that of a creature) for 1 hour.}}`;
+  `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/spells/2618834-elementalism) \n\nYou cause dirt, sand, fire, smoke, mist, or water that can fit in a 1-foot Cube to assume a crude shape (such as that of a creature) for 1 hour.}}`;
 const resistanceSpell = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Resistance}} ` +
@@ -95,7 +95,7 @@ const resistanceSpell = `&{template:spell} ` +
   `{{level=Abjuration Cantrip}} ` +
   `{{v=1}} ` +
   `{{s=1}} ` +
-  `{{description=**Source:** [*Player's Handbook*, pg. 312](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#Resistance) \n\nYou cause dirt, sand, fire, smoke, mist, or water that can fit in a 1-foot Cube to assume a crude shape (such as that of a creature) for 1 hour.}}`;
+  `{{description=**Source:** [*Player's Handbook*, pg. 312](https://www.dndbeyond.com/spells/2618947-resistance) \n\nYou cause dirt, sand, fire, smoke, mist, or water that can fit in a 1-foot Cube to assume a crude shape (such as that of a creature) for 1 hour.}}`;
 const spareTheDyingSpell = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Spare the Dying}} ` +
@@ -105,7 +105,7 @@ const spareTheDyingSpell = `&{template:spell} ` +
   `{{level=Necromancy Cantrip}} ` +
   `{{v=1}} ` +
   `{{s=1}} ` +
-  `{{description=**Source:** [*Player's Handbook*, pg. 318](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#SparetheDying) \n\nChoose a creature within range that has 0 Hit Points and isn't dead. The creature becomes Stable.}}`;
+  `{{description=**Source:** [*Player's Handbook*, pg. 318](https://www.dndbeyond.com/spells/2619067-spare-the-dying) \n\nChoose a creature within range that has 0 Hit Points and isn't dead. The creature becomes Stable.}}`;
 const beastBondSpell = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Beast Bond}} ` +
@@ -147,9 +147,9 @@ const cureWoundsSpell = function (levelInt) {
   `{{level=1st Level Abjuration${levelModifier}}} ` +
   `{{v=1}} ` +
   `{{s=1}} ` +
-  `{{description=**Source:** [*Player's Handbook*, pg. 259](https://www.dndbeyond.com/sources/dnd/phb-2024/spell-descriptions#CureWounds) \n\n` + 
+  `{{description=**Source:** [*Player's Handbook*, pg. 259](https://www.dndbeyond.com/spells/2619079-cure-wounds) \n\n` + 
   `A creature you touch regains a number of Hit Points equal to ` + 
-  `[${2*levelInt}d8+1](!\n${sanitizeCommand(commandToRun)})` + 
+  `[${2*levelInt}d8${modifiers.spellcasting.check}](!\n${sanitizeCommand(commandToRun)})` + 
   `}} \n${commandToRun} `;
 }
 const forestGuardSpell = function (levelInt) {
@@ -171,8 +171,227 @@ const forestGuardSpell = function (levelInt) {
   `You create **${levelInt} Small animated shrub${levelInt > 1 ? 's' : ''}**, which grow${levelInt > 1 ? '' : 's'} from the ground in an unoccupied space of your choice that you can see within range. The shrub${levelInt > 1 ? 's' : ''} ha${levelInt > 1 ? 've' : 's'} a number of human-like characteristics, such as a wooden body and face, but ${levelInt > 1 ? 'they' : 'it'} lack${levelInt > 1 ? '' : 's'} hands and arms and **can't move**.\n\n ` + 
   `Any creature hostile to you that **moves to a space within 10 feet of a shrub** for the first time on a turn **or starts its turn there**, is targeted by the **shrub's leaf attack**. The shrub makes a ranged weapon attack, using your spell attack modifier. On a hit, a creature takes [1d4](!\n${sanitizeCommand(commandToRun)}) slashing damage.\n\n ` + 
   `On your turn, you can use a **bonus action** to make a shrub use its **leaf attack** against one creature **within 10 feet of it**. ` + 
-  `}} `;
+  `}}`;
 }
+const healingWordSpell = function (levelInt) {
+  let levelModifier = '';
+  if (levelInt > 1) {
+    levelModifier = `, **cast at ${levelPlace(levelInt)} level**`;
+  }
+  const commandToRun = `&{template:dmg} {{charname=Floyd}} {{rname=Healing Word}} {{range=60ft.}} {{desc=Components: V}} {{damage=1}} {{dmg1flag=1}} {{dmg1= [[${2*levelInt}d4${modifiers.spellcasting.check}[${modifiers.spellcasting.display}]]]}} {{dmg1type=Healing}} {{crit1=Crit: [[${2*levelInt}]]}}`;
+  return `&{template:spell} ` +
+    `{{charname=${CHARACTER_NAME}}} ` +
+    `{{name=Healing Word}} ` +
+    `{{castingtime=1 bonus action}} ` +
+    `{{range=60ft.}} ` +
+    `{{duration=Instantaneous}} ` +
+    `{{level=1st Level Abjuration${levelModifier}}} ` +
+    `{{v=1}} ` +
+    `{{description=**Source:** [*Player's Handbook*, pg. 284](https://www.dndbeyond.com/spells/2619143-healing-word) \n\n` +
+    `A creature of your choice that you can see within range regains Hit Points equal to ` +
+    `[${2*levelInt}d4${modifiers.spellcasting.check}](!\n${sanitizeCommand(commandToRun)})` + 
+    `}} \n${commandToRun} `;
+}
+const speakWithAnimalsSpell = `&{template:spell} ` +
+    `{{charname=${CHARACTER_NAME}}} ` +
+    `{{name=Speak with Animals}} ` +
+    `{{castingtime=1 action}} ` +
+    `{{range=Self}} ` +
+    `{{duration=10 minutes}} ` +
+    `{{level=1st Level Divination}} ` +
+    `{{v=1}} ` +
+    `{{s=1}} ` +
+    `{{description=**Source:** [*Player's Handbook*, pg. 318](https://www.dndbeyond.com/spells/2619059-speak-with-animals) \n\n` +
+    `For the duration, you can **comprehend and verbally communicate with Beasts**, and you can use any of the Influence action's skill options with them.\n\n` +
+    `Most Beasts have little to say about topics that don't pertain to survival or companionship, but at minimum, **a Beast can give you information about nearby locations and monsters, including whatever it has perceived within the past day**.` +
+    `}}`;
+const sproutFoliageSpell = `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Sprout Foliage}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=Self}} ` +
+  `{{duration=1 hour}} ` +
+  `{{level=1st Level Conjuration}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{m=1}} {{material=flower seeds}} ` + 
+  `{{description=**Source:** [Obojima: Tales from the Tall Grass, pg. 189](https://www.dndbeyond.com/spells/2857546-sprout-foliage) \n\n` + 
+  `You sprout and rapidly grow a lush leafy foliage that covers the entirety of your body. When casting this spell, you can choose if the foliage has other features, such as flowers or berries.\n\n` + 
+  `While prone and motionless, **you are indistinguishable from a normal bush**. If a creature hasn't observed you move or act, **it must succeed on an Intelligence (Investigation) check** against your spell save [DC 12](!\n) to discern that you aren't a bush. To become disguised again from a creature that has discerned you for what you are, you must take the Hide action while you're unseen by the creature.\n\n` + 
+  `For the duration, **you can use your action to create and hurl a pinecone, berry, or flower bud**. When you do so, make a ranged spell attack against a creature within **30 feet** of you. On a hit, the target takes bludgeoning damage equal to [1d6+1](!\n).` + 
+  `}}`;
+const aidSpell = function (levelInt) {
+  let levelModifier = '';
+  if (levelInt > 2) {
+    levelModifier = `, **cast at ${levelPlace(levelInt)} level**`;
+  }
+  return `&{template:spell} ` + 
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Aid}} ` + 
+  `{{castingtime=1 action}} ` + 
+  `{{range=30ft.}} ` + 
+  `{{duration=8 hours}} ` + 
+  `{{level=2nd Level Abjuration${levelModifier}}} ` + 
+  `{{v=1}} ` + 
+  `{{s=1}} ` + 
+  `{{m=1}} ` + 
+  `{{material=a strip of white cloth}} ` + 
+  `{{description=**Source:** [*Player's Handbook*, pg. 239](https://www.dndbeyond.com/spells/2618845-aid) \n\n` + 
+  `Choose up to **three creatures** within range. Each target's Hit Point maximum and current **Hit Points increase by ${5*(levelInt-1)}** for the duration.\n\n` + 
+  `}}`;
+}
+const barkskinSpell = `&{template:spell} ` + 
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Barkskin}} ` + 
+  `{{castingtime=1 bonus action}} ` + 
+  `{{range=Touch}} ` + 
+  `{{duration=1 hour}} ` + 
+  `{{level=2nd Level Transmutation}} ` + 
+  `{{v=1}} ` + 
+  `{{s=1}} ` + 
+  `{{m=1}} {{material=a handful of oak bark}} ` + 
+  `{{description=**Source:** [*Player's Handbook*, pg. 245](https://www.dndbeyond.com/spells/2618907-barkskin) \n\n` + 
+  `You touch a willing creature. Until the spell ends, the target's skin assumes a bark-like appearance, and the target has an **Armor Class of [17](!\n)** if its AC is lower than that.` + 
+  `}}`;
+const healingSpiritSpell = function (levelInt) {
+  let levelModifier = '';
+  if (levelInt > 2) {
+    levelModifier = `, **cast at ${levelPlace(levelInt)} level**`;
+  }
+  const commandToRun = `&{template:dmg} {{charname=Floyd}} {{rname=Healing Spirit}} {{range=60ft. (Cube 5ft.)}} {{desc=Components: V, S}} {{damage=1}} {{dmg1flag=1}} {{dmg1= [[${levelInt-1}d6]]}} {{dmg1type=Healing}} {{crit1=Crit: [[${levelInt-1}d6]]}}`;
+  return `&{template:spell} ` + 
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Healing Spirit}} ` + 
+  `{{castingtime=1 bonus action}} ` + 
+  `{{range=60ft. (Cube 5ft.)}} ` + 
+  `{{duration=up to 1 minute}} ` + 
+  `{{level=2nd Level Conjuration${levelModifier}}} ` + 
+  `{{v=1}} ` + 
+  `{{s=1}} ` + 
+  `{{concentration=1}} ` + 
+  `{{description=**Source:** [*Xanathar's Guide to Everything*, pg. 157](https://www.dndbeyond.com/spells/14873-healing-spirit) \n\n` + 
+  `You call forth a nature spirit to soothe the wounded. The intangible spirit appears in a space that is a 5-foot cube you can see within range. The spirit looks like a transparent beast or fey (your choice).\n\n` + 
+  `Until the spell ends, whenever you or a creature you can see moves into the spirit's space for the first time on a turn or starts its turn there, you can cause the spirit to restore [${levelInt-1}d6](!\n${sanitizeCommand(commandToRun)}) hit points to that creature (no action required). The spirit can't heal constructs or undead. **The spirit can heal ${1+parseInt(modifiers.spellcasting.check)} times**. After healing that number of times, the spirit disappears.` + 
+  `As a **bonus action** on your turn, you can **move the spirit up to 30 feet** to a space you can see.` + 
+  `}}`;
+}
+const summonBeastAirSpell = function (levelInt) {
+  let levelModifier = '';
+  if (levelInt > 2) {
+    levelModifier = `, **cast at ${levelPlace(levelInt)} level**`;
+  }
+  let multiAttackString = ``;
+  if (levelInt > 3) {
+    multiAttackString = `[Multiattack](!\n) The spirit makes **${Math.floor(levelInt / 2.0)} Rend attacks**.\n`
+  }
+  const rendAttack = `&{template:atkdmg} {{charname=Bestial Spirit, Air}} {{rname=Rend}} {{mod=${modifiers.spellcasting.check}}} {{r1=[[1d20${modifiers.spellcasting.check}[${modifiers.spellcasting.display}]]]}} {{normal=1}} {{attack=1}} {{damage=1}} {{dmg1flag=1}} {{dmg1=[[1d8+4+${levelInt}[Spell Level]]]}} {{crit1=Crit: [[1d8]]}} {{dmg1type=Piercing}}`;
+  const commandToRun = `&{template:default} {{name=Bestial Spirit, Air}} ` +
+    `{{Armor Class=[[11[Base AC]+${levelInt}[Spell Level]]]}} ` +
+    `{{Hit Points=[[20[Air Bestial Spirit Base AC]+${levelInt-2}d5[${levelPlace(levelInt)} level spell]]]}} ` +
+    `{{Speed=30ft.; Fly 60ft.}} ` +
+    `{{Senses=Darkvision 60ft.; Passive Perception [12](!\n)}} ` +
+    `{{Languages=Understands the languages ${CHARACTER_NAME} knows}} ` +
+    `{{Traits=**Flyby**. The spirit doesn't provoke Opportunity Attacks when it flies out of an enemy's reach.}} ` +
+    `{{Attacks=` +
+    multiAttackString +
+    `[Rend](!\n${sanitizeCommand(rendAttack)}) *Melee Attack Roll*: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d8 + 4 + ${levelInt} Piercing damage.` +
+    `}} ` +
+    `{{Source=[*Player's Handbook*, pg. 322](https://www.dndbeyond.com/spells/2619106-summon-beast)}}`;
+  return `${commandToRun} \n &{template:spell} ` + 
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Summon Beast, Air}} ` + 
+  `{{castingtime=1 action}} ` + 
+  `{{range=90ft.}} ` + 
+  `{{duration=up to 1 hour}} ` + 
+  `{{level=2nd Level Conjuration${levelModifier}}} ` + 
+  `{{v=1}} ` + 
+  `{{s=1}} ` + 
+  `{{m=1}} {{material=a feather, tuft of fur, and fish tail inside a gilded acorn worth 200+ GP}} ` + 
+  `{{concentration=1}} ` + 
+  `{{description=**Source:** [*Player's Handbook*, pg. 322](https://www.dndbeyond.com/spells/2619106-summon-beast) \n\n` +
+  `You call forth a bestial spirit. It manifests in an unoccupied space that you can see within range and uses the Bestial Spirit stat block. When you cast the spell, choose an environment: Air, Land, or Water. The creature resembles an animal of your choice that is native to the chosen environment, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.\n\n` +
+  `The creature is an ally to you and your allies. In combat, **the creature shares your Initiative count, but it takes its turn immediately after yours**. It obeys your verbal commands (**no action required by you**). If you don't issue any, it takes the Dodge action and uses its movement to avoid danger.` +
+  `}} `;
+};
+const summonBeastLandSpell = function (levelInt) {
+  let levelModifier = '';
+  if (levelInt > 2) {
+    levelModifier = `, **cast at ${levelPlace(levelInt)} level**`;
+  }
+  let multiAttackString = ``;
+  if (levelInt > 3) {
+    multiAttackString = `[Multiattack](!\n) The spirit makes **${Math.floor(levelInt / 2.0)} Rend attacks**.\n`
+  }
+  const rendAttack = `&{template:atkdmg} {{charname=Bestial Spirit, Land}} {{rname=Rend}} {{mod=${modifiers.spellcasting.check}}} {{r1=[[1d20${modifiers.spellcasting.check}[${modifiers.spellcasting.display}]]]}} {{normal=1}} {{attack=1}} {{damage=1}} {{dmg1flag=1}} {{dmg1=[[1d8+4+${levelInt}[Spell Level]]]}} {{crit1=Crit: [[1d8]]}} {{dmg1type=Piercing}}`;
+  const commandToRun = `&{template:default} {{name=Bestial Spirit, Land}} ` +
+    `{{Armor Class=[[11[Base AC]+${levelInt}[Spell Level]]]}} ` +
+    `{{Hit Points=[[30[Land Bestial Spirit Base AC]+${levelInt-2}d5[${levelPlace(levelInt)} level spell]]]}} ` +
+    `{{Speed=30ft.; Climb 30ft.}} ` +
+    `{{Senses=Darkvision 60ft.; Passive Perception [12](!\n)}} ` +
+    `{{Languages=Understands the languages ${CHARACTER_NAME} knows}} ` +
+    `{{Traits=**Pack Tactics**. The spirit has Advantage on an attack roll against a creature if at least one of the spirit's allies is within 5 feet of the creature and the ally doesn't have the Incapacitated condition.}} ` +
+    `{{Attacks=` +
+    multiAttackString +
+    `[Rend](!\n${sanitizeCommand(rendAttack)}) *Melee Attack Roll*: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d8 + 4 + ${levelInt} Piercing damage.` +
+    `}} ` +
+    `{{Source=[*Player's Handbook*, pg. 322](https://www.dndbeyond.com/spells/2619106-summon-beast)}}`;
+  return `${commandToRun} \n &{template:spell} ` + 
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Summon Beast, Land}} ` + 
+  `{{castingtime=1 action}} ` + 
+  `{{range=90ft.}} ` + 
+  `{{duration=up to 1 hour}} ` + 
+  `{{level=2nd Level Conjuration${levelModifier}}} ` + 
+  `{{v=1}} ` + 
+  `{{s=1}} ` + 
+  `{{m=1}} {{material=a feather, tuft of fur, and fish tail inside a gilded acorn worth 200+ GP}} ` + 
+  `{{concentration=1}} ` + 
+  `{{description=**Source:** [*Player's Handbook*, pg. 322](https://www.dndbeyond.com/spells/2619106-summon-beast) \n\n` +
+  `You call forth a bestial spirit. It manifests in an unoccupied space that you can see within range and uses the Bestial Spirit stat block. When you cast the spell, choose an environment: Air, Land, or Water. The creature resembles an animal of your choice that is native to the chosen environment, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.\n\n` +
+  `The creature is an ally to you and your allies. In combat, **the creature shares your Initiative count, but it takes its turn immediately after yours**. It obeys your verbal commands (**no action required by you**). If you don't issue any, it takes the Dodge action and uses its movement to avoid danger.` +
+  `}} `;
+};
+const summonBeastWaterSpell = function (levelInt) {
+  let levelModifier = '';
+  if (levelInt > 2) {
+    levelModifier = `, **cast at ${levelPlace(levelInt)} level**`;
+  }
+  let multiAttackString = ``;
+  if (levelInt > 3) {
+    multiAttackString = `[Multiattack](!\n) The spirit makes **${Math.floor(levelInt / 2.0)} Rend attacks**.\n`
+  }
+  const rendAttack = `&{template:atkdmg} {{charname=Bestial Spirit, Water}} {{rname=Rend}} {{mod=${modifiers.spellcasting.check}}} {{r1=[[1d20${modifiers.spellcasting.check}[${modifiers.spellcasting.display}]]]}} {{normal=1}} {{attack=1}} {{damage=1}} {{dmg1flag=1}} {{dmg1=[[1d8+4+${levelInt}[Spell Level]]]}} {{crit1=Crit: [[1d8]]}} {{dmg1type=Piercing}}`;
+  const commandToRun = `&{template:default} {{name=Bestial Spirit, Water}} ` +
+    `{{Armor Class=[[11[Base AC]+${levelInt}[Spell Level]]]}} ` +
+    `{{Hit Points=[[30[Water Bestial Spirit Base AC]+${levelInt-2}d5[${levelPlace(levelInt)} level spell]]]}} ` +
+    `{{Speed=30ft.; Swim 30 ft.}} ` +
+    `{{Senses=Darkvision 60ft.; Passive Perception [12](!\n)}} ` +
+    `{{Languages=Understands the languages ${CHARACTER_NAME} knows}} ` +
+    `{{Traits=` +
+    `**Pack Tactics**. The spirit has Advantage on an attack roll against a creature if at least one of the spirit's allies is within 5 feet of the creature and the ally doesn't have the Incapacitated condition.` +
+    `**Water Breathing**. The spirit can breathe only underwater.` +
+    `}} ` +
+    `{{Attacks=` +
+    multiAttackString +
+    `[Rend](!\n${sanitizeCommand(rendAttack)}) *Melee Attack Roll*: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d8 + 4 + ${levelInt} Piercing damage.` +
+    `}} ` +
+    `{{Source=[*Player's Handbook*, pg. 322](https://www.dndbeyond.com/spells/2619106-summon-beast)}}`;
+  return `${commandToRun} \n &{template:spell} ` + 
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Summon Beast, Water}} ` + 
+  `{{castingtime=1 action}} ` + 
+  `{{range=90ft.}} ` + 
+  `{{duration=up to 1 hour}} ` + 
+  `{{level=2nd Level Conjuration${levelModifier}}} ` + 
+  `{{v=1}} ` + 
+  `{{s=1}} ` + 
+  `{{m=1}} {{material=a feather, tuft of fur, and fish tail inside a gilded acorn worth 200+ GP}} ` + 
+  `{{concentration=1}} ` + 
+  `{{description=**Source:** [*Player's Handbook*, pg. 322](https://www.dndbeyond.com/spells/2619106-summon-beast) \n\n` +
+  `You call forth a bestial spirit. It manifests in an unoccupied space that you can see within range and uses the Bestial Spirit stat block. When you cast the spell, choose an environment: Air, Land, or Water. The creature resembles an animal of your choice that is native to the chosen environment, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.\n\n` +
+  `The creature is an ally to you and your allies. In combat, **the creature shares your Initiative count, but it takes its turn immediately after yours**. It obeys your verbal commands (**no action required by you**). If you don't issue any, it takes the Dodge action and uses its movement to avoid danger.` +
+  `}} `;
+};
 const huntersMove = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Move Hunter's Mark}} ` +
@@ -273,16 +492,6 @@ const unarmedStrikeDescription = `&{template:traits} ` +
   `{{name=Unarmed Strike}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/br-2024/rules-glossary#UnarmedStrike)}} ` +
   `{{description=Instead of using a weapon to make a melee attack, you can use a punch, kick, headbutt, or similar forceful blow.}}`;
-const sproutFoliageDescription = `&{template:spell} ` +
-  `{{charname=${CHARACTER_NAME}}} ` +
-  `{{name=Sprout Foliage}} ` +
-  `{{castingtime=1 action}} ` +
-  `{{range=Self}} ` +
-  `{{duration=1 hour}} ` +
-  `{{level=1st Level Conjuration}} ` +
-  `{{v=1}} ` +
-  `{{components=V, S, M (flower seeds)}} ` + 
-  `{{description=**Source:** [Obojima: Tales from the Tall Grass, pg. 189](https://www.dndbeyond.com/spells/2857546-sprout-foliage) \n\nYou sprout and rapidly grow a lush leafy foliage that covers the entirety of your body. \n\nIf a creature hasn't observed you move or act, it must succeed on an Intelligence (Investigation) check against your spell save [DC 12](!\n) to discern that you aren't a bush. \n\nFor the duration, you can use your action to create and hurl a pinecone, berry, or flower bud 30 feet for [1d6+4](!\n) damage.}}`;
 const proficiencies = {
   not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
   half: {key: 'half', display: 'Half Proficiency', bonus: '+1'},
@@ -1018,8 +1227,16 @@ function buildSpellsPanel(panel) {
     {
       const button = document.createElement('button');
       button.classList.add('spell');
-      button.innerText = `C`;
-      button.setAttribute('message', mushroomBallista) // todo
+      button.innerText = `1`;
+      button.setAttribute('message', healingWordSpell(1));
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `2`;
+      button.setAttribute('message', healingWordSpell(2));
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
@@ -1037,8 +1254,8 @@ function buildSpellsPanel(panel) {
     {
       const button = document.createElement('button');
       button.classList.add('spell');
-      button.innerText = `C`;
-      button.setAttribute('message', mushroomBallista) // todo
+      button.innerText = `1`;
+      button.setAttribute('message', speakWithAnimalsSpell);
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
@@ -1057,7 +1274,7 @@ function buildSpellsPanel(panel) {
       const button = document.createElement('button');
       button.classList.add('spell');
       button.innerText = `1`;
-      button.setAttribute('message', sproutFoliageDescription)
+      button.setAttribute('message', sproutFoliageSpell)
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
@@ -1084,8 +1301,8 @@ function buildSpellsPanel(panel) {
     {
       const button = document.createElement('button');
       button.classList.add('spell');
-      button.innerText = `C`;
-      button.setAttribute('message', mushroomBallista) // todo
+      button.innerText = `2`;
+      button.setAttribute('message', aidSpell(2));
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
@@ -1103,8 +1320,8 @@ function buildSpellsPanel(panel) {
     {
       const button = document.createElement('button');
       button.classList.add('spell');
-      button.innerText = `C`;
-      button.setAttribute('message', mushroomBallista) // todo
+      button.innerText = `2`;
+      button.setAttribute('message', barkskinSpell);
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
@@ -1122,8 +1339,8 @@ function buildSpellsPanel(panel) {
     {
       const button = document.createElement('button');
       button.classList.add('spell');
-      button.innerText = `C`;
-      button.setAttribute('message', mushroomBallista) // todo
+      button.innerText = `2`;
+      button.setAttribute('message', healingSpiritSpell(2));
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
@@ -1135,14 +1352,52 @@ function buildSpellsPanel(panel) {
     {
       const span = document.createElement('span');
       span.style.marginRight = '5px';
-      span.innerText = `Summon Beast`;
+      span.innerText = `Summon Beast: Air`;
       thisDiv.appendChild(span);
     }
     {
       const button = document.createElement('button');
       button.classList.add('spell');
-      button.innerText = `C`;
-      button.setAttribute('message', mushroomBallista) // todo
+      button.innerText = `2`;
+      button.setAttribute('message', summonBeastAirSpell(2));
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Summon Beast: Land`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `2`;
+      button.setAttribute('message', summonBeastLandSpell(2));
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Summon Beast: Water`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `2`;
+      button.setAttribute('message', summonBeastWaterSpell(2));
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
