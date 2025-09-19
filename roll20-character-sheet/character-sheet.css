@@ -60,7 +60,7 @@
   background-color: rgb(255, 205, 205);
 }
 .character-sheet-extension label {
-  margin-right: 10px;
+  margin: 0px 10px 0px 0px;
 }
 .character-sheet-extension input[type="text"] {
   width: 110px;
@@ -108,4 +108,15 @@
   color: white!important;
   border-color: rgb(87, 0, 0)!important;
   padding: 0px 4px!important;
+}
+.spell-slot {
+  display: inline-block;
+  border: 1px solid black;
+  background-color: white;
+  width: 10px;
+  height: 10px;
+  margin-left: 2px;
+}
+.spent {
+  background-color: rgb(133, 0, 0);
 }

@@ -1036,7 +1036,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `Air`;
       button.setAttribute('message', elementalismAirSpell);
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     {
@@ -1044,7 +1044,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `Earth`;
       button.setAttribute('message', elementalismEarthSpell);
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1056,7 +1056,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `Fire`;
       button.setAttribute('message', elementalismFireSpell);
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     {
@@ -1064,7 +1064,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `Water`;
       button.setAttribute('message', elementalismWaterSpell);
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     {
@@ -1072,7 +1072,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `Sculpt Element`;
       button.setAttribute('message', elementalismSculptSpell);
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1091,7 +1091,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `C`;
       button.setAttribute('message', resistanceSpell);
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1110,7 +1110,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `C`;
       button.setAttribute('message', spareTheDyingSpell);
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1129,7 +1129,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `1`;
       button.setAttribute('message', beastBondSpell);
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1148,7 +1148,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `1`;
       button.setAttribute('message', bubbleLiftSpell(1));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     { 
@@ -1156,7 +1156,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `2`;
       button.setAttribute('message', bubbleLiftSpell(2));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1175,7 +1175,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `1`;
       button.setAttribute('message', cureWoundsSpell(1));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     {
@@ -1183,7 +1183,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `2`;
       button.setAttribute('message', cureWoundsSpell(2));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1202,7 +1202,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `1`;
       button.setAttribute('message', forestGuardSpell(1));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     {
@@ -1210,7 +1210,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `2`;
       button.setAttribute('message', forestGuardSpell(2));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1229,7 +1229,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `1`;
       button.setAttribute('message', healingWordSpell(1));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     {
@@ -1237,7 +1237,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `2`;
       button.setAttribute('message', healingWordSpell(2));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1256,7 +1256,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `1`;
       button.setAttribute('message', speakWithAnimalsSpell);
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1275,7 +1275,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `1`;
       button.setAttribute('message', sproutFoliageSpell)
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     {
@@ -1303,7 +1303,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `2`;
       button.setAttribute('message', aidSpell(2));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1322,7 +1322,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `2`;
       button.setAttribute('message', barkskinSpell);
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1341,7 +1341,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `2`;
       button.setAttribute('message', healingSpiritSpell(2));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1360,7 +1360,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `2`;
       button.setAttribute('message', summonBeastAirSpell(2));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1379,7 +1379,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `2`;
       button.setAttribute('message', summonBeastLandSpell(2));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1398,7 +1398,7 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `2`;
       button.setAttribute('message', summonBeastWaterSpell(2));
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
@@ -1590,20 +1590,127 @@ function displayConditionDescription(event) {
   characterSheetExtensionSendMessage(message);
   setLocalStorage();
 }
+function toggleSpellSlot(event) {
+  const turnOn = !event.target.classList.contains('spent');
+  let spellSlotRow = findParentWithClass(event.target, 'spell-slot-row');
+  if (turnOn) {
+    let itemToTurn = spellSlotRow.querySelector('div.spell-slot:not(.spent)');
+    if (itemToTurn) {
+      itemToTurn.classList.add('spent');
+      return true;
+    }
+  } else {
+    let itemToTurn = Array.from(spellSlotRow.querySelectorAll('div.spell-slot.spent'));
+    if (itemToTurn.length > 0) {
+      itemToTurn[itemToTurn.length - 1].classList.remove('spent');
+      return true;
+    }
+  }
+  return false;
+}
+function castSpell(event) {
+  const ignoreSlots = document.getElementById('textchat-notifier').style.display != 'none';
+  if (!ignoreSlots && ['1','2','3','4','5','6','7','8','9'].includes(event.target.textContent)) {
+    const levelInt = event.target.textContent;
+    const spellSlotRow = document.querySelector(`.spell-slot-row[spell-slot="${levelInt}"]`);
+    if (!spellSlotRow) {
+      characterSheetExtensionSendMessage(`/em does not have ${levelPlace(parseInt(levelInt))} level spell slots!`);
+      return;
+    }
+    const unspentSlot = spellSlotRow.querySelector('div.spell-slot:not(.spent)');
+    if (!unspentSlot) {
+      characterSheetExtensionSendMessage(`/em does not have any ${levelPlace(parseInt(levelInt))} level spell slots remaining!`);
+      return;
+    }
+    toggleSpellSlot({target: unspentSlot});
+    setLocalStorage();
+  }
+  characterSheetExtensionSendMessage(event);
+}
 function buildSpellSlotsPanel(panel) {
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('spell-slot-row');
+    thisDiv.setAttribute('spell-slot', '1');
     {
-      const el = document.createElement('textarea');
-      el.innerText = ``;
-      el.placeholder = `Enter spell slot counts here`;
-      el.style.height = '75px'; 
-      el.style.width = '165px';
+      const el = document.createElement('label');
+      el.innerText = '1st';
+      thisDiv.appendChild(el);
+    }
+    {
+      const el = document.createElement('div');
+      el.classList.add('spell-slot');
+      el.addEventListener('click', toggleSpellSlot);
+      thisDiv.appendChild(el);
+    }
+    {
+      const el = document.createElement('div');
+      el.classList.add('spell-slot');
+      el.addEventListener('click', toggleSpellSlot);
+      thisDiv.appendChild(el);
+    }
+    {
+      const el = document.createElement('div');
+      el.classList.add('spell-slot');
+      el.addEventListener('click', toggleSpellSlot);
+      thisDiv.appendChild(el);
+    }
+    {
+      const el = document.createElement('div');
+      el.classList.add('spell-slot');
+      el.addEventListener('click', toggleSpellSlot);
       thisDiv.appendChild(el);
     }
     panel.appendChild(thisDiv);
   }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('spell-slot-row');
+    thisDiv.setAttribute('spell-slot', '2');
+    {
+      const el = document.createElement('label');
+      el.innerText = '2nd';
+      thisDiv.appendChild(el);
+    }
+    {
+      const el = document.createElement('div');
+      el.classList.add('spell-slot');
+      el.addEventListener('click', toggleSpellSlot);
+      thisDiv.appendChild(el);
+    }
+    {
+      const el = document.createElement('div');
+      el.classList.add('spell-slot');
+      el.addEventListener('click', toggleSpellSlot);
+      thisDiv.appendChild(el);
+    }
+    {
+      const el = document.createElement('div');
+      el.classList.add('spell-slot');
+      el.addEventListener('click', toggleSpellSlot);
+      thisDiv.appendChild(el);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const el = document.createElement('button');
+      el.innerText = 'Reset';
+      el.addEventListener('click', clearSpellSlots);
+      thisDiv.appendChild(el);
+    }
+    panel.appendChild(thisDiv);
+  }
+}
+function clearSpellSlots(event) {
+  const spentSlots = Array.from(document.querySelectorAll('div.spell-slot.spent'));
+  spentSlots.forEach(function (slot) {
+    slot.classList.remove('spent');
+  });
 }
 function buildSkillsPanel(panel) {
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.DEX, name: "Acrobatics"});
@@ -2826,7 +2933,18 @@ function setLocalStorage() {
     bonusDamage: document.querySelector('input[type="text"][id="bonus-damage"]').value,
     ammo: document.querySelector('input.ammo[type="number"]').value,
     shotsShotgun: document.querySelector(`input.shots[type="number"][weapon-key="shotgun"]`).value,
-    shotsRifle: document.querySelector(`input.shots[type="number"][weapon-key="rifle"]`).value
+    shotsRifle: document.querySelector(`input.shots[type="number"][weapon-key="rifle"]`).value,
+    spentSpellSlots: [
+      document.querySelectorAll('[spell-slot="1"]>div.spell-slot.spent').length,
+      document.querySelectorAll('[spell-slot="2"]>div.spell-slot.spent').length,
+      document.querySelectorAll('[spell-slot="3"]>div.spell-slot.spent').length,
+      document.querySelectorAll('[spell-slot="4"]>div.spell-slot.spent').length,
+      document.querySelectorAll('[spell-slot="5"]>div.spell-slot.spent').length,
+      document.querySelectorAll('[spell-slot="6"]>div.spell-slot.spent').length,
+      document.querySelectorAll('[spell-slot="7"]>div.spell-slot.spent').length,
+      document.querySelectorAll('[spell-slot="8"]>div.spell-slot.spent').length,
+      document.querySelectorAll('[spell-slot="9"]>div.spell-slot.spent').length
+    ]
   }));
 }
 function getLocalStorage() {
@@ -2856,6 +2974,16 @@ function getLocalStorage() {
     document.querySelector(`input.shots[type="number"][weapon-key="shotgun"]`).value = d.shotsShotgun;
     document.querySelector(`input.shots[type="number"][weapon-key="rifle"]`).value = d.shotsRifle;
     document.querySelector(`input[name="mushroom"][value=${d.mushroomBallista}]`).checked = true;
+    clearSpellSlots();
+    for (let slot = 1; slot <= d.spentSpellSlots.length; slot++) {
+      let slotIndex = slot - 1;
+      for (let index = 0; index < d.spentSpellSlots[slotIndex]; index++) {
+        let unspentSlot = document.querySelector(`[spell-slot="${slot}"]>div.spell-slot:not(.spent)`);
+        if (unspentSlot) {
+          unspentSlot.classList.add('spent');
+        }
+      }
+    }
   } catch (e) {
     
   }
