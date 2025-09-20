@@ -26,7 +26,7 @@ const huntersMark = `&{template:spell} ` +
   `{{level=1st Level Divination}} ` +
   `{{v=1}} ` +
   `{{concentration=1}} ` +
-  `{{description=**Source:** [D&D Free Rules (2024)](https://www.dndbeyond.com/spells/2619166-hunters-mark) \nYou deal an extra [1d6](!\n) Force damage to the target whenever you hit it with an attack roll.}}`;
+  `{{description=**Source:** [D&D Free Rules (2024)](https://www.dndbeyond.com/spells/2619166-hunters-mark) \n\nYou deal an extra [1d6](!\n) Force damage to the target whenever you hit it with an attack roll.}}`;
 const mushroomBallista = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Mushroom Ballista}} ` +
@@ -86,6 +86,35 @@ const elementalismSculptSpell = `&{template:spell} ` +
   `{{v=1}} ` +
   `{{s=1}} ` +
   `{{description=**Source:** [*Player's Handbook*, pg. 267](https://www.dndbeyond.com/spells/2618834-elementalism) \n\nYou cause dirt, sand, fire, smoke, mist, or water that can fit in a 1-foot Cube to assume a crude shape (such as that of a creature) for 1 hour.}}`;
+const guidanceSpell = `&{template:spell} ` +
+  `{{charname=Floyd}} ` +
+  `{{name=Guidance}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=Touch}} ` +
+  `{{duration=up to 1 minute}} ` +
+  `{{level=Divination Cantrip}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{concentration=1}} ` +
+  `{{description=**Source:** [*Player's Handbook*, pg. 282](https://www.dndbeyond.com/spells/2618971-guidance) \n\n` +
+  `You touch a willing creature and choose a skill. Until the spell ends, the creature adds [1d4](!\n&#38;&#123;template:simple&#125; &#123;&#123;charname=Floyd&#125;&#125; &#123;&#123;rname=Guidance&#125;&#125; &#123;&#123;mod=1d4&#125;&#125; &#123;&#123;r1=&#91;&#91;1d4&#93;&#93;&#125;&#125; &#123;&#123;normal=1&#125;&#125;) to any ability check using the chosen skill.` +
+  `}}`;
+const shapeWaterSpell = `&{template:spell} ` +
+  `{{charname=Floyd}} ` +
+  `{{name=Shape Water}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=30ft. (Cube 5ft.)}} ` +
+  `{{duration=Instantaneous}} ` +
+  `{{level=Transmutation Cantrip}} ` +
+  `{{s=1}} ` +
+  `{{description=**Source:** [*Elemental Evil Player's Companion*, pg. 164](https://www.dndbeyond.com/spells/2397-shape-water) \n\n` +
+  `You choose an area of water that you can see within range and that fits within a 5-foot cube. You manipulate it in one of the following ways:\n\n` +
+  `[&#8226; You instantaneously **move** or otherwise change the flow of **the water** as you direct, up to 5 feet in any direction. This movement doesn't have enough force to cause damage.](" style="padding-left:1em;color:black;text-decoration:none;cursor:text;display:block;text-indent:-0.625em;)` +
+  `[&#8226; You cause the **water to form into simple shapes** and animate at your direction. This change lasts for 1 hour.](" style="padding-left:1em;color:black;text-decoration:none;cursor:text;display:block;text-indent:-0.625em;)` +
+  `[&#8226; You **change the water's color or opacity**. The water must be changed in the same way throughout. This change lasts for 1 hour.](" style="padding-left:1em;color:black;text-decoration:none;cursor:text;display:block;text-indent:-0.625em;)` +
+  `[&#8226; You **freeze the water**, provided that there are no creatures in it. The water unfreezes in 1 hour.](" style="padding-left:1em;color:black;text-decoration:none;cursor:text;display:block;text-indent:-0.625em;)\n` +
+  `If you cast this spell multiple times, you can have no more than **two of its non-instantaneous effects active at a time**, and you can dismiss such an effect as an action.` +
+  `}}`;
 const resistanceSpell = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Resistance}} ` +
@@ -100,7 +129,7 @@ const spareTheDyingSpell = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Spare the Dying}} ` +
   `{{castingtime=1 action}} ` +
-  `{{range=30 ft. (lvl 5)}} ` +
+  `{{range=30 ft. (Level 5)}} ` +
   `{{duration=Instantaneous}} ` +
   `{{level=Necromancy Cantrip}} ` +
   `{{v=1}} ` +
@@ -477,6 +506,19 @@ const resourcefulDescription = `&{template:traits} ` +
   `{{name=Resourceful}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/character-origins#HumanTraits)}} ` +
   `{{description=You gain Heroic Inspiration whenever you finish a Long Rest.}}`;
+const floydBerryDescription = `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=${CHARACTER_NAME}berry}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=Self}} ` +
+  `{{duration=24 hours}} ` +
+  `{{level=Conjuration Cantrip}} ` +
+  `{{s=1}} ` +
+  `{{description=**Source:** [*Floyd's Trial*, 2025-09-16](https://discord.com/channels/1081301034602872932/1222366579300372520/1417712417873592373) \n\n` +
+  `[${CHARACTER_NAME}berry](https://i.ibb.co/Mk74TJbs/floyd-berry-cropped-small-wide.png)\n\n` +
+  `One berry appear in ${CHARACTER_NAME}'s hand and is infused with magic for the duration. When ${CHARACTER_NAME} eats a berry, it **restores no hit points**, however the berry provides enough nourishment to **sustain ${CHARACTER_NAME} for one day**.\n\n` +
+  `It is not known what happens when another creature eats a ${CHARACTER_NAME}berry.` +
+  `}}`;
 const daggerDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Dagger}} ` +
@@ -707,6 +749,9 @@ function sanitizeCommand(text) {
   return stringArray.join('');
 }
 function levelPlace(levelInt) {
+  if (typeof myVariable === 'string') {
+    return levelInt;
+  }
   let suffix = 'th';
   if (levelInt == 1) {
     suffix = 'st';
@@ -959,7 +1004,7 @@ function buildSpellsPanel(panel) {
       const button = document.createElement('button');
       button.innerText = `H. Mark`;
       button.setAttribute('message', huntersMark)
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
     {
@@ -1080,6 +1125,27 @@ function buildSpellsPanel(panel) {
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('not-shown');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Guidance`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `C`;
+      button.setAttribute('message', guidanceSpell);
+      button.addEventListener('click', castSpell);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('not-shown');
     {
       const span = document.createElement('span');
       span.style.marginRight = '5px';
@@ -1091,6 +1157,25 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `C`;
       button.setAttribute('message', resistanceSpell);
+      button.addEventListener('click', castSpell);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Shape Water`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `C`;
+      button.setAttribute('message', shapeWaterSpell);
       button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
@@ -1597,12 +1682,14 @@ function toggleSpellSlot(event) {
     let itemToTurn = spellSlotRow.querySelector('div.spell-slot:not(.spent)');
     if (itemToTurn) {
       itemToTurn.classList.add('spent');
+      setLocalStorage();
       return true;
     }
   } else {
     let itemToTurn = Array.from(spellSlotRow.querySelectorAll('div.spell-slot.spent'));
     if (itemToTurn.length > 0) {
       itemToTurn[itemToTurn.length - 1].classList.remove('spent');
+      setLocalStorage();
       return true;
     }
   }
@@ -1610,24 +1697,59 @@ function toggleSpellSlot(event) {
 }
 function castSpell(event) {
   const ignoreSlots = document.getElementById('textchat-notifier').style.display != 'none';
-  if (!ignoreSlots && ['1','2','3','4','5','6','7','8','9'].includes(event.target.textContent)) {
-    const levelInt = event.target.textContent;
-    const spellSlotRow = document.querySelector(`.spell-slot-row[spell-slot="${levelInt}"]`);
+  if (!ignoreSlots && ['H. Mark', '1','2','3','4','5','6','7','8','9'].includes(event.target.textContent)) {
+    let levelInt = event.target.textContent;
+    let spellSlotRow = document.querySelector(`.spell-slot-row[spell-slot="${levelInt}"]`);
     if (!spellSlotRow) {
-      characterSheetExtensionSendMessage(`/em does not have ${levelPlace(parseInt(levelInt))} level spell slots!`);
+      characterSheetExtensionSendMessage(`/em does not have ${levelPlace(levelInt)} level spell slots!`);
       return;
     }
-    const unspentSlot = spellSlotRow.querySelector('div.spell-slot:not(.spent)');
+    let unspentSlot = spellSlotRow.querySelector('div.spell-slot:not(.spent)');
+    if (!unspentSlot && ['H. Mark'].includes(levelInt)) {
+      // try again with level 1 spell slot
+      levelInt = '1';
+      spellSlotRow = document.querySelector(`.spell-slot-row[spell-slot="${levelInt}"]`);
+      unspentSlot = spellSlotRow.querySelector('div.spell-slot:not(.spent)');
+    }
     if (!unspentSlot) {
-      characterSheetExtensionSendMessage(`/em does not have any ${levelPlace(parseInt(levelInt))} level spell slots remaining!`);
+      characterSheetExtensionSendMessage(`/em does not have any ${levelPlace(levelInt)} level spell slots remaining!`);
       return;
     }
     toggleSpellSlot({target: unspentSlot});
-    setLocalStorage();
   }
   characterSheetExtensionSendMessage(event);
 }
 function buildSpellSlotsPanel(panel) {
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('spell-slot-row');
+    thisDiv.setAttribute('spell-slot', 'H. Mark');
+    {
+      const el = document.createElement('label');
+      el.innerText = `Hunter's Mark`;
+      thisDiv.appendChild(el);
+    }
+    {
+      const el = document.createElement('div');
+      el.classList.add('spell-slot');
+      el.addEventListener('click', toggleSpellSlot);
+      thisDiv.appendChild(el);
+    }
+    {
+      const el = document.createElement('div');
+      el.classList.add('spell-slot');
+      el.addEventListener('click', toggleSpellSlot);
+      thisDiv.appendChild(el);
+    }
+    {
+      const el = document.createElement('div');
+      el.classList.add('spell-slot');
+      el.addEventListener('click', toggleSpellSlot);
+      thisDiv.appendChild(el);
+    }
+    panel.appendChild(thisDiv);
+  }
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
@@ -1711,6 +1833,7 @@ function clearSpellSlots(event) {
   spentSlots.forEach(function (slot) {
     slot.classList.remove('spent');
   });
+  setLocalStorage();
 }
 function buildSkillsPanel(panel) {
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.DEX, name: "Acrobatics"});
@@ -2371,6 +2494,18 @@ function buildMiscPanel(panel) {
       const button = document.createElement('button');
       button.innerText = 'Interesting Plants';
       button.addEventListener('click', interestingPlantsRoll);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = `${CHARACTER_NAME}berry`;
+      button.setAttribute('message', floydBerryDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
