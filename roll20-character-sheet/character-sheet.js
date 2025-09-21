@@ -26,7 +26,7 @@ const huntersMark = `&{template:spell} ` +
   `{{level=1st Level Divination}} ` +
   `{{v=1}} ` +
   `{{concentration=1}} ` +
-  `{{description=**Source:** [D&D Free Rules (2024)](https://www.dndbeyond.com/spells/2619166-hunters-mark) \n\nYou deal an extra [1d6](!\n) Force damage to the target whenever you hit it with an attack roll.}}`;
+  `{{description=**Source:** [*Player's Handbook*, pg. 287](https://www.dndbeyond.com/spells/2619166-hunters-mark) \n\nYou magically mark one creature you can see within range as your quarry. \n\nYou have Advantage on any Wisdom (Perception or Survival) check you make to find it.}}`;
 const mushroomBallista = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Mushroom Ballista}} ` +
@@ -97,7 +97,7 @@ const guidanceSpell = `&{template:spell} ` +
   `{{s=1}} ` +
   `{{concentration=1}} ` +
   `{{description=**Source:** [*Player's Handbook*, pg. 282](https://www.dndbeyond.com/spells/2618971-guidance) \n\n` +
-  `You touch a willing creature and choose a skill. Until the spell ends, the creature adds [1d4](!\n&#38;&#123;template:simple&#125; &#123;&#123;charname=Floyd&#125;&#125; &#123;&#123;rname=Guidance&#125;&#125; &#123;&#123;mod=1d4&#125;&#125; &#123;&#123;r1=&#91;&#91;1d4&#93;&#93;&#125;&#125; &#123;&#123;normal=1&#125;&#125;) to any ability check using the chosen skill.` +
+  `You touch a willing creature and choose a skill. Until the spell ends, the creature adds [1d4](!\n) to any ability check using the chosen skill.` +
   `}}`;
 const shapeWaterSpell = `&{template:spell} ` +
   `{{charname=Floyd}} ` +
@@ -109,10 +109,10 @@ const shapeWaterSpell = `&{template:spell} ` +
   `{{s=1}} ` +
   `{{description=**Source:** [*Elemental Evil Player's Companion*, pg. 164](https://www.dndbeyond.com/spells/2397-shape-water) \n\n` +
   `You choose an area of water that you can see within range and that fits within a 5-foot cube. You manipulate it in one of the following ways:\n\n` +
-  `[&#8226; You instantaneously **move** or otherwise change the flow of **the water** as you direct, up to 5 feet in any direction. This movement doesn't have enough force to cause damage.](" style="padding-left:1em;color:black;text-decoration:none;cursor:text;display:block;text-indent:-0.625em;)` +
-  `[&#8226; You cause the **water to form into simple shapes** and animate at your direction. This change lasts for 1 hour.](" style="padding-left:1em;color:black;text-decoration:none;cursor:text;display:block;text-indent:-0.625em;)` +
-  `[&#8226; You **change the water's color or opacity**. The water must be changed in the same way throughout. This change lasts for 1 hour.](" style="padding-left:1em;color:black;text-decoration:none;cursor:text;display:block;text-indent:-0.625em;)` +
-  `[&#8226; You **freeze the water**, provided that there are no creatures in it. The water unfreezes in 1 hour.](" style="padding-left:1em;color:black;text-decoration:none;cursor:text;display:block;text-indent:-0.625em;)\n` +
+  bullet(`You instantaneously **move** or otherwise change the flow of **the water** as you direct, up to 5 feet in any direction. This movement doesn't have enough force to cause damage.`) +
+  bullet(`You cause the **water to form into simple shapes** and animate at your direction. This change lasts for 1 hour.`) +
+  bullet(`You **change the water's color or opacity**. The water must be changed in the same way throughout. This change lasts for 1 hour.`) +
+  bullet(`You **freeze the water**, provided that there are no creatures in it. The water unfreezes in 1 hour.`) + `\n` +
   `If you cast this spell multiple times, you can have no more than **two of its non-instantaneous effects active at a time**, and you can dismiss such an effect as an action.` +
   `}}`;
 const resistanceSpell = `&{template:spell} ` +
@@ -160,6 +160,29 @@ const bubbleLiftSpell = function (levelInt) {
   `{{level=1st Level Conjuration${levelModifier}}} ` +
   `{{v=1}} ` +
   `{{description=**Source:** [*Obojima: Tales from the Tall Grass*, pg. 182](https://www.dndbeyond.com/spells/2857561-bubble-lift) \n\nYou blow a bubble around any solid, granular, or liquid object that weighs **${500*levelInt} pounds** or less, causing it to float **4 feet off the ground**. No matter what the contents of the bubble are, the bubble weighs 10 pounds and can be pushed using an action. Strong winds or effects that would push a creature also push the bubble. The bubble always floats at least 4 feet off the ground, and descends from a fall at a speed of 10 feet per round.\n\nAs an action, a creature can pierce the outside of the bubble, causing it to pop and releasing its contents.}}`;
+}
+const createOrDestroyWaterSpell = function (levelInt) {
+  let levelModifier = '';
+  if (levelInt > 1) {
+    levelModifier = `, **cast at ${levelPlace(levelInt)} level**`;
+  }
+  return `&{template:spell} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Create or Destroy Water}} ` +
+  `{{castingtime=1 action}} ` +
+  `{{range=30ft. (Cube 30ft.)}} ` +
+  `{{duration=Instantaneous}} ` +
+  `{{level=1st Level Transmutation${levelModifier}}} ` +
+  `{{v=1}} ` +
+  `{{s=1}} ` +
+  `{{m=1}} ` +
+  `{{material=a mix of water and sand}} ` +
+  `{{description=**Source:** [*Player's Handbook*, pg. 258](https://www.dndbeyond.com/spells/2053-create-or-destroy-water) \n\n` +
+  `You do one of the following:\n\n` +
+  bullet(`**Create Water**. You **create up to ${levelInt*10} gallons** of clean water within range in an open container. Alternatively, the water falls as **rain in a ${30+(5*levelInt)}-foot Cube** within range, extinguishing exposed flames there.`) +
+  bullet(`**Destroy Water**. You **destroy up to ${levelInt*10} gallons** of water in an open container within range. Alternatively, you **destroy fog in a ${30+(5*levelInt)}-foot Cube** within range.`) +
+  `}}`;
+  //bullet(`Using a Higher-Level Spell Slot. You create or destroy 10 additional gallons of water, or the size of the Cube increases by 5 feet, for each spell slot level above 1.`) +
 }
 const cureWoundsSpell = function (levelInt) {
   let levelModifier = '';
@@ -506,6 +529,14 @@ const resourcefulDescription = `&{template:traits} ` +
   `{{name=Resourceful}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/character-origins#HumanTraits)}} ` +
   `{{description=You gain Heroic Inspiration whenever you finish a Long Rest.}}`;
+const favoredEnemyDescription = `&{template:traits} ` +
+  `{{charname=Floyd}} ` +
+  `{{name=Favored Enemy}} ` +
+  `{{source=&#8193;[D&D Beyond Basic Rules](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1FavoredEnemy)}} ` +
+  `{{description=` +
+  `You always have the Hunter's Mark spell prepared. You can cast it twice without expending a spell slot, and you regain all expended uses of this ability when you finish a Long Rest.\n\n` +
+  `The number of times you can cast the spell without a spell slot increases when you reach certain Ranger levels.` +
+  `}}`;
 const floydBerryDescription = `&{template:spell} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=${CHARACTER_NAME}berry}} ` +
@@ -515,7 +546,7 @@ const floydBerryDescription = `&{template:spell} ` +
   `{{level=Conjuration Cantrip}} ` +
   `{{s=1}} ` +
   `{{description=**Source:** [*Floyd's Trial*, 2025-09-16](https://discord.com/channels/1081301034602872932/1222366579300372520/1417712417873592373) \n\n` +
-  `[${CHARACTER_NAME}berry](https://i.ibb.co/Mk74TJbs/floyd-berry-cropped-small-wide.png)\n\n` +
+  `[${CHARACTER_NAME}berry](https://i.ibb.co/rrV15wk/floyd-berry-cropped-small-wide-2.png)\n\n` +
   `One berry appear in ${CHARACTER_NAME}'s hand and is infused with magic for the duration. When ${CHARACTER_NAME} eats a berry, it **restores no hit points**, however the berry provides enough nourishment to **sustain ${CHARACTER_NAME} for one day**.\n\n` +
   `It is not known what happens when another creature eats a ${CHARACTER_NAME}berry.` +
   `}}`;
@@ -747,6 +778,9 @@ function sanitizeCommand(text) {
     }
   }
   return stringArray.join('');
+}
+function bullet(inputString) {
+  return `[&bull; ${inputString}](" style="padding-left:1em;color:black;text-decoration:none;cursor:text;display:block;text-indent:-0.625em;)`
 }
 function levelPlace(levelInt) {
   if (typeof myVariable === 'string') {
@@ -1070,6 +1104,7 @@ function buildSpellsPanel(panel) {
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('not-shown');
     {
       const span = document.createElement('span');
       span.style.marginRight = '5px';
@@ -1096,6 +1131,8 @@ function buildSpellsPanel(panel) {
   }
   {
     const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('not-shown');
     {
       const button = document.createElement('button');
       button.classList.add('spell');
@@ -1125,7 +1162,6 @@ function buildSpellsPanel(panel) {
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
-    thisDiv.classList.add('not-shown');
     {
       const span = document.createElement('span');
       span.style.marginRight = '5px';
@@ -1203,6 +1239,7 @@ function buildSpellsPanel(panel) {
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('not-shown');
     {
       const span = document.createElement('span');
       span.style.marginRight = '5px';
@@ -1241,6 +1278,33 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `2`;
       button.setAttribute('message', bubbleLiftSpell(2));
+      button.addEventListener('click', castSpell);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Create / Destroy Water`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `1`;
+      button.setAttribute('message', createOrDestroyWaterSpell(1));
+      button.addEventListener('click', castSpell);
+      thisDiv.appendChild(button);
+    }
+    { 
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `2`;
+      button.setAttribute('message', createOrDestroyWaterSpell(2));
       button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
@@ -1746,6 +1810,18 @@ function buildSpellSlotsPanel(panel) {
       const el = document.createElement('div');
       el.classList.add('spell-slot');
       el.addEventListener('click', toggleSpellSlot);
+      thisDiv.appendChild(el);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const el = document.createElement('button');
+      el.innerText = "Favored Enemy";
+      el.setAttribute('message', favoredEnemyDescription);
+      el.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(el);
     }
     panel.appendChild(thisDiv);
