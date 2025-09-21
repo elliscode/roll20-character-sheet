@@ -327,6 +327,30 @@ const healingSpiritSpell = function (levelInt) {
   `As a **bonus action** on your turn, you can **move the spirit up to 30 feet** to a space you can see.` + 
   `}}`;
 }
+const enhanceAbilitySpell = function (levelInt) {
+  let levelModifier = '';
+  let higherLevelBonusText = '';
+  if (levelInt > 2) {
+    levelModifier = `, **cast at ${levelPlace(levelInt)} level**`;
+    higherLevelBonusText = ` \n\nYou can **target ${levelInt-1} creatures**. You can choose a different ability for each target.`;
+  }
+  return `&{template:spell} ` + 
+    `{{charname=Floyd}} ` + 
+    `{{name=Enhance Ability}} ` + 
+    `{{castingtime=1 action}} ` + 
+    `{{range=Touch}} ` + 
+    `{{duration=up to 1 hour}} ` + 
+    `{{level=2nd Level Transmutation${levelModifier}}} ` + 
+    `{{v=1}} ` + 
+    `{{s=1}} ` + 
+    `{{m=1}} ` + 
+    `{{material=fur or a feather}} ` + 
+    `{{concentration=1}} ` + 
+    `{{description=**Source:** [*Player's Handbook*, pg. 268](https://www.dndbeyond.com/spells/2619165-enhance-ability)\n\n` + 
+    `You touch a creature and choose Strength, Dexterity, Intelligence, Wisdom, or Charisma. For the duration, **the target has Advantage** on ability checks using the chosen ability.` + 
+    higherLevelBonusText +
+    `}}`;
+}
 const summonBeastAirSpell = function (levelInt) {
   let levelModifier = '';
   if (levelInt > 2) {
@@ -1479,6 +1503,7 @@ function buildSpellsPanel(panel) {
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('not-shown');
     {
       const span = document.createElement('span');
       span.style.marginRight = '5px';
@@ -1490,6 +1515,25 @@ function buildSpellsPanel(panel) {
       button.classList.add('spell');
       button.innerText = `2`;
       button.setAttribute('message', healingSpiritSpell(2));
+      button.addEventListener('click', castSpell);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Enhance Ability (c)`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `2`;
+      button.setAttribute('message', enhanceAbilitySpell(2));
       button.addEventListener('click', castSpell);
       thisDiv.appendChild(button);
     }
