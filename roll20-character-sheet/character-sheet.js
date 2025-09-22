@@ -335,7 +335,7 @@ const enhanceAbilitySpell = function (levelInt) {
     higherLevelBonusText = ` \n\nYou can **target ${levelInt-1} creatures**. You can choose a different ability for each target.`;
   }
   return `&{template:spell} ` + 
-    `{{charname=Floyd}} ` + 
+    `{{charname=${CHARACTER_NAME}}} ` +
     `{{name=Enhance Ability}} ` + 
     `{{castingtime=1 action}} ` + 
     `{{range=Touch}} ` + 
@@ -350,6 +350,31 @@ const enhanceAbilitySpell = function (levelInt) {
     `You touch a creature and choose Strength, Dexterity, Intelligence, Wisdom, or Charisma. For the duration, **the target has Advantage** on ability checks using the chosen ability.` + 
     higherLevelBonusText +
     `}}`;
+}
+const ragefulNimbusDamage = function(levelInt) {
+  let diceCount = 2 + Math.floor((levelInt - 2) / 2);
+  return `${diceCount}d8`;
+}
+const ragefulNimbusSpell = function(levelInt) {
+  let damage = ragefulNimbusDamage(levelInt);
+  let levelModifier = '';
+  if (levelInt > 2) {
+    levelModifier = `, **cast at ${levelPlace(levelInt)} level**`;
+  }
+  return `&{template:spell} ` + 
+    `{{charname=${CHARACTER_NAME}}} ` +
+    `{{name=Rageful Nimbus}} ` + 
+    `{{castingtime=1 bonus action}} ` + 
+    `{{range=60ft.}} ` + 
+    `{{duration=1 minute}} ` + 
+    `{{level=2nd Level Evocation${levelModifier}}} ` + 
+    `{{v=1}} ` + 
+    `{{s=1}} ` + 
+    `{{m=1}} {{material=a drop of water}} ` + 
+    `{{description=` + 
+    `**Source:** [*Obojima: Tales from the Tall Grass*, pg. 188](https://www.dndbeyond.com/spells/2857549-rageful-nimbus) \n\n` + 
+    `Choose a creature within range, which can be yourself. A pristine, fluffy white cloud appears above the target and follows them for the duration. **If the target takes damage** from a hostile creature you can see, you can use your reaction to **make a ranged spell attack from the cloud**, provided that creature is within 60 feet of the target. On a hit, the creature takes [${damage}](!\n) lightning damage.` + 
+    `}} `;
 }
 const summonBeastAirSpell = function (levelInt) {
   let levelModifier = '';
@@ -598,6 +623,14 @@ const proficiencies = {
 const modifiers = {
   spellcasting: {key: 'spellcasting', display: 'Spell Casting Modifier', check: '+1', proficiency: 'proficiency'},
 };
+const specificSkillBonuses = {
+  arcana: [
+    { name: 'Primal Order: Magician', bonus: '+1' }
+  ],
+  nature: [
+    { name: 'Primal Order: Magician', bonus: '+1' }
+  ]
+}
 const weaponProperties = {
   ammunition: 'ammunition',
   burstFire: 'burstFire',
@@ -772,9 +805,18 @@ const attackStats = {
     proficiency: proficiencies.proficiency,
     stat: modifiers.spellcasting,
     damage: '1d6',
-    name: 'Sprout Foliage: Throw Plant',
+    name: 'Sprout Foliage',
     range: '30ft.',
     damageType: 'Bludgeoning',
+    callbacks: defaultCallbacks.rangedAttackSpell
+  },
+  ragefulNimbus: {
+    proficiency: proficiencies.proficiency,
+    stat: modifiers.spellcasting,
+    damage: '2d8',
+    name: 'Rageful Nimbus',
+    range: '30ft.',
+    damageType: 'Lightning',
     callbacks: defaultCallbacks.rangedAttackSpell
   }
 }
@@ -1538,14 +1580,45 @@ function buildSpellsPanel(panel) {
       thisDiv.appendChild(button);
     }
     panel.appendChild(thisDiv);
-  }
-  {
+  }  {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
     {
       const span = document.createElement('span');
       span.style.marginRight = '5px';
-      span.innerText = `Summon Beast: Air`;
+      span.innerText = `Rageful Nimbus`;
+      thisDiv.appendChild(span);
+    }
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = `2`;
+      button.setAttribute('weapon-key', 'ragefulNimbus');
+      button.setAttribute('damage', ragefulNimbusDamage(2))
+      button.setAttribute('message', ragefulNimbusSpell(2))
+      button.addEventListener('click', castSpell);
+      thisDiv.appendChild(button);
+    }
+
+    {
+      const button = document.createElement('button');
+      button.classList.add('spell');
+      button.innerText = 'S';
+      button.setAttribute('weapon-key', 'ragefulNimbus');
+      button.setAttribute('attack-type', 'ranged-spell');
+      button.addEventListener('click', rollWeapon);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('not-shown');
+    {
+      const span = document.createElement('span');
+      span.style.marginRight = '5px';
+      span.innerText = `Summon Beast: Air (c)`;
       thisDiv.appendChild(span);
     }
     {
@@ -1561,10 +1634,11 @@ function buildSpellsPanel(panel) {
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('not-shown');
     {
       const span = document.createElement('span');
       span.style.marginRight = '5px';
-      span.innerText = `Summon Beast: Land`;
+      span.innerText = `Summon Beast: Land (c)`;
       thisDiv.appendChild(span);
     }
     {
@@ -1580,10 +1654,11 @@ function buildSpellsPanel(panel) {
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
+    thisDiv.classList.add('not-shown');
     {
       const span = document.createElement('span');
       span.style.marginRight = '5px';
-      span.innerText = `Summon Beast: Water`;
+      span.innerText = `Summon Beast: Water (c)`;
       thisDiv.appendChild(span);
     }
     {
@@ -1825,6 +1900,9 @@ function castSpell(event) {
     }
     toggleSpellSlot({target: unspentSlot});
   }
+  if (event.target.hasAttribute('damage') && event.target.hasAttribute('weapon-key')) {
+    attackStats[event.target.getAttribute('weapon-key')].damage = event.target.getAttribute('damage');
+  }
   characterSheetExtensionSendMessage(event);
 }
 function buildSpellSlotsPanel(panel) {
@@ -2010,7 +2088,16 @@ function addSkill({panel, proficiency, modifier, name, passive}) {
       thisDiv.appendChild(span);
     }
     {
-      let calculatedBonus = parseInt(modifier.check) + parseInt(proficiency.bonus);
+      console.log('here');
+      let specificBonusTotal = 0;
+      let specificBonuses = specificSkillBonuses[name.toLowerCase()]
+      if (!!specificBonuses && specificBonuses.length > 0) {
+        for (let bonusItem of specificBonuses) {
+          specificBonusTotal += parseInt(bonusItem.bonus);
+        }
+      }
+
+      let calculatedBonus = parseInt(modifier.check) + parseInt(proficiency.bonus) + specificBonusTotal;
       let calculatedBonusString = calculatedBonus < 0 ? calculatedBonus.toString() : `+${calculatedBonus}`;
 
       let span = document.createElement('span');
@@ -2058,6 +2145,7 @@ function getRollSkillMessage(event) {
   let statRoll = skillDiv.getAttribute('statRoll');
   let statName = skillDiv.getAttribute('statName');
   let passive = skillDiv.getAttribute('passive');
+  let specificBonuses = specificSkillBonuses[name.toLowerCase()]
 
   let proficiencyHit = '';
   let proficiencyHitPlain = '';
@@ -2073,6 +2161,15 @@ function getRollSkillMessage(event) {
     extraHitPlain = `+${bonusHit}`;
   }
 
+  let specificBonus = '';
+  let specificBonusPlain = '';
+  if (!!specificBonuses && specificBonuses.length > 0) {
+    for (let bonusItem of specificBonuses) {
+      specificBonus += `${bonusItem.bonus}[${bonusItem.name}]`;
+      specificBonusPlain += `${bonusItem.bonus}`;
+    }
+  }
+
   let message = `&{template:simple} `;
   // passive description if needed
   // if (passive) {
@@ -2082,10 +2179,10 @@ function getRollSkillMessage(event) {
   // /r {1d20+1[Wisdom]+6[Expertise],0d0+17[Passive]}kh1
   message += `{{charname=${CHARACTER_NAME}}} ` +
     `{{rname=${name}}} ` +
-    `{{mod=${statRoll}${proficiencyHitPlain}${extraHitPlain}${exhaustionStringPlain}}} ` +
-    `{{r1=[[1d20${statRoll}[${statName}]${proficiencyHit}${extraHit}${exhaustionString}]]}} ` +
+    `{{mod=${statRoll}${proficiencyHitPlain}${extraHitPlain}${specificBonusPlain}${exhaustionStringPlain}}} ` +
+    `{{r1=[[1d20${statRoll}[${statName}]${proficiencyHit}${extraHit}${specificBonus}${exhaustionString}]]}} ` +
     `{{${rollType}=1}} ` +
-    `{{r2=[[1d20${statRoll}[${statName}]${proficiencyHit}${extraHit}${exhaustionString}]]}} `;
+    `{{r2=[[1d20${statRoll}[${statName}]${proficiencyHit}${extraHit}${specificBonus}${exhaustionString}]]}} `;
   
   return message;
 }
