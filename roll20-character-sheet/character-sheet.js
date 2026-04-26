@@ -90,6 +90,11 @@ const extraAttackDescription = `&{template:traits} ` +
   `{{name=Extra Attack}} ` +
   `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level5ExtraAttack)}}}} ` +
   `{{description=You can attack twice instead of once whenever you take the Attack action on your turn.}}`;
+const dangerSenseDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Danger Sense}} ` +
+  `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level2DangerSense)}} ` +
+  `{{description=You gain an uncanny sense of when things aren't as they should be, giving you an edge when you dodge perils. You have **Advantage on Dexterity saving throws** unless you have the Incapacitated condition.}}`;
 const initiativeRoll = `&{template:simple} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{rname=Initiative}} ` +
@@ -510,8 +515,10 @@ function toggleRage(event) {
   let isRaging = Array.from(document.querySelectorAll(`input#rage:checked`)).length > 0;
   if (isRaging) {
     message = `/em has activated his Rage`;
+    modifySkill({name: 'Perception', modifier: stats.STR})
   } else {
     message = `/em has deactivated his Rage`;
+    modifySkill({name: 'Perception', modifier: stats.WIS})
   }
   characterSheetExtensionSendMessage(message);
   setLocalStorage();
@@ -814,6 +821,17 @@ function clearSpellSlots(event) {
   });
   setLocalStorage();
 }
+function modifySkill({modifier, name}) {
+  const thisDiv = document.querySelector(`div[name="${name}"]`);
+  thisDiv.setAttribute('statRoll', modifier.check);
+  thisDiv.setAttribute('statName', modifier.display);
+  const proficiency = proficiencies[thisDiv.getAttribute('proficiencyKey')];
+  const span = thisDiv.querySelector(`span.skill-total`);
+  let calculatedBonusString = calculateSkillBonus({name: name, modifier: modifier, proficiency: proficiency});
+  span.innerText = calculatedBonusString;
+  const skillStatSpan = thisDiv.querySelector(`.skill-stat`);
+  skillStatSpan.innerText = modifier.key;
+}
 function buildSkillsPanel(panel) {
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.DEX, name: "Acrobatics"});
   addSkill({panel: panel, proficiency: proficiencies.proficiency, modifier: stats.WIS, name: "Animal Handling"});
@@ -833,6 +851,18 @@ function buildSkillsPanel(panel) {
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.DEX, name: "Sleight of Hand"});
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.DEX, name: "Stealth"});
   addSkill({panel: panel, proficiency: proficiencies.not, modifier: stats.WIS, name: "Survival"});
+}
+function calculateSkillBonus({panel, proficiency, modifier, name, passive}) {
+  let specificBonusTotal = 0;
+  let specificBonuses = specificSkillBonuses[name.toLowerCase()]
+  if (!!specificBonuses && specificBonuses.length > 0) {
+    for (let bonusItem of specificBonuses) {
+      specificBonusTotal += parseInt(bonusItem.bonus);
+    }
+  }
+
+  let calculatedBonus = parseInt(modifier.check) + parseInt(proficiency.bonus) + specificBonusTotal;
+  return  calculatedBonus < 0 ? calculatedBonus.toString() : `+${calculatedBonus}`;
 }
 function addSkill({panel, proficiency, modifier, name, passive}) {
   {
@@ -869,18 +899,9 @@ function addSkill({panel, proficiency, modifier, name, passive}) {
       thisDiv.appendChild(span);
     }
     {
-      let specificBonusTotal = 0;
-      let specificBonuses = specificSkillBonuses[name.toLowerCase()]
-      if (!!specificBonuses && specificBonuses.length > 0) {
-        for (let bonusItem of specificBonuses) {
-          specificBonusTotal += parseInt(bonusItem.bonus);
-        }
-      }
-
-      let calculatedBonus = parseInt(modifier.check) + parseInt(proficiency.bonus) + specificBonusTotal;
-      let calculatedBonusString = calculatedBonus < 0 ? calculatedBonus.toString() : `+${calculatedBonus}`;
-
+      let calculatedBonusString = calculateSkillBonus({name: name, modifier: modifier, proficiency: proficiency});
       let span = document.createElement('span');
+      span.classList.add('skill-total');
       span.classList.add('pointer');
       span.addEventListener('click', rollSkill);
       span.innerText = calculatedBonusString;
