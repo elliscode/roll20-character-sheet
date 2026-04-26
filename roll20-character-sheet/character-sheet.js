@@ -1,4 +1,5 @@
 const characterSheetDiv = document.createElement('div');
+const overlayDiv = document.createElement('div');
 
 const CHARACTER_NAME = "Brum";
 
@@ -479,6 +480,13 @@ function buildUi() {
   characterSheetDiv.appendChild(controlsDiv);
 
   document.body.appendChild(characterSheetDiv);
+
+  overlayDiv.classList.add('character-sheet-overlay-div');
+  let ttmsElement = document.createElement('div');
+  ttmsElement.innerText = 'You are talking to yourself';
+  overlayDiv.appendChild(ttmsElement);
+
+  document.body.appendChild(overlayDiv);
 
   {
     const marqueeSpaces = `&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;`;
@@ -1259,12 +1267,22 @@ function rollAbility(event) {
   setLocalStorage();
 }
 
+function toggleTalkToMyselfOverlay() {
+  let shouldShowOverlay = document.getElementById('textchat-notifier').style.display != 'none';
+  if (shouldShowOverlay && overlayDiv.style.display != 'flex') {
+    overlayDiv.style.display = 'flex';
+  } else if (!shouldShowOverlay && overlayDiv.style.display != 'none') {
+    overlayDiv.style.display = 'none';
+  }
+}
+
 function characterSheetExtensionPositionGui() {
   let right = window.innerWidth - parseInt(document.getElementById('babylonCanvas').getBoundingClientRect().width);
   let newValue = `${right}px`;
   if (characterSheetDiv.style.right != newValue) {
     characterSheetDiv.style.right = newValue;
   }
+  toggleTalkToMyselfOverlay();
 }
 
 function characterSheetExtensionSendMessage(message) {
@@ -1274,6 +1292,7 @@ function characterSheetExtensionSendMessage(message) {
   }
   document.querySelector('textarea[role="textarea"]').value = message.trim();
   document.getElementById('chatSendBtn').click();
+  setTimeout(toggleTalkToMyselfOverlay, 100);
 }
 
 function expandPanel(event) {
@@ -1630,6 +1649,7 @@ function checkIfShouldBuildUi(event) {
   characterSheetExtensionSendMessage('/talktomyself');
   setTalking(CHARACTER_NAME);
   repositionInterval = setInterval(characterSheetExtensionPositionGui, 1000);
+  setTimeout(toggleTalkToMyselfOverlay, 100);
 }
 const checkInterval = setInterval(checkIfShouldBuildUi, 100);
 let repositionInterval = undefined;

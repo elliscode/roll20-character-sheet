@@ -146,3 +146,17 @@
   0% { transform: translateX(0);background-position: 0% 50%; }
   100% { transform: translateX(-100%);background-position: 10000% 9950%;  }
 }
+
+.character-sheet-overlay-div {
+  z-index: 100000;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  font-size: xxx-large;
+  justify-content: center;
+  align-items: center;
+}
