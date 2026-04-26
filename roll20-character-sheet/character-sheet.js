@@ -2,6 +2,9 @@ const characterSheetDiv = document.createElement('div');
 
 const CHARACTER_NAME = "Brum";
 
+const colors = {
+  blue: `" style="color:#285eb2;`
+}
 const stats = {
   STR: { key: 'STR', display: 'Strength', check: "+5", proficiency: 'proficiency'},
   DEX: { key: 'DEX', display: 'Dexterity', check: "+3", proficiency: 'not'},
@@ -10,18 +13,28 @@ const stats = {
   WIS: { key: 'WIS', display: 'Wisdom', check: "+3", proficiency: 'not'},
   CHA: { key: 'CHA', display: 'Charisma', check: "-1", proficiency: 'not'}
 };
-
+const proficiencies = {
+  not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
+  half: {key: 'half', display: 'Half Proficiency', bonus: '+1'},
+  proficiency: {key: 'proficiency', display: 'Proficiency', bonus: '+3'},
+  expertise: {key: 'expertise', display: 'Expertise', bonus: '+6'}
+};
 const statRoll = `4d6dl1`;
 const newCharacterStatRoll = `/ooc &{template:default} ` +
   `{{name=New Character Stat Rolls}} ` +
   `{{Roll 1=[[${statRoll}]]}} {{Roll 2=[[${statRoll}]]}} {{Roll 3=[[${statRoll}]]}} ` +
   `{{Roll 4=[[${statRoll}]]}} {{Roll 5=[[${statRoll}]]}} {{Roll 6=[[${statRoll}]]}} ` +
   `{{Source=[D&D Beyond Basic Rules](https://www.dndbeyond.com/sources/dnd/br-2024/creating-a-character#GenerateYourScores)}}`;
-const savageAttacker = `&{template:traits} ` +
+const recklessAttackDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
-  `{{name=Savage Attacker}} ` +
-  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/character-origins#Soldier)}} ` +
-  `{{description=Once per turn when you hit a target with a weapon, you can roll the weapon's damage dice twice and use either roll against the target.}}`;
+  `{{name=Reckless Attack}} ` +
+  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level2RecklessAttack)}} ` +
+  `{{description=When you make your first attack roll on your turn, you can decide to attack recklessly. Doing so gives you Advantage on attack rolls using Strength until the start of your next turn, but attack rolls against you have Advantage during that time.}}`;
+const instinctivePounceDescription = `&{template:traits} ` +
+  `{{charname=Brum}} ` +
+  `{{name=Instinctive Pounce}} ` +
+  `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level7InstinctivePounce)}} ` +
+  `{{description=As part of the Bonus Action you take to enter your Rage, you can move up to half your Speed.}}`;
 const extensionDescription = `/ooc &{template:traits} ` +
   `{{name=[Roll20 Character Sheet](https://github.com/elliscode/roll20-character-sheet" style="color:#7e2d40;)}} ` +
   `{{charname=elliscode}}` + 
@@ -43,20 +56,56 @@ const unarmedStrikeDescription = `&{template:traits} ` +
   `{{description=Instead of using a weapon to make a melee attack, you can use a punch, kick, headbutt, or similar forceful blow.}}`;
 const greataxePlusTwoDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
-  `{{name=Greataxe, +2}} ` +
+  `{{name=[Greataxe, +2](${colors.blue})}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#WeaponsTable)}} ` +
-  `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Range**: 20ft./60ft.\n**Damage**: [1d12](!\n)\n**Damage Type**: Slashing\n**Weight**: 7 lb.\n**Cost**: --\n**Properties**: [Heavy](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Heavy), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Cleave](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Cleave)\n\nYou have a [+2](!\n) bonus to attack and damage rolls made with this magic weapon.\n}}`;
+  `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Range**: 20ft./60ft.\n**Damage**: [1d12](!\n)\n**Damage Type**: Slashing\n**Weight**: 7 lb.\n**Cost**: --\n**Properties**: [Heavy](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Heavy), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Cleave](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Cleave)\nYou have a [+2](!\n) bonus to attack and damage rolls made with this magic weapon.\n}}`;
 const rageDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Rage}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)}} ` +
-  `{{description=You can take a Bonus action to enter Rage if you aren't wearing Heavy Armor. While active, your Rage follows these rules:\n&#8193;[Damage Resistance](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Rage Damage](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Strength Advantage](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[No Concentration or Spells](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)}}`;
-  const proficiencies = {
-  not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
-  half: {key: 'half', display: 'Half Proficiency', bonus: '+1'},
-  proficiency: {key: 'proficiency', display: 'Proficiency', bonus: '+3'},
-  expertise: {key: 'expertise', display: 'Expertise', bonus: '+6'}
-};
+  `{{description=You can take a Bonus action to enter Rage if you aren't wearing Heavy Armor. While active, your Rage follows these rules:\n&#8193;[Damage Resistance](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Rage Damage](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Strength Advantage](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[No Concentration or Spells](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Vitality of the Tree](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level3VitalityoftheTree)}}`;
+const vitalityOfTheTreeHealthRoll = `&{template:dmg} {{charname=${CHARACTER_NAME}}} {{rname=Vitality of the Tree}} {{range=10ft.}} {{desc=Components: V}} {{damage=1}} {{dmg1flag=1}} {{dmg1= [[2d6]]}} {{dmg1type=Healing}}`;
+const vitalityOfTheTreeDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Vitality of the Tree}} ` +
+  `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level3VitalityoftheTree)}} ` +
+  `{{description=When you activate your Rage, you gain [8](!\n) Temporary HP\n\nAt the start of each of your turns while your Rage is active, you can choose another creature within 10 ft. of you to gain [2d6](!\n${sanitizeCommand(vitalityOfTheTreeHealthRoll)}) Temporary HP.\n\nIf any of these Temporary HP remain when your Rage ends, they vanish.}}`;
+  //(DC 8 plus your Strength modifier and Proficiency Bonus) 
+const branchesOfTheTreeSave = `${8+parseInt(stats['STR'].check)+parseInt(proficiencies.proficiency.bonus)}`;
+const branchesOfTheTreeRoll = `&{template:dmg} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{rname=Branches of the Tree}} ` +
+  `{{range=30ft.}} ` +
+  `{{desc=Components: S}} ` +
+  `{{save=1}} ` +
+  `{{saveattr=${stats['STR'].display}}} ` +
+  `{{savedc=${branchesOfTheTreeSave}}}`;
+const branchesOfTheTreeDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Branches of the Tree}} ` +
+  `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level6BranchesoftheTree)}} ` +
+  `{{description=Whenever a creature you can see **starts its turn** within 30 feet of you while your Rage is active, you can take a **Reaction** to summon spectral branches of the World Tree around it. \n\nThe target must succeed on a [DC${branchesOfTheTreeSave}](!\n${sanitizeCommand(branchesOfTheTreeRoll)}) **Strength** saving throw or be teleported to an unoccupied space you can see within 5 feet of yourself or in the nearest unoccupied space you can see. \n\nAfter the target teleports, you can **reduce its Speed to 0** until the end of the current turn.}}`;
+const extraAttackDescription = `&{template:traits} ` +
+  `{{charname=Brum}} ` +
+  `{{name=Extra Attack}} ` +
+  `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level5ExtraAttack)}}}} ` +
+  `{{description=You can attack twice instead of once whenever you take the Attack action on your turn.}}`;
+const initiativeRoll = `&{template:simple} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{rname=Initiative}} ` +
+  `{{mod=${stats['DEX'].check}}} ` +
+  `{{r1=[[2d20kh1${stats['DEX'].check}[${stats['DEX'].display}] &{tracker}]] (Advantage)}} ` +
+  `{{normal=1}}`;
+const cleaveDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Cleave (Greataxe)}} ` +
+  `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/br-2024/equipment#Cleave)}} ` +
+  `{{description=Your training with weapons allows you to use the mastery property of Greataxes:\n**Cleave.** If you hit a creature with a melee attack roll using a Greataxe, you can make a melee attack roll with the Greataxe against a second creature within 5 feet of the first that is also within your reach. \n\nOn a hit, the second creature takes the Greataxe's damage, but **don't add your ability modifier to that damage unless that modifier is negative**. You can make this extra attack only **once per turn.**}}`;
+const hewDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Hew}} ` +
+  `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/feats#GreatWeaponMaster)}} ` +
+  `{{description=Immediately after you score a **Critical Hit with a Melee weapon or reduce a creature to 0 Hit Points** with one, you can make **one attack** with the same weapon as a **Bonus Action**.}}`;
 const modifiers = {
   spellcasting: {key: 'spellcasting', display: 'Spell Casting Modifier', check: '+1', proficiency: 'proficiency'},
 };
@@ -151,7 +200,7 @@ const attackStats = {
     stat: stats.STR,
     damage: '1d12',
     bonus: '+2',
-    name: 'Greataxe, +2',
+    name: `[Greataxe, +2](${colors.blue})`,
     range: '5ft.',
     damageType: 'Slashing',
     callbacks: defaultCallbacks.melee,
@@ -166,7 +215,7 @@ const attackStats = {
     stat: stats.STR,
     damage: '1d12',
     bonus: '+2',
-    name: 'Greataxe, +2',
+    name: `[Greataxe, +2](${colors.blue})`,
     range: '5ft.',
     damageType: 'Slashing',
     callbacks: defaultCallbacks.multiAttack,
@@ -283,28 +332,16 @@ function buildUi() {
   }
   characterSheetDiv.appendChild(skillsDiv);
 
-  let spellsDiv = document.createElement('div');
-  {
-    const panel = document.createElement('div');
-    panel.classList.add('panel');
-    panel.id = 'spells-panel';
-    buildSpellsPanel(panel);
-    spellsDiv.appendChild(panel);
-  }
-  {
-    const buttonsDiv = document.createElement('div');
-    buttonsDiv.classList.add('flex-row');
-    buttonsDiv.classList.add('flex-right');
-    {
-      const button = document.createElement('button');
-      button.innerText = 'Spells';
-      button.setAttribute('for', 'spells-panel');
-      button.addEventListener('click', expandPanel);
-      buttonsDiv.appendChild(button);
-    }
-    spellsDiv.appendChild(buttonsDiv);
-  }
-  characterSheetDiv.appendChild(spellsDiv);
+  // let spellsDiv = document.createElement('div');
+
+  // {
+  //   const buttonsDiv = document.createElement('div');
+  //   buttonsDiv.classList.add('flex-row');
+  //   buttonsDiv.classList.add('flex-right');
+
+  //   spellsDiv.appendChild(buttonsDiv);
+  // }
+  // characterSheetDiv.appendChild(spellsDiv);
 
   let gunsDiv = document.createElement('div');
   {
@@ -317,15 +354,15 @@ function buildUi() {
   {
     const panel = document.createElement('div');
     panel.classList.add('panel');
-    panel.id = 'gun-panel';
-    buildGunPanel(panel);
+    panel.id = 'attack-panel';
+    buildAttackPanel(panel);
     gunsDiv.appendChild(panel);
   }
   {
     const panel = document.createElement('div');
     panel.classList.add('panel');
-    panel.id = 'attack-panel';
-    buildAttackPanel(panel);
+    panel.id = 'spells-panel';
+    buildSpellsPanel(panel);
     gunsDiv.appendChild(panel);
   }
   {
@@ -341,16 +378,15 @@ function buildUi() {
     }
     {
       const button = document.createElement('button');
-      button.classList.add('not-shown');
-      button.innerText = 'Guns';
-      button.setAttribute('for', 'gun-panel');
+      button.innerText = 'Attack';
+      button.setAttribute('for', 'attack-panel');
       button.addEventListener('click', expandPanel);
       buttonsDiv.appendChild(button);
     }
     {
       const button = document.createElement('button');
-      button.innerText = 'Attack';
-      button.setAttribute('for', 'attack-panel');
+      button.innerText = 'Spells';
+      button.setAttribute('for', 'spells-panel');
       button.addEventListener('click', expandPanel);
       buttonsDiv.appendChild(button);
     }
@@ -440,11 +476,24 @@ function buildUi() {
   document.body.appendChild(characterSheetDiv);
 
   {
+    const marqueeSpaces = `&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;&#8193;`;
     let marqueeDiv = document.createElement('div');
     marqueeDiv.classList.add('character-sheet-extension-marquee');
     let marquee = document.createElement("div");
     let span = document.createElement('span');
-    span.innerText = "You need to use Cleave! You can attack twice!!";
+    span.innerHTML = `You get 2 attacks!!` +
+      `${marqueeSpaces}` +
+      `You need to use Cleave! You can attack twice!!` +
+      `${marqueeSpaces}` +
+      `Make sure you use your rage healing!!! Heal your party members!!!` +
+      `${marqueeSpaces}` +
+      `Don't forget to use your inspiration!!!` +
+      `${marqueeSpaces}` +
+      `You have resistance to damages!!` +
+      `${marqueeSpaces}` +
+      `You can move when you rage!!` +
+      `${marqueeSpaces}` +
+      `If you crit or kill, you get to attack again!!`;
     span.classList.add('rainbow-text');
     marquee.appendChild(span);
     marquee.classList.add('marquee');
@@ -499,6 +548,46 @@ function buildSpellsPanel(panel) {
     }
     panel.appendChild(thisDiv);
   }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = `Vitality of the Tree`;
+      button.setAttribute('message', vitalityOfTheTreeDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = `H`;
+      button.setAttribute('message', vitalityOfTheTreeHealthRoll)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = `Branches of the Tree`;
+      button.setAttribute('message', branchesOfTheTreeDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = `H`;
+      button.setAttribute('message', branchesOfTheTreeRoll)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+//https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level6BranchesoftheTree
+  
 }
 
 function buildWeaponsPanel(panel) {
@@ -522,7 +611,7 @@ function buildWeaponsPanel(panel) {
     }
     {
       const button = document.createElement('button');
-      button.innerText = 'M';
+      button.innerText = 'C';
       button.setAttribute('weapon-key', 'greataxePlusTwoMultiAttack');
       button.setAttribute('attack-type', 'melee');
       button.addEventListener('click', rollWeapon);
@@ -649,7 +738,7 @@ function toggleSpellSlot(event) {
 }
 function castSpell(event) {
   const ignoreSlots = document.getElementById('textchat-notifier').style.display != 'none';
-  if (!ignoreSlots && ['H. Mark', '1','2','3','4','5','6','7','8','9'].includes(event.target.textContent)) {
+  if (!ignoreSlots && ['Rage', '1','2','3','4','5','6','7','8','9'].includes(event.target.textContent)) {
     let levelInt = event.target.textContent;
     let spellSlotRow = document.querySelector(`.spell-slot-row[spell-slot="${levelInt}"]`);
     if (!spellSlotRow) {
@@ -657,7 +746,7 @@ function castSpell(event) {
       return;
     }
     let unspentSlot = spellSlotRow.querySelector('div.spell-slot:not(.spent)');
-    if (!unspentSlot && ['H. Mark'].includes(levelInt)) {
+    if (!unspentSlot && ['Rage'].includes(levelInt)) {
       // try again with level 1 spell slot
       levelInt = '1';
       spellSlotRow = document.querySelector(`.spell-slot-row[spell-slot="${levelInt}"]`);
@@ -679,7 +768,7 @@ function buildSpellSlotsPanel(panel) {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
     thisDiv.classList.add('spell-slot-row');
-    thisDiv.setAttribute('spell-slot', 'H. Mark');
+    thisDiv.setAttribute('spell-slot', 'Rage');
     {
       const el = document.createElement('label');
       el.innerText = `Rage`;
@@ -823,6 +912,7 @@ function rollSkill(event) {
   setLocalStorage();
 }
 function getRollSkillMessage(event) {
+  let isRaging = Array.from(document.querySelectorAll(`input#rage:checked`)).length > 0;
   let exhaustionString = getExhaustionString();
   let exhaustionStringPlain = getExhaustionStringPlain();
   let rollType = document.querySelector('input[name="roll-type"]:checked').value;
@@ -835,6 +925,9 @@ function getRollSkillMessage(event) {
   let proficiencyName = skillDiv.getAttribute('proficiencyName');
   let statRoll = skillDiv.getAttribute('statRoll');
   let statName = skillDiv.getAttribute('statName');
+  if (isRaging && statName == 'Strength') {
+    rollType = 'advantage';
+  }
   let passive = skillDiv.getAttribute('passive');
   let specificBonuses = specificSkillBonuses[name.toLowerCase()]
 
@@ -878,7 +971,54 @@ function getRollSkillMessage(event) {
   return message;
 }
 function buildAttackPanel(panel) {
-
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');{
+      const button = document.createElement('button');
+      button.innerText = 'Initiative';
+      button.setAttribute('message', initiativeRoll);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Reckless Attack';
+      button.setAttribute('message', recklessAttackDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');{
+      const button = document.createElement('button');
+      button.innerText = 'Instinctive Pounce (+20ft)';
+      button.setAttribute('message', instinctivePounceDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Cleave';
+      button.setAttribute('message', cleaveDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Hew';
+      button.setAttribute('message', hewDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
 }
 function buildGunPanel(panel) {
 }
@@ -891,7 +1031,7 @@ function buildBuffsPanel(panel) {
       const el = document.createElement('textarea');
       el.innerText = ``;
       el.placeholder = `No buffs currently applied...`;
-      el.style.height = '195px'; 
+      el.style.height = '100px'; 
       el.style.width = '231px';
       thisDiv.appendChild(el);
     }
@@ -900,6 +1040,7 @@ function buildBuffsPanel(panel) {
 }
 
 function buildAbilitiesPanel(panel) {
+  let isRaging = Array.from(document.querySelectorAll(`input#rage:checked`)).length > 0;
   let divs = {
     check: document.createElement('div'),
     save: document.createElement('div')
@@ -921,16 +1062,6 @@ function buildAbilitiesPanel(panel) {
 }
 
 function buildRollTypePanel(panel) {
-  {
-    const thisDiv = document.createElement('div');
-    thisDiv.classList.add('flex-row');
-    {
-      const span = document.createElement('span');
-      span.innerText = `Don't forget to use your Inspiration!!`;
-      thisDiv.appendChild(span);
-    }
-    panel.appendChild(thisDiv);
-  }
   {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
@@ -1002,6 +1133,13 @@ function buildMiscPanel(panel) {
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Extra Attack';
+      button.setAttribute('message', extraAttackDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
     panel.appendChild(thisDiv);
   }
 }
@@ -1061,12 +1199,16 @@ function buildFormattingPanel(panel) {
 }
 
 function rollAbility(event) {
+  let ability = event.target.textContent;
+  let isRaging = Array.from(document.querySelectorAll(`input#rage:checked`)).length > 0;
   let exhaustionString = getExhaustionString();
   let exhaustionStringPlain = getExhaustionStringPlain();
   let rollType = document.querySelector('input[name="roll-type"]:checked').value;
+  if ((isRaging && ability == 'STR') || ability == 'DEX') {
+    rollType = 'advantage';
+  }
   let bonusHitName = document.querySelector('input[type="text"][id="bonus-hit-name"]').value;
   let bonusHit = document.querySelector('input[type="text"][id="bonus-hit"]').value;
-  let ability = event.target.textContent;
   let displayName = stats[ability].display;
   let isSave = event.target.classList.contains('save');
   let typeString = isSave ? ' Save' : '';
@@ -1125,8 +1267,11 @@ function expandPanel(event) {
 
 function setTalking(nameOfSpeaker) {
   let speakingAs = document.getElementById('speakingas');
-  let desired = Array.from(speakingAs.querySelectorAll('option')).filter(x => x.value.startsWith('character|') && x.textContent == nameOfSpeaker)[0]?.value;
-  speakingAs.value = desired;
+  let desiredItem = Array.from(speakingAs.querySelectorAll('option')).filter(x => x.value.startsWith('character|') && x.textContent == nameOfSpeaker)[0]
+  if (desiredItem) {
+    let desired = desiredItem.value;
+    speakingAs.value = desired;
+  }
 }
 function standardHitRoll(event, d) {
   let thisWeaponKey = event.target.getAttribute('weapon-key');
@@ -1256,6 +1401,7 @@ function archeryModifier(event, d) {
 }
 function multiAttackDamageRoll(event, d) {
   standardDamageRoll(event, d, true);
+  d.desc += `Cleave Attack (No Ability Mod.)\n`;
 }
 function standardDamageRoll(event, d, ignoreBonus) {
   let thisWeaponKey = event.target.getAttribute('weapon-key');
@@ -1428,7 +1574,6 @@ function getLocalStorage() {
     });
     document.querySelector(`input[name="burst-fire"][value=${d.burstFire}]`).checked = true;
     document.querySelector(`input[name="hunters"][value=${d.huntersMark}]`).checked = true;
-    document.querySelector(`input[name="savage"][value=${d.savageAttacker}]`).checked = true;
     document.querySelector(`input[name="colossus-horde"][value=${d.huntersPrey}]`).checked = true;
     document.querySelector(`input[name="mastery"][value=${d.weaponMastery}]`).checked = true;
     document.querySelector(`input[name="roll-type"][value=${d.rollType}]`).checked = true;
