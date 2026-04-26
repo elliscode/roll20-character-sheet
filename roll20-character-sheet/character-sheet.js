@@ -46,7 +46,12 @@ const greataxePlusTwoDescription = `&{template:traits} ` +
   `{{name=Greataxe, +2}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#WeaponsTable)}} ` +
   `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Range**: 20ft./60ft.\n**Damage**: [1d12](!\n)\n**Damage Type**: Slashing\n**Weight**: 7 lb.\n**Cost**: --\n**Properties**: [Heavy](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Heavy), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Cleave](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Cleave)\n\nYou have a [+2](!\n) bonus to attack and damage rolls made with this magic weapon.\n}}`;
-const proficiencies = {
+const rageDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Rage}} ` +
+  `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)}} ` +
+  `{{description=You can take a Bonus action to enter Rage if you aren't wearing Heavy Armor. While active, your Rage follows these rules:\n&#8193;[Damage Resistance](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Rage Damage](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Strength Advantage](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[No Concentration or Spells](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)}}`;
+  const proficiencies = {
   not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
   half: {key: 'half', display: 'Half Proficiency', bonus: '+1'},
   proficiency: {key: 'proficiency', display: 'Proficiency', bonus: '+3'},
@@ -82,12 +87,14 @@ const defaultCallbacks = {
     bonusHitModifier,
     standardDamageRoll,
     bonusDamageModifier,
+    rageModifier,
     squareBracketFormat
   ],
   multiAttack: [
     standardHitRoll,
     bonusHitModifier,
     multiAttackDamageRoll,
+    rageModifier,
     squareBracketFormat
   ],
   ranged: [
@@ -449,7 +456,49 @@ function buildUi() {
   getLocalStorage();
 }
 
+function toggleRage(event) {
+  let message = '';
+  let isRaging = Array.from(document.querySelectorAll(`input#rage:checked`)).length > 0;
+  if (isRaging) {
+    message = `/em has activated his Rage`;
+  } else {
+    message = `/em has deactivated his Rage`;
+  }
+  characterSheetExtensionSendMessage(message);
+  setLocalStorage();
+}
+
+function displayActiveRageDescription(event) {
+  
+}
+
 function buildSpellsPanel(panel) {
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = `Rage`;
+      button.setAttribute('message', rageDescription)
+      button.addEventListener('click', castSpell);
+      thisDiv.appendChild(button);
+    }
+    {
+      let input = document.createElement('input');
+      input.type = 'checkbox';
+      input.id='rage';
+      input.addEventListener('change', toggleRage);
+      thisDiv.appendChild(input);
+    }
+    {
+      let span = document.createElement('span');
+      span.innerText = name;
+      span.classList.add('pointer');
+      span.addEventListener('click', displayActiveRageDescription);
+      thisDiv.appendChild(span);
+    }
+    panel.appendChild(thisDiv);
+  }
 }
 
 function buildWeaponsPanel(panel) {
@@ -1182,6 +1231,22 @@ function bonusDamageModifier(event, d) {
     d.crit2 += `${bonusDamage}[${bonusDamageName}]`;
     d.dmg2type += `${bonusDamageName}`
     d.desc += `${bonusDamageName} \n`;
+  }
+}
+function rageModifier(event, d) {
+  let thisWeaponKey = event.target.getAttribute('weapon-key');
+  let thisWeaponStats = attackStats[thisWeaponKey];
+  let isRaging = Array.from(document.querySelectorAll(`input#rage:checked`)).length > 0;
+  if (isRaging && thisWeaponStats.stat.key == 'STR') {
+    if (!d.dmg2flag) {
+      d.dmg2flag = '1';
+    } else {
+      d.dmg2 += '+';
+      d.dmg2type += ' + ';
+    }
+    d.dmg2 += `+2[Rage]`;
+    d.dmg2type += `${thisWeaponStats.damageType}`
+    d.desc += `Rage Damage Bonus\n`;
   }
 }
 function archeryModifier(event, d) {
