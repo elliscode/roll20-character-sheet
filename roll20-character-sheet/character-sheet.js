@@ -64,7 +64,7 @@ const rageDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Rage}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)}} ` +
-  `{{description=You can take a Bonus action to enter Rage if you aren't wearing Heavy Armor. While active, your Rage follows these rules:\n&#8193;[Damage Resistance](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Rage Damage](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Strength Advantage](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[No Concentration or Spells](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Vitality of the Tree](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level3VitalityoftheTree)}}`;
+  `{{description=You can take a Bonus action to enter Rage if you aren't wearing Heavy Armor. While active, your Rage follows these rules:\n&#8193;[Damage Resistance](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Rage Damage](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Strength Advantage](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[No Concentration or Spells](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level1Rage)\n&#8193;[Vitality of the Tree](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level3VitalityoftheTree)\n&#8193;[Branches of the Tree](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level6BranchesoftheTree)}}`;
 const vitalityOfTheTreeHealthRoll = `&{template:dmg} {{charname=${CHARACTER_NAME}}} {{rname=Vitality of the Tree}} {{range=10ft.}} {{desc=Components: V}} {{damage=1}} {{dmg1flag=1}} {{dmg1= [[2d6]]}} {{dmg1type=Healing}}`;
 const vitalityOfTheTreeDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
@@ -112,6 +112,11 @@ const hewDescription = `&{template:traits} ` +
   `{{name=Hew}} ` +
   `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/feats#GreatWeaponMaster)}} ` +
   `{{description=Immediately after you score a **Critical Hit with a Melee weapon or reduce a creature to 0 Hit Points** with one, you can make **one attack** with the same weapon as a **Bonus Action**.}}`;
+const primalKnowledgeDescription = `&{template:traits} ` +
+  `{{charname=Brum}} ` +
+  `{{name=Primal Knowledge}} ` +
+  `{{source=&#8193;[Tasha's Cauldron of Everything](https://www.dndbeyond.com/sources/dnd/tcoe/barbarian#PrimalKnowledge)}} ` +
+  `{{description=You gain proficiency in another skill of your choice from the skill list available to Barbarians at level 1.\n\nIn addition, while your Rage is active, you can channel primal power when you attempt certain tasks; whenever you make an ability check using one of the following skills, **you can make it as a Strength check even if it normally uses a different ability**: Acrobatics, Intimidation, Perception, Stealth, or Survival. When you use this ability, your Strength represents primal power coursing through you, honing your agility, bearing, and senses.\n\n&#8193;> Perception}}`;
 const modifiers = {
   spellcasting: {key: 'spellcasting', display: 'Spell Casting Modifier', check: '+1', proficiency: 'proficiency'},
 };
@@ -550,13 +555,14 @@ function buildSpellsPanel(panel) {
     {
       let input = document.createElement('input');
       input.type = 'checkbox';
+      input.style.marginLeft = '10px';
       input.id='rage';
       input.addEventListener('change', toggleRage);
       thisDiv.appendChild(input);
     }
     {
       let span = document.createElement('span');
-      span.innerText = name;
+      span.innerText = 'Activated';
       span.classList.add('pointer');
       span.addEventListener('click', displayActiveRageDescription);
       thisDiv.appendChild(span);
@@ -1166,6 +1172,18 @@ function buildMiscPanel(panel) {
       const button = document.createElement('button');
       button.innerText = 'Extra Attack';
       button.setAttribute('message', extraAttackDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Primal Knowledge';
+      button.setAttribute('message', primalKnowledgeDescription);
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
