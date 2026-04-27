@@ -30,7 +30,7 @@ const recklessAttackDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Reckless Attack}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level2RecklessAttack)}} ` +
-  `{{description=When you make your first attack roll on your turn, you can decide to attack recklessly. Doing so gives you Advantage on attack rolls using Strength until the start of your next turn, but attack rolls against you have Advantage during that time.}}`;
+  `{{description=When you make your first attack roll on your turn, you can decide to attack recklessly. Doing so gives you **Advantage on attack rolls** using **Strength** until the start of your next turn, but attack rolls against you have Advantage during that time.}}`;
 const instinctivePounceDescription = `&{template:traits} ` +
   `{{charname=Brum}} ` +
   `{{name=Instinctive Pounce}} ` +
@@ -59,7 +59,14 @@ const greataxePlusTwoDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=[Greataxe, +2](${colors.blue})}} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#WeaponsTable)}} ` +
-  `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Range**: 20ft./60ft.\n**Damage**: [1d12](!\n)\n**Damage Type**: Slashing\n**Weight**: 7 lb.\n**Cost**: --\n**Properties**: [Heavy](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Heavy), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Cleave](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Cleave)\nYou have a [+2](!\n) bonus to attack and damage rolls made with this magic weapon.\n}}`;
+  `{{description=**Proficient**: Yes\n**Attack Type**: Melee\n**Reach**: 5ft.\n**Damage**: [1d12](!\n)\n**Damage Type**: Slashing\n**Weight**: 7 lb.\n**Cost**: --\n**Properties**: [Heavy](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Heavy), [Two-Handed](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#TwoHanded), [Cleave](https://www.dndbeyond.com/sources/dnd/free-rules/equipment#Cleave)\nYou have a [+2](!\n) bonus to attack and damage rolls made with this magic weapon.\n}}`;
+const crafterDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Crafter}} ` +
+  `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/feats#Crafter)}} {{description=` +
+  `**Tool Proficiency.** You gain proficiency with three different Artisan's Tools of your choice from the Fast Crafting table.\n\n` +
+  `**Discount.** Whenever you buy a nonmagical item, you receive a **20 percent discount** on it.\n\n` +
+  `**Fast Crafting.** When you finish a Long Rest, you can craft one piece of gear from the Fast Crafting table, provided you have the Artisan's Tools associated with that item and have proficiency with those tools. The item lasts until you finish another Long Rest, at which point the item falls apart.}}`;
 const rageDescription = `&{template:traits} ` +
   `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Rage}} ` +
@@ -1187,6 +1194,25 @@ function buildMiscPanel(panel) {
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Danger Sense';
+      button.setAttribute('message', dangerSenseDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Crafter';
+      button.setAttribute('message', crafterDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
     panel.appendChild(thisDiv);
   }
 }
@@ -1248,16 +1274,16 @@ function buildFormattingPanel(panel) {
 function rollAbility(event) {
   let ability = event.target.textContent;
   let isRaging = Array.from(document.querySelectorAll(`input#rage:checked`)).length > 0;
+  let isSave = event.target.classList.contains('save');
   let exhaustionString = getExhaustionString();
   let exhaustionStringPlain = getExhaustionStringPlain();
   let rollType = document.querySelector('input[name="roll-type"]:checked').value;
-  if ((isRaging && ability == 'STR') || ability == 'DEX') {
+  if ((isRaging && ability == 'STR') || (isSave && ability == 'DEX')) {
     rollType = 'advantage';
   }
   let bonusHitName = document.querySelector('input[type="text"][id="bonus-hit-name"]').value;
   let bonusHit = document.querySelector('input[type="text"][id="bonus-hit"]').value;
   let displayName = stats[ability].display;
-  let isSave = event.target.classList.contains('save');
   let typeString = isSave ? ' Save' : '';
   let rollString = `${stats[ability].check}[${displayName}]`;
   let rollStringPlain = stats[ability].check;
