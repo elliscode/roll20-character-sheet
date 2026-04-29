@@ -7,7 +7,7 @@ const colors = {
   blue: `" style="color:#285eb2;`
 }
 const stats = {
-  STR: { key: 'STR', display: 'Strength', check: "+5", proficiency: 'proficiency'},
+  STR: { key: 'STR', display: 'Strength', check: "+6", proficiency: 'proficiency'},
   DEX: { key: 'DEX', display: 'Dexterity', check: "+3", proficiency: 'not'},
   CON: { key: 'CON', display: 'Constitution', check: "+4", proficiency: 'proficiency'},
   INT: { key: 'INT', display: 'Intelligence', check: "-2", proficiency: 'not'},
@@ -32,7 +32,7 @@ const recklessAttackDescription = `&{template:traits} ` +
   `{{source=&#8193;[D&D Free Rules (2024)](https://www.dndbeyond.com/sources/dnd/br-2024/character-classes#Level2RecklessAttack)}} ` +
   `{{description=When you make your first attack roll on your turn, you can decide to attack recklessly. Doing so gives you **Advantage on attack rolls** using **Strength** until the start of your next turn, but attack rolls against you have Advantage during that time.}}`;
 const instinctivePounceDescription = `&{template:traits} ` +
-  `{{charname=Brum}} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Instinctive Pounce}} ` +
   `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level7InstinctivePounce)}} ` +
   `{{description=As part of the Bonus Action you take to enter your Rage, you can move up to half your Speed.}}`;
@@ -94,7 +94,7 @@ const branchesOfTheTreeDescription = `&{template:traits} ` +
   `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level6BranchesoftheTree)}} ` +
   `{{description=Whenever a creature you can see **starts its turn** within 30 feet of you while your Rage is active, you can take a **Reaction** to summon spectral branches of the World Tree around it. \n\nThe target must succeed on a [DC${branchesOfTheTreeSave}](!\n${sanitizeCommand(branchesOfTheTreeRoll)}) **Strength** saving throw or be teleported to an unoccupied space you can see within 5 feet of yourself or in the nearest unoccupied space you can see. \n\nAfter the target teleports, you can **reduce its Speed to 0** until the end of the current turn.}}`;
 const extraAttackDescription = `&{template:traits} ` +
-  `{{charname=Brum}} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Extra Attack}} ` +
   `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/character-classes#Level5ExtraAttack)}}}} ` +
   `{{description=You can attack twice instead of once whenever you take the Attack action on your turn.}}`;
@@ -120,10 +120,33 @@ const hewDescription = `&{template:traits} ` +
   `{{source=&#8193;[PHB (2024)](https://www.dndbeyond.com/sources/dnd/phb-2024/feats#GreatWeaponMaster)}} ` +
   `{{description=Immediately after you score a **Critical Hit with a Melee weapon or reduce a creature to 0 Hit Points** with one, you can make **one attack** with the same weapon as a **Bonus Action**.}}`;
 const primalKnowledgeDescription = `&{template:traits} ` +
-  `{{charname=Brum}} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
   `{{name=Primal Knowledge}} ` +
   `{{source=&#8193;[Tasha's Cauldron of Everything](https://www.dndbeyond.com/sources/dnd/tcoe/barbarian#PrimalKnowledge)}} ` +
   `{{description=You gain proficiency in another skill of your choice from the skill list available to Barbarians at level 1.\n\nIn addition, while your Rage is active, you can channel primal power when you attempt certain tasks; whenever you make an ability check using one of the following skills, **you can make it as a Strength check even if it normally uses a different ability**: Acrobatics, Intimidation, Perception, Stealth, or Survival. When you use this ability, your Strength represents primal power coursing through you, honing your agility, bearing, and senses.\n\n&#8193;> Perception}}`;
+const dragonBoonDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=Dragon's Boon: Brum}} ` +
+  `{{source=&#8193;Brian's Mind}} ` +
+  `{{description=The primordial fury of the dragon and the unyielding roots of the desert oasis take purchase in your heart.\n\n**Passive**: Your **Strength** score **increases by 2**, and your maximum for that score is now 22.\n\n**Active (The Dragon's Eruption)**: Once per long rest, while raging, you can take an additional action on your turn to violently expand your aura. Ethereal, burning roots erupt in a 20-foot radius centered on you. Enemies in the area must make a Dexterity saving throw (DC 8 + your Proficiency Bonus + your Constitution modifier), taking 6d10 Fire and Piercing damage on a failed save, or half as much on a successful one. You also gain temporary hit points equal to the damage dealt to the primary target.}}`;
+const dragonsEruptionSave = `${8+parseInt(stats['CON'].check)+parseInt(proficiencies.proficiency.bonus)}`;
+const dragonsEruptionRoll = `&{template:dmg} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{rname=The Dragon's Eruption}} ` +
+  `{{range=20ft. radius}} ` +
+  `{{desc=Components: S}} ` +
+  `{{save=1}} ` +
+  `{{saveattr=${stats['DEX'].display}}} ` +
+  `{{savedc=${dragonsEruptionSave}}} ` +
+  `{{damage=1}} ` +
+  `{{dmg1flag=1}} ` +
+  `{{dmg1= [[6d10]]}} ` +
+  `{{dmg1type=Fire}}`;
+const dragonsEruptionDescription = `&{template:traits} ` +
+  `{{charname=${CHARACTER_NAME}}} ` +
+  `{{name=The Dragon's Eruption}} ` +
+  `{{source=&#8193;Brian's Mind}} ` +
+  `{{description=Once per long rest, while raging, you can take an additional action on your turn to violently expand your aura. \n\nEthereal, burning roots erupt in a 20-foot radius centered on you. Enemies in the area must make a [DC${dragonsEruptionSave}](!\n${sanitizeCommand(dragonsEruptionRoll)}) Dexterity saving throw, taking [6d10](!\n) Fire and Piercing damage on a failed save, or half as much on a successful one. You also gain temporary hit points equal to the damage dealt to the primary target.}}`;
 const modifiers = {
   spellcasting: {key: 'spellcasting', display: 'Spell Casting Modifier', check: '+1', proficiency: 'proficiency'},
 };
@@ -416,13 +439,6 @@ function buildUi() {
   {
     const panel = document.createElement('div');
     panel.classList.add('panel');
-    panel.id = 'buffs-panel';
-    buildBuffsPanel(panel);
-    controlsDiv.appendChild(panel);
-  }
-  {
-    const panel = document.createElement('div');
-    panel.classList.add('panel');
     panel.id = 'abilities-panel';
     buildAbilitiesPanel(panel);
     controlsDiv.appendChild(panel);
@@ -452,13 +468,6 @@ function buildUi() {
     const buttonsDiv = document.createElement('div');
     buttonsDiv.classList.add('flex-row');
     buttonsDiv.classList.add('flex-right');
-    {
-      const button = document.createElement('button');
-      button.innerText = 'Buffs';
-      button.setAttribute('for', 'buffs-panel');
-      button.addEventListener('click', expandPanel);
-      buttonsDiv.appendChild(button);
-    }
     {
       const button = document.createElement('button');
       button.innerText = 'Ablts';
@@ -609,6 +618,25 @@ function buildSpellsPanel(panel) {
       const button = document.createElement('button');
       button.innerText = `H`;
       button.setAttribute('message', branchesOfTheTreeRoll)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = `The Dragon's Eruption`;
+      button.setAttribute('message', dragonsEruptionDescription)
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    {
+      const button = document.createElement('button');
+      button.innerText = `H`;
+      button.setAttribute('message', dragonsEruptionRoll)
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
@@ -1062,24 +1090,6 @@ function buildAttackPanel(panel) {
     panel.appendChild(thisDiv);
   }
 }
-function buildGunPanel(panel) {
-}
-
-function buildBuffsPanel(panel) {
-  {
-    const thisDiv = document.createElement('div');
-    thisDiv.classList.add('flex-row');
-    {
-      const el = document.createElement('textarea');
-      el.innerText = ``;
-      el.placeholder = `No buffs currently applied...`;
-      el.style.height = '100px'; 
-      el.style.width = '231px';
-      thisDiv.appendChild(el);
-    }
-    panel.appendChild(thisDiv);
-  }
-}
 
 function buildAbilitiesPanel(panel) {
   let isRaging = Array.from(document.querySelectorAll(`input#rage:checked`)).length > 0;
@@ -1213,6 +1223,13 @@ function buildMiscPanel(panel) {
       button.addEventListener('click', characterSheetExtensionSendMessage);
       thisDiv.appendChild(button);
     }
+    {
+      const button = document.createElement('button');
+      button.innerText = `Dragon's Boon`;
+      button.setAttribute('message', dragonBoonDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
     panel.appendChild(thisDiv);
   }
 }
@@ -1247,17 +1264,26 @@ function buildFormattingPanel(panel) {
     const thisDiv = document.createElement('div');
     thisDiv.classList.add('flex-row');
     {
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.id = 'arrow-text';
+      input.placeholder = 'Arrow text';
+      input.style.minWidth = '75px';
+      input.style.width = '75px';
+      thisDiv.appendChild(input);
+    }
+    {
       const button = document.createElement('button');
       button.innerText = 'Down';
-      button.setAttribute('message', `/em &darr;`)
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.setAttribute('message', `&darr;`)
+      button.addEventListener('click', printArrowText);
       thisDiv.appendChild(button);
     }
     {
       const button = document.createElement('button');
       button.innerText = 'Up';
-      button.setAttribute('message', `/em &uarr;`)
-      button.addEventListener('click', characterSheetExtensionSendMessage);
+      button.setAttribute('message', `&uarr;`)
+      button.addEventListener('click', printArrowText);
       thisDiv.appendChild(button);
     }
     {
@@ -1269,6 +1295,12 @@ function buildFormattingPanel(panel) {
     }
     panel.appendChild(thisDiv);
   }
+}
+
+function printArrowText(event) {
+  let arrowText = event.target.getAttribute('message');
+  let additionalText = document.getElementById('arrow-text').value;
+  characterSheetExtensionSendMessage(`/em ${arrowText} ${additionalText} ${arrowText}`);
 }
 
 function rollAbility(event) {
