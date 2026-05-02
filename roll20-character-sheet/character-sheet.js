@@ -4,7 +4,8 @@ const overlayDiv = document.createElement('div');
 const CHARACTER_NAME = "Brum";
 
 const colors = {
-  blue: `" style="color:#285eb2;`
+  blue: `" style="color:#285eb2;`,
+  green: `" style="color:#09b800;`
 }
 const stats = {
   STR: { key: 'STR', display: 'Strength', check: "+6", proficiency: 'proficiency'},
@@ -14,6 +15,9 @@ const stats = {
   WIS: { key: 'WIS', display: 'Wisdom', check: "+3", proficiency: 'not'},
   CHA: { key: 'CHA', display: 'Charisma', check: "-1", proficiency: 'not'}
 };
+const abilityBonuses = [
+  { appliesToSave: true, appliesToStat: false, appliesToStats: ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'], display: 'Cloak of Protection', bonus: '+1' }
+];
 const proficiencies = {
   not: {key: 'not', display: 'Not Proficient', bonus: '+0'},
   half: {key: 'half', display: 'Half Proficiency', bonus: '+1'},
@@ -147,6 +151,7 @@ const dragonsEruptionDescription = `&{template:traits} ` +
   `{{name=The Dragon's Eruption}} ` +
   `{{source=&#8193;Brian's Mind}} ` +
   `{{description=Once per long rest, while raging, you can take an additional action on your turn to violently expand your aura. \n\nEthereal, burning roots erupt in a 20-foot radius centered on you. Enemies in the area must make a [DC${dragonsEruptionSave}](!\n${sanitizeCommand(dragonsEruptionRoll)}) Dexterity saving throw, taking [6d10](!\n) Fire and Piercing damage on a failed save, or half as much on a successful one. You also gain temporary hit points equal to the damage dealt to the primary target.}}`;
+const cloakOfProtectionDescription = `&{template:traits} {{charname=${CHARACTER_NAME}}} {{name=[Cloak of Protection](${colors.green})}} {{source=Wondrous item, Uncommon (requires attunement)}} {{description=You gain a [+1](!\n) bonus to **Armor Class** and **saving throws** while you wear this cloak.}}`;
 const modifiers = {
   spellcasting: {key: 'spellcasting', display: 'Spell Casting Modifier', check: '+1', proficiency: 'proficiency'},
 };
@@ -1232,6 +1237,18 @@ function buildMiscPanel(panel) {
     }
     panel.appendChild(thisDiv);
   }
+  {
+    const thisDiv = document.createElement('div');
+    thisDiv.classList.add('flex-row');
+    {
+      const button = document.createElement('button');
+      button.innerText = 'Cloak of Protection';
+      button.setAttribute('message', cloakOfProtectionDescription);
+      button.addEventListener('click', characterSheetExtensionSendMessage);
+      thisDiv.appendChild(button);
+    }
+    panel.appendChild(thisDiv);
+  }
 }
 function buildFormattingPanel(panel) {
   {
@@ -1332,13 +1349,23 @@ function rollAbility(event) {
     proficiencyHit = `${proficiencies[proficiency].bonus}[${proficiencies[proficiency].display}]`;
     proficiencyHitPlain = proficiencies[proficiency].bonus;
   }
+  let bonusPlain = '';
+  let bonus = '';
+
+  for (let abilityBonus of abilityBonuses) {
+    appliesToTypeOfRoll = abilityBonus.appliesToSave && isSave || abilityBonus.appliesToStat && !isSave;
+    if (appliesToTypeOfRoll && abilityBonus.appliesToStats.includes(ability)) {
+      bonus += `${abilityBonus.bonus}[${abilityBonus.display}]`;;
+      bonusPlain += abilityBonus.bonus;
+    }
+  }
   let message = `&{template:simple} ` +
     `{{charname=${CHARACTER_NAME}}} ` +
     `{{rname=${displayName}${typeString}}} ` +
-    `{{mod=${rollStringPlain}${proficiencyHitPlain}${extraHitPlain}${exhaustionStringPlain}}} ` +
-    `{{r1=[[1d20${rollString}${proficiencyHit}${extraHit}${exhaustionString}]]}} ` +
+    `{{mod=${rollStringPlain}${proficiencyHitPlain}${bonusPlain}${extraHitPlain}${exhaustionStringPlain}}} ` +
+    `{{r1=[[1d20${rollString}${proficiencyHit}${bonus}${extraHit}${exhaustionString}]]}} ` +
     `{{${rollType}=1}} ` +
-    `{{r2=[[1d20${rollString}${proficiencyHit}${extraHit}${exhaustionString}]]}}`;
+    `{{r2=[[1d20${rollString}${proficiencyHit}${bonus}${extraHit}${exhaustionString}]]}}`;
   characterSheetExtensionSendMessage(message);
   setLocalStorage();
 }
